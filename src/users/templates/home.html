@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block head_title %} Welcome | {{ block.super }}{% endblock %}
+
+
+
+<!-- 
+<!-- Main component for a primary marketing message or call to action -->
+{% block jumbotron %}
+ <div class="jumbotron">
+ 	<div class="row" style="text-align:center; padding-bottom:50px;">
+ 		<h2 style="display:inline;">Working "</h2><span class="brand"><h1 class="brand" style="display:inline;">Together </h1></span><h2 style="display:inline;"> "as a team.</h2>   
+ 	</div>
+      <div class="row">   
+	      <div class="col-sm-8" style="text-align:center; margin:auto;"> 	
+		      <div class="row">  			
+					<div class="image">
+						<!-- <a class="btn btn-lg" href="" role="button">Join Us</a>  -->
+						<img src="{% static 'img/meeting.png' %}" alt="" style=" width:80%; height:80%;">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="text-align:right;"> 	
+			
+					<h3>Join Us.</h3>
+					<div style="background-color:#F7F5F5; border-radius:10px; padding:15px;">
+				    <form method='POST' action=''>{% csrf_token %} <!--method=post/get action=where-->
+				      	{{ form|crispy }}
+				      	<input class = 'btn' type='submit' value='Sign Up'/>
+				    </form>
+				</div>
+			
+			</div>
+	  </div>
+
+</div>
+{% endblock %}
+
+
+
+{% block content %} 
+<hr style="height:15px;">
+<div class="row">
+
+
+	<div class="col-sm-12" style="text-align:left;">
+		<p class='lead'>What is Together?</p>
+		<p>Together can help you and your classmates manage and distribute the workload. This web application is tailored specifically for small-scaled collaborative projects.</p>
+	</div>
+
+	
+</div>
+<div class="row">
+	<hr>
+	<h3>Features</h3>
+	<div class="col-sm-4" style="text-align:right;">
+		<img src="{% static 'img/Google_Tasks.png' %}" alt="" style="width:25%; height:25%;" class="img-rounded">
+	</div>
+	<div class="col-sm-8" style="text-align:left;">
+		<p class='lead'>Distribute Tasks</p>
+		<p>Evenly distribute tasks between members or use our Auto-Assign feature.</p>
+	</div>
+
+	
+</div>
+<div class="row">
+	<div class="col-sm-4" style="text-align:right;">
+		<img src="{% static 'img/Google_Calendar.png' %}" alt="" style="width:25%; height:25%;" class="img-rounded">
+	</div>
+	<div class="col-sm-8">
+		<p class='lead'>Coordinate Schedule</p>
+		<p>Find a suitable meeting time that is convenient for all team members with just one click.</p>
+	</div>
+
+</div>
+
+
+{% endblock %}
+
+
+<!-- <h1>{{ title }}</h1>
+
+<form method='POST' action=''> {% csrf_token %}
+	{{ form.as_p }}
+	<input type='submit' value='Sign Up'/>
+</form> -->

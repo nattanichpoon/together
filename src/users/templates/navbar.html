@@ -58,13 +58,9 @@
                           </form>
                       </li>
                     {% else %}
-                   
-                    
-                       
-                   
-                    <li><a href="" class="list-group-item">My Profile</a></li>
-                    <li><a href="" class="list-group-item">My Projects</a>  </li>
-                    <li><a href="{% url 'auth_logout' %}" class="list-group-item">Log Out</a>  </li>
+                      <li><a href="{% url 'profile' %}" class="list-group-item">My Profile</a></li>
+                      <li><a href="{% url 'projects' %}" class="list-group-item">My Projects</a>  </li>
+                      <li><a href="{% url 'auth_logout' %}" class="list-group-item">Log Out</a>  </li>
 
 
                     {% endif %}

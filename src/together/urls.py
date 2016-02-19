@@ -21,6 +21,8 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^$', 'users.views.home', name='home'),
     url(r'^contact/$', 'users.views.contact', name='contact'),
+    url(r'^profile/$', 'users.views.myprofile', name='profile'),
+    url(r'^projects/$', 'users.views.myprojects', name='projects'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
 

@@ -29,6 +29,27 @@ def home(request):
 
 	
 	return render(request, "home.html", context)
+
+def myprofile(request):
+	title = "My Profile"
+	title_align_center = True
+
+	context = {
+	"title": title,
+	"title_align_center":title_align_center,
+	}
+	return render(request, "myprofile.html", context)
+
+def myprojects(request):
+	title = "My Projects"
+	title_align_center = True
+
+	context = {
+	"title": title,
+	"title_align_center":title_align_center,
+	}
+	return render(request, "myprojects.html", context)
+
 	
 def contact(request):
 	title = "Have feedback? Leave us a message!"

@@ -30,15 +30,15 @@ def home(request):
 	
 	return render(request, "home.html", context)
 
-def myprofile(request):
-	title = "My Profile"
-	title_align_center = True
-
-	context = {
-	"title": title,
-	"title_align_center":title_align_center,
+def about(request):
+	context ={
+		"title": "About Us"
 	}
-	return render(request, "myprofile.html", context)
+	return render(request, "about.html", context)
+
+def myprofile(request):
+	
+	return render(request, "myprofile.html", '')
 
 def myprojects(request):
 	title = "My Projects"

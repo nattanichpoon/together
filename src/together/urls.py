@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', 'users.views.home', name='home'),
+    url(r'^about/$', 'users.views.about', name='about'),
     url(r'^contact/$', 'users.views.contact', name='contact'),
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^projects/$', 'users.views.myprojects', name='projects'),

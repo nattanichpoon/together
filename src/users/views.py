@@ -33,6 +33,9 @@ def about(request):
 def myprofile(request):
 	return render(request, "myprofile.html", '')
 
+def editprofile(request):
+	return render(request, "editprofile.html", '')
+
 def myprojects(request):
 	title = "My Projects"
 	title_align_center = True

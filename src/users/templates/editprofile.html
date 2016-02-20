@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+<div class='col-sm-10 col-sm-offset-1'>
+<p class='lead'>Edit your profile</p>
+<form method="post" action=".">
+  {% csrf_token %} 
+    {{ form|crispy }}
+
+ User:
+    <input type="text" name="user" value="{{ profile.user}}" /><br />
+    Name:
+    <input type="text" name="full_name" value="{{ profile.full_name}}" /><br />
+
+    Address:
+    <input type="text" name="address" value="{{ profile.address}}" /><br />
+    Designation:
+    <input type="text" name="designation" value="{{ profile.designation}}" /><br />
+
+    Email:
+    <input type="text" name="email" value="{{ profile.email}}" /><br />
+    Role:
+    <input type="text" name="role" value="{{ profile.role}}" /><br />
+
+    Project:
+    <input type="text" name="project" value="{{ profile.project}}" /><br />
+    Task:
+    <input type="text" name="task" value="{{ profile.task}}" /><br />
+
+    <input type="submit" value="Save Changes" name="save" />
+    <input type="submit" value="Cancel" name="cancel" />
+    <br/>
+</form>
+</div>
+{% endblock %}

@@ -1,5 +1,22 @@
+from registration.forms import RegistrationForm
 from django import forms
-from .models import SignUp
+from .models import SignUp, UserProfile
+from django.contrib.auth.models import User
+
+class RegistrationForm(RegistrationForm):
+	class Meta:
+		model = UserProfile
+		fields = ['full_name', 'email']
+	def clean_email(self):
+		email = self.cleaned_data.get('email')
+		email_base, provider = email.split("@")
+		domain, extension = provider.split('.')
+		return email
+
+	def clean_full_name(self):
+		full_name = self.cleaned_data.get('full_name')
+		#write validation code.
+		return full_name
 
 class ContactForm(forms.Form):
 

@@ -17,6 +17,8 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from users.forms import RegistrationForm
+from registration.backends.default.views import RegistrationView
 
 urlpatterns = [
     url(r'^$', 'users.views.home', name='home'),
@@ -25,6 +27,7 @@ urlpatterns = [
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^projects/$', 'users.views.myprojects', name='projects'),
     url(r'^admin/', admin.site.urls),
+    url(r'accounts/register/$', RegistrationView.as_view(form_class = RegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
 ] 

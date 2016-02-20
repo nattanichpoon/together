@@ -6,8 +6,6 @@ from .forms import SignUpForm, ContactForm
 # Create your views here.
 def home(request):
 	title = "Welcome"
-	
-	#add a form
 	if request.method == 'POST':
 		print request.POST
 	form = SignUpForm(request.POST or None)
@@ -24,10 +22,6 @@ def home(request):
 		context = {
 			"title": "Thanks!"
 		}
-		# print instance.email
-		# print instance.timestamp
-
-	
 	return render(request, "home.html", context)
 
 def about(request):
@@ -37,7 +31,6 @@ def about(request):
 	return render(request, "about.html", context)
 
 def myprofile(request):
-	
 	return render(request, "myprofile.html", '')
 
 def myprojects(request):

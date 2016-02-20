@@ -45,8 +45,25 @@
                         </a>
 
                         <ul class="dropdown-menu">
+                            {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
+                                <form class="navbar-form navbar-right" method="POST" action="{% url 'auth_login' %}">{% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="username" placeholder="Username" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" />
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Login </button>
+                                </form>
+
+                           <!--  {% endif %}
+
+
+                            
                             {% if not request.user.is_authenticated %}
                                 <li>
+
+
                                     <form class="form-horizontal col-sm-10 col-sm-offset-1">
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail3">Email address</label>
@@ -63,7 +80,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-block">Sign In</button>
                                     </form>
-                                </li>
+                                </li> -->
                             {% else %}
                                 <li><a href="#" class="list-group-item">Edit Profile</a></li>
                                 <li><a href="{% url 'auth_logout' %}" class="list-group-item">Log Out</a></li>
@@ -72,6 +89,9 @@
                         </ul>
                     </li>
                 </ul>
+                
+
+
             </div>
         </div>
     </nav>

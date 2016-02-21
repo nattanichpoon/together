@@ -48,15 +48,6 @@ def editprofile(request):
 	# args['form'] = form
 	return render(request, "editprofile.html", args)
 
-def myprojects(request):
-	title = "My Projects"
-	title_align_center = True
-
-	context = {
-	"title": title,
-	"title_align_center":title_align_center,
-	}
-	return render(request, "myprojects.html", context)
 
 	
 def contact(request):

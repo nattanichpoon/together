@@ -3,35 +3,49 @@
 {% load i18n %}
 
 {% block content %}
-<div class='col-sm-10 col-sm-offset-1'>
-<p class='lead'>Edit your profile</p>
-<form method="post" action=".">
-  {% csrf_token %} 
-    {{ form|crispy }}
+<div class="container">
+    <ul class="nav nav-tabs">
+          <li><a href="{% url 'profile' %}">Home</a></li>
+          <li class="active"><a href="{% url 'editprofile' %}">Profile</a></li>
+          <li role="presentation"><a href="#">Tasks</a></li>
+          <li role="presentation"><a href="#">Schedule</a></li>
+          <li role="presentation"><a href="#">Messages</a></li>
 
- User:
-    <input type="text" name="user" value="{{ profile.user}}" /><br />
-    Name:
-    <input type="text" name="full_name" value="{{ profile.full_name}}" /><br />
-
-    Address:
-    <input type="text" name="address" value="{{ profile.address}}" /><br />
-    Designation:
-    <input type="text" name="designation" value="{{ profile.designation}}" /><br />
-
-    Email:
-    <input type="text" name="email" value="{{ profile.email}}" /><br />
-    Role:
-    <input type="text" name="role" value="{{ profile.role}}" /><br />
-
-    Project:
-    <input type="text" name="project" value="{{ profile.project}}" /><br />
-    Task:
-    <input type="text" name="task" value="{{ profile.task}}" /><br />
-
-    <input type="submit" value="Save Changes" name="save" />
-    <input type="submit" value="Cancel" name="cancel" />
-    <br/>
-</form>
+    </ul>
+</div>
+<div class="container">
+    <div class="row">
+    <div class='col-sm-10 col-sm-offset-1'>
+        <p class='lead'>Edit your profile</p>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+            <form method="POST" action=".">
+                {% csrf_token %} 
+                {{ form|crispy }}
+                <div class="form-group">
+                    Username:
+                    <input type="text" name="first_name" value="{{ request.user }}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    First Name:
+                    <input type="text" name="first_name" value="{{ request.user.first_name }}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    Last Name:
+                    <input type="text" name="last_name" value="{{ request.user.last_name}}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    Email:
+                    <input type="email" name="email" value="{{ request.user.email}}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                <a href="{% url 'auth_password_change' %}">Click here to change your password.</a>
+            </div>
+                    <button type="submit" class="btn">Save</button>
+            </form> 
+        </div>
+    </div> 
 </div>
 {% endblock %}

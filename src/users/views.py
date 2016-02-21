@@ -24,6 +24,7 @@ def home(request):
 		}
 	return render(request, "home.html", context)
 
+
 def about(request):
 	context ={
 		"title": "About Us"
@@ -34,7 +35,18 @@ def myprofile(request):
 	return render(request, "myprofile.html", '')
 
 def editprofile(request):
-	return render(request, "editprofile.html", '')
+	args = {}
+
+	# if request.method == 'POST':
+	#     form = EditProfile(request.POST, instance=request.user)
+	#     if form.is_valid():
+	#         form.save()
+	#         return HttpResponseRedirect('/profile/')
+	# else:
+	#     form = EditProfile()
+
+	# args['form'] = form
+	return render(request, "editprofile.html", args)
 
 def myprojects(request):
 	title = "My Projects"

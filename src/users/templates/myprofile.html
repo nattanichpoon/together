@@ -2,11 +2,21 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-{% block head_title %} My Profile {% endblock %}
+{% block head_title %} My Page {% endblock %}
+
 
 {% block content %}
+<div class="container">
+	<ul class="nav nav-tabs">
+		  <li class="active"><a href="{% url 'profile' %}">Home</a></li>
+		  <li role="presentation"><a href="{% url 'editprofile' %}">Profile</a></li>
+		  <li role="presentation"><a href="#">Tasks</a></li>
+		  <li role="presentation"><a href="#">Schedule</a></li>
+		  <li role="presentation"><a href="#">Messages</a></li>
 
-
+		</ul>
+	</div>
+	<div class="container">
 	<div class='row'>
 		<div class="col-sm-4">
 			<h4>Things you need to work on</h4>
@@ -36,6 +46,7 @@
 
 		
 	</div>
+</div>
 
 
 

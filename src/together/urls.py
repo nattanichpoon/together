@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
     url(r'^projects/$', 'users.views.myprojects', name='projects'),
     url(r'^admin/', admin.site.urls),
-    url(r'accounts/register/$', RegistrationView.as_view(form_class = RegistrationForm), name = 'registration_register'),
+    url(r'^accounts/register/$', RegistrationView.as_view(form_class = RegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
 ] 

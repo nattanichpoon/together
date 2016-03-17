@@ -8,12 +8,14 @@
 <div class="col-sm-2">
     <ul class="nav nav-pills nav-stacked">
       <li><a href="{% url 'messages' %}">Inbox</a></li>
+            <li><a href="{% url 'messages_compose' %}">Compose</a></li>
+
       <li class="active"><a href="{% url 'messages_outbox' %}">Outbox</a></li>
-      <li><a href="#">Trash</a></li>
+      <li><a href="{% url 'messages_trash' %}">Trash</a></li>
     </ul>
 </div>
 
-<div class="col-sm-10 col-sm-offset-2">
+<div class="col-sm-10">
     <h1>{% trans "Sent Messages" %}</h1>
     {% if message_list %} 
     <table class="messages"> 

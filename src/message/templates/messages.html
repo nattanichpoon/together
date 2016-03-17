@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} My Messages {% endblock %}
+
+
+{% block content %}
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li><a href="{% url 'profile' %}">Home</a></li>
+		<li><a href="{% url 'editprofile' %}">Profile</a></li>
+		<li><a href="{% url 'projects' %}">Projects</a></li>
+		<li><a href="#">Schedule</a></li>
+		<li class="active"><a href="{% url 'messages' %}">Messages</a></li>
+
+		</ul>
+	</div>
+	<div class="container">
+	<div class='row'>
+		<div class="col-sm-4">
+			<h4>Your messages</h4>
+		</div>
+	</div>
+	<div class='row'>
+		<div class="col-sm-4">
+
+			<div class="list-group">
+			 	<a href="#" class="list-group-item">Task 1<span class="badge">3 days</span></a>
+			  	<a href="#" class="list-group-item">Task 2<span class="badge">3 days</span></a>
+			  	<a href="#" class="list-group-item">Task 3<span class="badge">3 days</span></a>
+			</div>
+		</div>
+		<div class="col-sm-8">
+				<div class="list-group">
+				 	<a href="#" class="list-group-item">Task 1<span class="badge">3 days</span></a>
+				  	<a href="#" class="list-group-item">Task 2<span class="badge">3 days</span></a>
+				  	<a href="#" class="list-group-item">Task 3<span class="badge">3 days</span></a>
+				</div>
+		</div>
+		
+		
+
+		
+	</div>
+</div>
+
+
+
+{% endblock %}

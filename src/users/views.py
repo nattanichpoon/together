@@ -6,8 +6,6 @@ from .forms import SignUpForm, ContactForm
 # Create your views here.
 def home(request):
 	title = "Welcome"
-	
-	#add a form
 	if request.method == 'POST':
 		print request.POST
 	form = SignUpForm(request.POST or None)
@@ -24,11 +22,33 @@ def home(request):
 		context = {
 			"title": "Thanks!"
 		}
-		# print instance.email
-		# print instance.timestamp
-
-	
 	return render(request, "home.html", context)
+
+
+def about(request):
+	context ={
+		"title": "About Us"
+	}
+	return render(request, "about.html", context)
+
+def myprofile(request):
+	return render(request, "myprofile.html", '')
+
+def editprofile(request):
+	args = {}
+
+	# if request.method == 'POST':
+	#     form = EditProfile(request.POST, instance=request.user)
+	#     if form.is_valid():
+	#         form.save()
+	#         return HttpResponseRedirect('/profile/')
+	# else:
+	#     form = EditProfile()
+
+	# args['form'] = form
+	return render(request, "editprofile.html", args)
+
+
 	
 def contact(request):
 	title = "Have feedback? Leave us a message!"

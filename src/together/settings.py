@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'registration',
     'users',
     'project',
+    'message',
+    'discussion'
 ]
 
 MIDDLEWARE_CLASSES = [

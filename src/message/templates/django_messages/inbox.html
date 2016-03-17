@@ -1,0 +1,50 @@
+{% extends "django_messages/base.html" %} 
+{% load i18n %} 
+
+{% block content %}
+{% include "message_tab.html" %}
+
+
+<div class="container-fluid">
+<div class="row" style="padding-top:10px">
+<div class="col-sm-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><a href="{% url 'messages' %}">Inbox</a></li>
+      <li><a href="{% url 'messages_outbox' %}">Outbox</a></li>
+      <li><a href="#">Trash</a></li>
+    </ul>
+</div>
+
+
+<div class="col-sm-10 col-sm-offset-2">
+    <h1>{% trans "Inbox" %}</h1>
+    {% if message_list %} 
+    <table class="messages">
+        <thead>
+            <tr><th>{% trans "Sender" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Received" %}</th><th>{% trans "Action" %}</th></tr>
+        </thead>
+        <tbody>
+    {% for message in message_list %} 
+        <tr>
+            <td>{{ message.sender }}</td>
+            <td>
+                {% if message.new %}<strong>{% endif %}
+                {% if message.replied %}<em>{% endif %}
+                <a href="{{message.get_absolute_url }}">{{ message.subject }}</a>
+                {% if message.replied %}</em>{% endif %}
+                {% if message.new %}</strong>{% endif %}</td>
+            <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+            <td><a href="{% url 'messages_delete' message.id %}">{% trans "delete" %}</a></td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>{% trans "No messages." %}</p>
+    {% endif %}  
+</div>
+</div>
+</div>
+
+
+{% endblock %}

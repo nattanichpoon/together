@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/register/$', RegistrationView.as_view(form_class = RegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^messages/', include('django_messages.urls')),
 
 ] 
 if settings.DEBUG:

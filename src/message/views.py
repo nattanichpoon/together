@@ -12,4 +12,4 @@ def messages(request):
 	"title_align_center":title_align_center,
 	"navtab":navtab,
 	}
-	return render(request, "messages.html", context)
+	return render(request, "django_messages/inbox.html", context)

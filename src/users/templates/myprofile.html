@@ -12,39 +12,62 @@
 		<li><a href="{% url 'editprofile' %}">Profile</a></li>
 		<li><a href="{% url 'projects' %}">Projects</a></li>
 		<li><a href="#">Schedule</a></li>
-		<li><a href="{% url 'messages' %}">Messages</a></li>
+		<li><a href="{% url 'messages_inbox' %}">Messages</a></li>
 
-		</ul>
+	</ul>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h4 class="lead">Your Projects</h4>
+		</div>
 	</div>
-	<div class="container">
-	<div class='row'>
-		<div class="col-sm-4">
-			<h4>Things you need to work on</h4>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class='row'>
+
+			<div class="row placeholders">
+			  <div class="col-xs-6 col-sm-3 placeholder">
+			    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+			    <h4>Project 1</h4>
+			    <span class="text-muted">Something else</span>
+			  </div>
+			  <div class="col-xs-6 col-sm-3 placeholder">
+			    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+			    <h4>Project 2</h4>
+			    <span class="text-muted">Something else</span>
+			  </div>
+			  <div class="col-xs-6 col-sm-3 placeholder">
+			    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+			    <h4>Project 3</h4>
+			    <span class="text-muted">Something else</span>
+			  </div>
+			  <div class="col-xs-6 col-sm-3 placeholder">
+			    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+			    <h4>Project 4</h4>
+			    <span class="text-muted">Something else</span>
+			  </div>
+			</div>
+
+		</div>
+
+		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h4 class="lead">Things you need to work on</h4>
+		</div>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class='row'>
+			<div class="col-sm-6">
 				<div class="list-group">
 				 	<a href="#" class="list-group-item">Task 1<span class="badge">3 days</span></a>
 				  	<a href="#" class="list-group-item">Task 2<span class="badge">3 days</span></a>
 				  	<a href="#" class="list-group-item">Task 3<span class="badge">3 days</span></a>
 				</div>
+			</div>
 		</div>
-		<div class="col-sm-4">
-		</div>
-
-		<div class="col-sm-3 pull-right">
-			<head>
-			        <title>Calendar</title>
-			    </head>
-			    <body>
-			        <div id="calendar-container">
-			            <div id="calendar-header">
-			                <span id="calendar-month-year"></span>
-			            </div>
-			            <div id="calendar-dates">
-			            </div>
-			        </div>
-			    </body>
-		</div>
-
-		
 	</div>
 </div>
 

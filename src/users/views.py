@@ -2,6 +2,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
 from .forms import SignUpForm, ContactForm
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 def home(request):
@@ -22,6 +24,8 @@ def home(request):
 		context = {
 			"title": "Thanks!"
 		}
+	if request.user.is_authenticated():
+		return render(request, "myprofile.html", '')
 	return render(request, "home.html", context)
 
 

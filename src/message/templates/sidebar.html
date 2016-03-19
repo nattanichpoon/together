@@ -1,0 +1,9 @@
+<div class="col-sm-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="{% url 'messages_inbox' %}">Inbox<span class="badge">{{ messages_inbox_count }}</span></a></li>
+      <li><a href="{% url 'messages_compose' %}">Compose</a></li>
+
+      <li><a href="{% url 'messages_outbox' %}">Outbox</a></li>
+      <li><a href="{% url 'messages_trash' %}">Trash</a></li>
+    </ul>
+</div>

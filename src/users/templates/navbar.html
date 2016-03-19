@@ -19,28 +19,7 @@
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
-                    {% else %}
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Profile<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" class="list-group-item">My Tasks</a></li>
-                                <li><a href="#" class="list-group-item">My Schedule</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'editprofile' %}" class="list-group-item">Edit Profile</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="{% url 'projects' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Projects<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" class="list-group-item">My Tasks</a></li>
-                                <li><a href="#" class="list-group-item">My Schedule</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#" class="list-group-item">Edit Profile</a></li>
-                            </ul>
-                        </li>
+                    
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

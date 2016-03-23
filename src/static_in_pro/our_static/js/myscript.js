@@ -1,11 +1,10 @@
-// $(document).ready(function () {
-//     $('.nav li a').click(function(e) {
+$(".nav li a").on("load", function(){
+   $(".nav").find(".active").removeClass("active");
+   $(this).parent().addClass("active");
+});
 
-//         // $('.nav li').removeClass('active');
 
-//         var $this = $(this);
-//          $this.closest('li').find('.active').removeClass('active');
-//         $this.parent().addClass('active');
-//     });
-// });
 
+// function changeText(id) {
+//     id.addClass = "active";
+// }

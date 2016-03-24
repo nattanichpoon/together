@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
     url(r'^projects/$', 'project.views.myprojects', name='projects'),
+    url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
+
     # url(r'^messages/$', 'message.views.messages', name='messages'),
     # url(r'^discussion/$', 'discussion.views.home', name='discussion'),
     url(r'^admin/', admin.site.urls),

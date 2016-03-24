@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import PostForm
  
 def discussions(request):
 	title = "Discussions"
@@ -11,3 +12,10 @@ def discussions(request):
 	"navtab":navtab,
 	}
 	return render(request, "discussion_home.html", context)
+
+def post_new(request):
+    form = PostForm()
+    return render(request, 'discussion/post_edit.html', {'form': form})
+
+    def post_list(request):
+    return render(request, 'discussion/post_list.html', {})

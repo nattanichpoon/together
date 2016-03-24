@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'message',
     'discussion',
     'django_messages',
+    'schedule',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django_messages.context_processors.inbox',
+                'django.core.context_processors.request',
             ],
         },
     },

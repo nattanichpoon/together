@@ -28,6 +28,13 @@ urlpatterns = [
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
     url(r'^projects/$', 'project.views.myprojects', name='projects'),
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
+    url(r'^discussions/post_list', 'discussion.views.post_list', name='post_list'),
+    url(r'^discussions/post/(?P<pk>\d+)/$', 'discussion.views.post_detail', name='post_detail'),
+    url(r'^discussions/post/new/$', 'discussion.views.post_new', name='post_new'),
+    url(r'^discussions/post/(?P<pk>\d+)/comment/$', 'discussion.views.add_comment_to_post', name='add_comment_to_post'),
+
+
+
 
     # url(r'^messages/$', 'message.views.messages', name='messages'),
     # url(r'^discussion/$', 'discussion.views.home', name='discussion'),

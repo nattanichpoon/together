@@ -8,25 +8,9 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 def home(request):
 	title = "Welcome"
-	if request.method == 'POST':
-		print request.POST
-	form = SignUpForm(request.POST or None)
-	context = {
-		"title": title,
-		"form": form,
-	}
-	if form.is_valid():
-		#form.save()
-		instance = form.save(commit=False)
-		# full_name = form.cleaned_data.get('full_name')
-		# if not
-		instance.save()
-		context = {
-			"title": "Thanks!"
-		}
 	if request.user.is_authenticated():
 		return render(request, "myprofile.html", '')
-	return render(request, "home.html", context)
+	return render(request, "home.html", '')
 
 
 def about(request):
@@ -39,18 +23,21 @@ def myprofile(request):
 	return render(request, "myprofile.html", '')
 
 def editprofile(request):
-	args = {}
+	try:
+		profile = request.user.userprofile
+	except UserProfile.DoesNotExist:
+		profile = UserProfile(user=request.user)
+	if request.method == 'POST':
+		form = UserProfileForm(data=request.POST, instance=profile)
+		if form.is_valid():
+			form.save()
+			# return HttpResponse("Exito!")
+		else:
+			form = UserProfileForm(instance=profile)
+	else:
+		form = UserProfileForm()
 
-	# if request.method == 'POST':
-	#     form = EditProfile(request.POST, instance=request.user)
-	#     if form.is_valid():
-	#         form.save()
-	#         return HttpResponseRedirect('/profile/')
-	# else:
-	#     form = EditProfile()
-
-	# args['form'] = form
-	return render(request, "editprofile.html", args)
+	return render(request,'editprofile.html',{ 'form': form})
 
 
 	

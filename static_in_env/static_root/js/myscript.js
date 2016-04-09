@@ -12,4 +12,4 @@ makeActive = function () {
 };
 
 for (var i = 0; i < elems.length; i++)
-    elems[i].addEventListener('mousedown', makeActive);
+    elems[i].addEventListener('click', makeActive);

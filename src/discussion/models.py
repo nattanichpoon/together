@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -24,8 +25,8 @@ class Post(models.Model):
         return self.title
 
 class Comment(models.Model):
+	author = models.ForeignKey('auth.User')
 	post = models.ForeignKey('discussion.Post', related_name='comments')
-	author = models.CharField(max_length=200)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
 	approved_comment = models.BooleanField(default=False)

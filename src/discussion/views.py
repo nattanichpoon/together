@@ -17,5 +17,5 @@ def post_new(request):
     form = PostForm()
     return render(request, 'discussion/post_edit.html', {'form': form})
 
-    def post_list(request):
+def post_list(request):
     return render(request, 'discussion/post_list.html', {})

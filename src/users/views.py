@@ -1,15 +1,20 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import render
-from .forms import SignUpForm, ContactForm
+from django.shortcuts import render, redirect
+from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
+from .models import UserProfile
 
 
 # Create your views here.
 def home(request):
 	title = "Welcome"
+	profile = UserProfile.objects.get(username=request.user)
 	if request.user.is_authenticated():
-		return render(request, "myprofile.html", '')
+		if profile:
+			return render(request, "myprofile.html", {'profile':profile})
+		else:
+			return render(request, "myprofile.html",'')
 	return render(request, "home.html", '')
 
 
@@ -20,22 +25,28 @@ def about(request):
 	return render(request, "about.html", context)
 
 def myprofile(request):
+	profile = UserProfile.objects.get(username=request.user)
+	if profile:
+		print "yes"
+		return render(request, "myprofile.html", {'profile': profile})
+
 	return render(request, "myprofile.html", '')
 
 def editprofile(request):
-	try:
-		profile = request.user.userprofile
-	except UserProfile.DoesNotExist:
-		profile = UserProfile(user=request.user)
-	if request.method == 'POST':
-		form = UserProfileForm(data=request.POST, instance=profile)
+	if request.method == "POST":
+		form = UserProfileForm(request.POST)
 		if form.is_valid():
-			form.save()
-			# return HttpResponse("Exito!")
-		else:
-			form = UserProfileForm(instance=profile)
+			user = form.save(commit=False)
+			user.username = request.user
+			user.save()
+			return redirect('home')
 	else:
 		form = UserProfileForm()
+		profile = UserProfile.objects.get(username=request.user)
+
+
+		if profile:
+			return render(request,'editprofile.html',{ 'form': form, 'profile': profile})
 
 	return render(request,'editprofile.html',{ 'form': form})
 

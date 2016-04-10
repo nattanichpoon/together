@@ -30,7 +30,14 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {% if request.user.is_authenticated %}
-                                <span style="font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; ">{{ request.user.get_full_name }}</span>
+                                <span style="font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; ">
+                                    {% if profile %}
+                                    {{ profile }}
+                                    {% else %}
+                                    {{ request.user }}
+                                    {% endif %}
+                                </span>
+                              
                             {% else %}
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             {% endif %}
@@ -50,7 +57,7 @@
                                 </form>
 
                             {% else %}
-                                <li><a href="{%url 'editprofile'%}" class="list-group-item">My Profile</a></li>
+                                <li><a href="{%url 'editprofile'%}" class="list-group-item">Edit Profile</a></li>
                                 <li><a href="{% url 'auth_logout' %}" class="list-group-item">Log Out</a></li>
                             {% endif %}
                   

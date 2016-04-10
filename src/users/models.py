@@ -17,11 +17,14 @@ class SignUp(models.Model):
 		return self.email #dispayed in signup field in admin page
 
 
-# class UserProfile(models.Model):
-#     #Esta linea es requerira. Linkea UserProfile a un User model
-#     user = models.OneToOneField(User)
-
-#     #atributos adicionales
-#     about_me = models.TextField(max_length=100,default='',blank=True)
-#     experience = models.TextField(max_length=250,default='',blank=True)
-#     offers = models.TextField(max_length=110,default='',blank=True)
+class UserProfile(models.Model):
+	username = models.ForeignKey('auth.User', primary_key=True)
+	# first_name = models.CharField(max_length=100)
+	# last_name = models.CharField(max_length=100)
+	full_name = models.CharField(max_length=200)
+	
+	# def save(self):
+	# 	# full_name = first_name + " " + last_name
+	# 	self.save()
+	def __str__(self):
+		return self.full_name

@@ -32,7 +32,9 @@
                             {% if request.user.is_authenticated %}
                                 <span style="font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; ">
                                     {% if profile %}
-                                    {{ profile }}
+                                    <!-- {{ profile }} -->
+                                    {{ request.user }}
+
                                     {% else %}
                                     {{ request.user }}
                                     {% endif %}

@@ -4,30 +4,36 @@ from django.utils import timezone
 
 from .forms import PostForm, CommentForm
 from .models import Post
+from users.models import UserProfile
 
  
 def discussions(request):
 	title = "Discussions"
 	title_align_center = True
 	navtab = True
+	profile = UserProfile.objects.get(username=request.user)
 
 	context = {
 	"title": title,
 	"title_align_center":title_align_center,
 	"navtab":navtab,
+	"profile":profile,
+
 	}
 	return render(request, "discussion_home.html", context)
 
 def post_new(request):
     form = PostForm()
-    return render(request, 'post_edit.html', {'form': form})
+    profile = UserProfile.objects.get(username=request.user)
+    return render(request, 'post_edit.html', {'form': form,'profile':profile})
 
 def post_list(request):
 	# Post.objects.order_by('-created_date')
 	# posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date') 
 	posts = Post.objects.order_by('-published_date') 
+	profile = UserProfile.objects.get(username=request.user)
 
-	return render(request, 'post_list.html', {'posts': posts})
+	return render(request, 'post_list.html', {'posts': posts,'profile':profile})
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)

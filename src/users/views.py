@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
 from .models import UserProfile
@@ -9,12 +10,13 @@ from .models import UserProfile
 # Create your views here.
 def home(request):
 	title = "Welcome"
-	profile = UserProfile.objects.get(username=request.user)
 	if request.user.is_authenticated():
-		if profile:
+		try:
+			profile = UserProfile.objects.get(username=request.user)
 			return render(request, "myprofile.html", {'profile':profile})
-		else:
-			return render(request, "myprofile.html",'')
+		except ObjectDoesNotExist:
+			form = UserProfileForm()
+			return render(request, "editprofile.html",{'form':form})
 	return render(request, "home.html", '')
 
 
@@ -25,10 +27,11 @@ def about(request):
 	return render(request, "about.html", context)
 
 def myprofile(request):
-	profile = UserProfile.objects.get(username=request.user)
-	if profile:
-		print "yes"
+	try:
+		profile = UserProfile.objects.get(username=request.user)
 		return render(request, "myprofile.html", {'profile': profile})
+	except ObjectDoesNotExist:
+		print "nothing"
 
 	return render(request, "myprofile.html", '')
 
@@ -42,12 +45,11 @@ def editprofile(request):
 			return redirect('home')
 	else:
 		form = UserProfileForm()
-		profile = UserProfile.objects.get(username=request.user)
-
-
-		if profile:
+		try:
+			profile = UserProfile.objects.get(username=request.user)
 			return render(request,'editprofile.html',{ 'form': form, 'profile': profile})
-
+		except ObjectDoesNotExist:
+			print "nothing"
 	return render(request,'editprofile.html',{ 'form': form})
 
 

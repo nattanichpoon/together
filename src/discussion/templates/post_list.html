@@ -5,8 +5,9 @@
 {% block head_title %} Discussions {% endblock %}
 
 {% block content %}
-<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-
+<div class='container'>
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span>Add a post</a>
+</div>
 <div class='container'>
 
   {% for post in posts %}

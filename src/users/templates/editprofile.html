@@ -5,18 +5,32 @@
 {% block content %}
 
 {% if profile %}
-<h1>Need to edit your name?</h1>
+	<h1>Need to edit your name?</h1>
+	<div class='container'>
+		<form method="POST" class="post-form">
+		    {% csrf_token %}
+		    <!-- {{ form.as_p }} -->
+		    <div class='row'>
+		    <label for="full_name">Full name: </label>
+		    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px">
+		</div>
+		    <div class='row'>
+		    <button type="submit" class="save btn">Save</button>
+		</div>
+		</form>
+	</div>
+
+
 {% else %}
 <h1>Tell us your name.</h1>
-{% endif %}
-<div class='container'>
 
+<div class='container'>
 	<form method="POST" class="post-form">
 	    {% csrf_token %}
-	    <!-- {{ form.as_p }} -->
-	    <div class='row'>
+	    {{ form.as_p }}
+	   <!--  <div class='row'>
 	    <label for="full_name">Full name: </label>
-	    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px">
+	    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px"> -->
 	</div>
 	    <div class='row'>
 	    <button type="submit" class="save btn">Save</button>
@@ -24,4 +38,7 @@
 	</form>
 </div>
 
+{% endif %}
 {% endblock %}
+
+

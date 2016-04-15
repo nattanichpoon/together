@@ -19,8 +19,6 @@ class SignUp(models.Model):
 
 class UserProfile(models.Model):
 	username = models.ForeignKey('auth.User', primary_key=True)
-	# first_name = models.CharField(max_length=100)
-	# last_name = models.CharField(max_length=100)
 	full_name = models.CharField(max_length=200)
 	
 	# def save(self):

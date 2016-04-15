@@ -15,8 +15,9 @@ def home(request):
 			profile = UserProfile.objects.get(username=request.user)
 			return render(request, "myprofile.html", {'profile':profile})
 		except ObjectDoesNotExist:
-			form = UserProfileForm()
-			return render(request, "editprofile.html",{'form':form})
+			print "nothing"
+			# form = UserProfileForm()
+			# return render(request, "editprofile.html",{'form':form})
 	return render(request, "home.html", '')
 
 

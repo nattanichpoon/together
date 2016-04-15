@@ -6,17 +6,40 @@
 
 {% block content %}
 <div class='container'>
-<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span>Add a post</a>
-</div>
-<div class='container'>
+	<div class='col-sm-2' style='border-top:2px'>
+		<button type='button' class='btn btn-clean'>
+			<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span>Add a post</a>
+		</button>
+		<button type="button" class="btn btn-clean dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+			<a href="" class="top-menu"><span class="glyphicon glyphicon-filter"></span>Filter </a><span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+		    <li><a href="#">Action</a></li>
+		    <li><a href="#">Another action</a></li>
+		    <li><a href="#">Something else here</a></li>
+		  </ul>
+	</div>
 
-  {% for post in posts %}
-        <div class="post">
-            <h3><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
-            <p>{{ post.author }} | {{ post.published_date }} | Comments: {{ post.comments.count }}</p> 
-            <p>{{ post.text|linebreaks }}</p>
-        </div>
-    {% endfor %}
+	<div class='col-sm-9' style='margin:1px'>
+	{% for post in posts %}
 
+	<div class='panel-group'>
+		<div class='panel'>
+			<div class="panel-footer pull-right">
+				{{ post.author }} | {{ post.published_date }} | <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a>
+			</div>
+			<div class="panel-heading">
+				<h3 class="panel-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+				</div>
+			<div class="panel-body">
+				{{post.text}}
+			</div>
+			
+		</div>
+
+	</div>
+	{% endfor %}
 </div>
+</div>
+
 {% endblock %}

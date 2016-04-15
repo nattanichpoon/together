@@ -3,21 +3,44 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class='panel-group' style='margin-top:5px'>
+    <div class='panel'>
+        <div class="panel-footer pull-right">
+            {{ post.author }} | {{ post.published_date }} 
+        </div>
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ post.title }}</a></h3>
+            </div>
+        <div class="panel-body">
+            {{post.text}}
+        </div>
+        
+    </div>
 
-    <div class="post">
+</div>
+ <!--    <div class="post">
         <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <p>{{ post.author }} | {{ post.published_date }}</p> 
         <p>{{ post.text }}</p>
-    </div>
+    </div> -->
     <hr>
     <a class="btn" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+
+    <div class='container' style='margin-top:2px'>
+        <div class='col-sm-10 col-sm-offset-1'>
     {% for comment in post.comments.all %}
-        <div class="comment">
-            <div class="date">{{ comment.created_date }}</div>
-            <strong>{{ comment.author }}</strong>
-            <p>{{ comment.text }}</p>
+        <div class="comment">     
+        <div class="date pull-right">{{ comment.created_date }}</div>
+       
+            <p><strong>{{ comment.author }}: </strong>{{ comment.text }}</p>
+
         </div>
+        <hr>
+
     {% empty %}
         <p>No comments here yet :(</p>
+
     {% endfor %}
+</div>
+</div>
 {% endblock %}

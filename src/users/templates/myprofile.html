@@ -9,10 +9,15 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
-			<h4 class="strong pull-right">Welcome, {{profile}}.</h4>
-
-		</div>
+		{% if profile %}
+			<div class="col-sm-12">
+				<h4 class="strong pull-right">Welcome, {{profile}}.</h4>
+			</div>
+		{% else %}
+			<div class="col-sm-12">
+				<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
+			</div>
+		{% endif %}
 		<div class="col-sm-12">
 			<h4 class="lead">Your Projects</h4>
 		</div>

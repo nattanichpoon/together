@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} Discussions {% endblock %}
+
+{% block content %}
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
+<div class='container'>
+
+  {% for post in posts %}
+        <div class="post">
+            <h3><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+            <p>{{ post.author }} | {{ post.published_date }} | Comments: {{ post.comments.count }}</p> 
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

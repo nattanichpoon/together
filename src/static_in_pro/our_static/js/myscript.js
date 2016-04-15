@@ -1,10 +1,15 @@
-$(".nav li a").on("load", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
-});
+var selector, elems, makeActive;
 
+selector = '.nav li';
 
+elems = document.querySelectorAll(selector);
 
-// function changeText(id) {
-//     id.addClass = "active";
-// }
+makeActive = function () {
+    for (var i = 0; i < elems.length; i++)
+        elems[i].classList.remove('active');
+    
+    this.classList.add('active');
+};
+
+for (var i = 0; i < elems.length; i++)
+    elems[i].addEventListener('click', makeActive);

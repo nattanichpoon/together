@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
 from .models import UserProfile
+from projects.models import Project, Task
 
 
 # Create your views here.
@@ -30,7 +31,8 @@ def about(request):
 def myprofile(request):
 	try:
 		profile = UserProfile.objects.get(username=request.user)
-		return render(request, "myprofile.html", {'profile': profile})
+		projects = Project.objects.all()
+		return render(request, "myprofile.html", {'profile': profile, 'projects': projects})
 	except ObjectDoesNotExist:
 		print "nothing"
 

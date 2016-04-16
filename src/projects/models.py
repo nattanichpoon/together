@@ -7,7 +7,7 @@ from decimal import Decimal
 
 # Create your models here.
 class Project(models.Model):
-	projectName = models.CharField(max_length=200, unique=True)
+	projectName = models.CharField(max_length=200, unique=True,null=True)
 	members = models.ManyToManyField(User)
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
 
@@ -17,6 +17,7 @@ class Project(models.Model):
 class Task(models.Model):
 	project = models.ForeignKey('projects.Project')
 	taskName = models.CharField(max_length=200)
+	assignee = models.ForeignKey(User)
 	AWAITING = 'AW'
 	IN_PROGRESS = 'IP'
 	COMPLETED = 'CP'

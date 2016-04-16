@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from projects.models import Project
 
 # Create your models here.
 
-
-
 class Post(models.Model):
+    project = models.ForeignKey('projects.Project', related_name='posts',null=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()

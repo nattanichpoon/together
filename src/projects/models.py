@@ -13,11 +13,13 @@ class Project(models.Model):
 
 	def __str__(self):
 		return self.projectName
+	def get_members(self):
+	        return ",".join([str(p) for p in self.members.all()])
 
 class Task(models.Model):
 	project = models.ForeignKey('projects.Project')
 	taskName = models.CharField(max_length=200)
-	assignee = models.ForeignKey(User)
+	assignee = models.ForeignKey(User, null=True)
 	AWAITING = 'AW'
 	IN_PROGRESS = 'IP'
 	COMPLETED = 'CP'

@@ -14,7 +14,9 @@ def home(request):
 	if request.user.is_authenticated():
 		try:
 			profile = UserProfile.objects.get(username=request.user)
-			return render(request, "myprofile.html", {'profile':profile})
+			# return render(request, "myprofile.html", {'profile':profile})
+			# return render(request,"test.html",'')
+			return HttpResponseRedirect("http://127.0.0.1:8000/profile/")
 		except ObjectDoesNotExist:
 			print "nothing"
 			# form = UserProfileForm()

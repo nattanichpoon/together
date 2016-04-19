@@ -10,11 +10,13 @@ class Project(models.Model):
 	projectName = models.CharField(max_length=200, unique=True,null=True)
 	members = models.ManyToManyField(User)
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
+	
+	def get_members(self):
+	        return ",".join([str(p) for p in self.members.all()])
 
 	def __str__(self):
 		return self.projectName
-	def get_members(self):
-	        return ",".join([str(p) for p in self.members.all()])
+	
 
 class Task(models.Model):
 	project = models.ForeignKey('projects.Project')

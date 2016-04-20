@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} Discussions {% endblock %}
+
+{% block content %}
+<div class='container'>
+    <div class='col-sm-2' style='border-top:2px'>
+        <button type='button' class='btn btn-clean'>
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span>Add a post</a>
+        </button>
+        <p>Filter by projects:</p>
+        <div id="project_filters">
+            <ul class="list-group">
+                {% for project in projects %}
+                <li class="list-group-item"><a href="{% url 'post_filter' pk=project.pk %}">{{ project.projectName }}</a></li>  
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class='col-sm-9' style='margin:1px'>
+    
+    {% for post in posts %}
+
+    <div class='panel-group'>
+        <div class='panel'>
+            <div class="panel-footer pull-right">
+                {{ post.author }} | {{ post.published_date }} | <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a>
+            </div>
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+                </div>
+            <div class="panel-body">
+                {{post.text}}
+            </div>
+            
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}

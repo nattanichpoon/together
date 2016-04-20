@@ -5,6 +5,7 @@ from django.utils import timezone
 from .forms import PostForm, CommentForm
 from .models import Post
 from users.models import UserProfile
+from projects.models import Project
 
  
 def discussions(request):
@@ -28,12 +29,18 @@ def post_new(request):
     return render(request, 'post_edit.html', {'form': form,'profile':profile})
 
 def post_list(request):
-	# Post.objects.order_by('-created_date')
-	# posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date') 
+	projects = Project.objects.filter(members__username=request.user.username)
 	posts = Post.objects.order_by('-published_date') 
 	profile = UserProfile.objects.get(username=request.user)
 
-	return render(request, 'post_list.html', {'posts': posts,'profile':profile})
+	return render(request, 'post_list.html', {'posts': posts,'profile':profile,'projects':projects})
+def post_filter(request, pk):
+	projects = Project.objects.filter(members__username=request.user.username)
+	myproject = get_object_or_404(Project, pk=pk)
+	posts = Post.objects.filter(project__projectName=myproject.projectName).order_by('-published_date') 
+	profile = UserProfile.objects.get(username=request.user)
+	return render(request, 'post_filter.html', {'posts': posts,'profile':profile,'projects':projects})
+
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)

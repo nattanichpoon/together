@@ -5,6 +5,32 @@
 {% block head_title %} My Page {% endblock %}
 
 
+{% block extrahead %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Progress', 'Tasks'],
+          ['Completed',     {{ completed }}],
+          ['In Progress',      {{ inprogress }}],
+          ['Awaiting',  {{ awaiting }}]
+         
+        ]);
+
+        var options = {
+          pieHole: 0.3,
+          colors: ['#1FB58F', '#EAB126', '#F24C4E'],
+          // legend: 'none'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -12,6 +38,8 @@
 		{% if profile %}
 			<div class="col-sm-12">
 				<h4 class="strong pull-right">Welcome, {{profile}}.</h4>
+
+				
 			</div>
 		{% else %}
 			<div class="col-sm-12">
@@ -19,44 +47,31 @@
 			</div>
 		{% endif %}
 		<div class="col-sm-12">
-			<h4 class="lead">Your Projects</h4>
+			<h4 class="lead">Your Tasks</h4>
+			<div id="donutchart" style="width:400px; height:400px; "></div>
 		</div>
 	</div>
-	<div class="col-sm-10 col-sm-offset-1">
-		<!-- <div class='row'> -->
-		{% for project in projects %}
-
-		<h4> {{ project.projectName }}</h4>
-			<div class="progress">
-			  <div class="progress-bar progress-bar-success" style="width: 35%">
-			    <span class="sr-only">35% Complete (success)</span>
-			  </div>
-			  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
-			    <span class="sr-only">20% Complete (warning)</span>
-			  </div>
-			  <div class="progress-bar progress-bar-danger" style="width: 45%">
-			    <span class="sr-only">45% Complete (danger)</span>
-			  </div>
-			</div>
-		{% endfor %}
-
-		</div>
-		
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h4 class="lead">Things you need to work on </h4>
+			<h4 class="lead">Tasks you're working on </h4>
+			<!-- {{myTasks}} -->
 		</div>
 	</div>
 	<div class="col-sm-10 col-sm-offset-1">
 		<div class='row'>
 			<div class="col-sm-6">
 				<div class="list-group">
-					<a href="#" class="list-group-item"> task <span class="badge">3 days</span></a>
-
+					
+					{% for task in inProgressTasks %}
+					<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
+					{% endfor %}
 				</div>
+
 			</div>
 		</div>
 	</div>
 </div>
+
 {% endblock %}
+

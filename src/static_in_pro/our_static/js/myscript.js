@@ -1,15 +1,7 @@
-var selector, elems, makeActive;
+$('#project_filters > ul.nav-pills li').click(function(e) {
+    $('.nav li.active').removeClass('active');
+    var $this = $(this);
+    $this.addClass('active');
+    e.preventDefault();
+});
 
-selector = '.nav li';
-
-elems = document.querySelectorAll(selector);
-
-makeActive = function () {
-    for (var i = 0; i < elems.length; i++)
-        elems[i].classList.remove('active');
-    
-    this.classList.add('active');
-};
-
-for (var i = 0; i < elems.length; i++)
-    elems[i].addEventListener('click', makeActive);

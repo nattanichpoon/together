@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'message',
     'discussion',
     'django_messages',
-    'schedule',
+    'schedule1',
 ]
 
 MIDDLEWARE_CLASSES = [

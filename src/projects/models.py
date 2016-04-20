@@ -33,13 +33,12 @@ class Task(models.Model):
  		(IN_PROGRESS,'In Progress'),
  		(COMPLETED,'Completed')
 	)
-	EASY = 'E'
-	MEDIUM = 'M'
-	DIFFICULT = 'D'
+	EASY = 1
+	MEDIUM = 3
+	DIFFICULT = 5
 	DIFFICULTY_STATE = ((EASY, 'Easy'), (MEDIUM, 'Medium'), (DIFFICULT, 'Difficult'))
 
 	taskState = models.CharField(choices=STATE, default=AWAITING, max_length=200)
-	completed = models.BooleanField(default=False)
 	
 	difficultyLevel =models.CharField(choices=DIFFICULTY_STATE, default=EASY, max_length=200)
 	expectedDate = models.DateField(default=timezone.now,blank=True)

@@ -46,31 +46,31 @@
 				<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
 			</div>
 		{% endif %}
-		<div class="col-sm-12">
-			<h4 class="lead">Your Tasks</h4>
-			<div id="donutchart" style="width:400px; height:400px; "></div>
+		<div class="col-sm-6 pull-right">
+			<div id="donutchart" style="width:500px; height:500px; "></div>
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-6 pull-left">
 			<h4 class="lead">Tasks you're working on </h4>
 			<!-- {{myTasks}} -->
+			<div class="list-group">
+				{% for task in inProgressTasks %}
+				<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
+				{% endfor %}
+			</div>
 		</div>
-	</div>
-	<div class="col-sm-10 col-sm-offset-1">
-		<div class='row'>
-			<div class="col-sm-6">
-				<div class="list-group">
-					
-					{% for task in inProgressTasks %}
-					<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
-					{% endfor %}
-				</div>
-
+		<div class="col-sm-6 pull-left">
+			<h4 class="lead">Tasks waiting for you </h4>
+			<!-- {{myTasks}} -->
+			<div class="list-group">
+				{% for task in awaitingTasks %}
+				<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
+
+	
+
 </div>
 
 {% endblock %}

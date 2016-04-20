@@ -31,10 +31,27 @@ def about(request):
 	return render(request, "about.html", context)
 
 def myprofile(request):
+	awaiting = 0
+	inprogress = 0
+	completed = 0
+	inProgressTasks = []
+	awaitingTasks = []
 	try:
 		profile = UserProfile.objects.get(username=request.user)
-		projects = Project.objects.all()
-		return render(request, "myprofile.html", {'profile': profile, 'projects': projects})
+		projects = Project.objects.filter(members__username=request.user.username).all()
+		for project in projects:
+			allTasks = Task.objects.filter(project=project).all()
+			tasks = allTasks.filter(assignee=request.user).all()
+			awaiting += tasks.filter(taskState = Task.AWAITING).count()
+			inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+			completed += tasks.filter(taskState = Task.COMPLETED).count()
+			for task in tasks.filter(taskState = Task.IN_PROGRESS):
+				inProgressTasks.append(task)
+			for task in tasks.filter(taskState = Task.AWAITING):
+				awaitingTasks.append(task)
+		# t = tasks.count()
+		
+		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks})
 	except ObjectDoesNotExist:
 		print "nothing"
 
@@ -56,7 +73,6 @@ def editprofile(request):
 		except ObjectDoesNotExist:
 			print "nothing"
 	return render(request,'editprofile.html',{ 'form': form})
-
 
 	
 def contact(request):

@@ -10,7 +10,10 @@ class Project(models.Model):
 	projectName = models.CharField(max_length=200, unique=True,null=True)
 	members = models.ManyToManyField(User)
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
+	dueDate = models.DateField(default=timezone.now,blank=True)
+	completed = models.BooleanField(default=False)
 	
+
 	def get_members(self):
 	        return ",".join([str(p) for p in self.members.all()])
 
@@ -41,5 +44,7 @@ class Task(models.Model):
 	difficultyLevel =models.CharField(choices=DIFFICULTY_STATE, default=EASY, max_length=200)
 	expectedDate = models.DateField(default=timezone.now,blank=True)
 	actualDate = models.DateField(default=timezone.now,blank=True)
+	description = models.CharField(blank = True, max_length = 200)
+	
 	def __str__(self):
 		return self.taskName

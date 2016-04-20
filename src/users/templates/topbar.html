@@ -5,7 +5,26 @@
 			<li><a href="{% url 'projects' %}">Projects</a></li>
 			<li><a href="{% url 'schedule' %}">Schedule</a></li>
 			<li><a href="{% url 'messages_inbox' %}">Messages</a></li>
-			<li><a href="{% url 'post_filter' pk=1%}">Discussions</a></li>
+			<li><a "{% url 'post_list' %}">Discussions</a></li>
 
 	</ul>
 </div>
+
+
+<!-- <header> -->
+  <nav class="cd-stretchy-nav">
+    <a class="cd-nav-trigger" href="#0">
+			Menu
+			<span aria-hidden="true"></span>
+		</a>
+    <ul>
+      <li><a href="{% url 'profile' %}" class="active"><span>Home</span></a></li>
+      <li><a href="{% url 'projects' %}"><span>Projects</span></a></li>
+      <li><a href="{% url 'schedule' %}"><span>Schedule</span></a></li>
+      <li><a href="{% url 'messages_inbox' %}"><span>Messages</span></a></li>
+      <li><a href="{% url 'post_list' %}"><span>Discussions</span></a></li>
+    </ul>
+    <span aria-hidden="true" class="stretchy-nav-bg"></span>
+  </nav>
+<!-- </header> -->
+

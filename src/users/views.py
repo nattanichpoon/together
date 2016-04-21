@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
 from .models import UserProfile
-from projects.models import Project, Task
 
 
 # Create your views here.
@@ -52,6 +51,7 @@ def myprofile(request):
 		# t = tasks.count()
 		
 		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks})
+
 	except ObjectDoesNotExist:
 		print "nothing"
 

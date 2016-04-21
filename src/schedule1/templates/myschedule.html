@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} My Page {% endblock %}
+<!-- {% block topbar %}
+{% include 'topbar.html'%}
+{% endblock %} -->
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="header">
+
+            <h4>Click on the dates which you are available.</h4>
+
+        </div>
+
+        <div class="col-sm-3 pull-left">
+			<head>
+			        <title>Calendar</title>
+			    </head>
+			    <body>
+			        <div id="calendar-container">
+			            <div id="calendar-header">
+			                <span id="calendar-month-year"></span>
+			            </div>
+			            <div id="calendar-dates">
+			            </div>
+			        </div>
+			    </body>
+		</div>
+
+    </div>
+
+
+
+{% endblock %}

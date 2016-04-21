@@ -38,7 +38,7 @@ urlpatterns = [
     # url(r'^accounts/register/$', RegistrationView.as_view(form_class = RegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^messages/', include('django_messages.urls')),
-    url(r'^schedule/$', 'schedule.views.myschedule', name='schedule'),
+    url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
 
 ] 
 if settings.DEBUG:

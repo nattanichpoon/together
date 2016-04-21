@@ -33,6 +33,7 @@
 
 {% block content %}
 
+
 <div class="container">
 	<div class="row">
 		{% if profile %}
@@ -65,11 +66,12 @@
 				{% for task in awaitingTasks %}
 				<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
 				{% endfor %}
-	</div>
-	
-</div>
 
+			</div>
+		</div>
 	</div>
+
+	
 
 </div>
 

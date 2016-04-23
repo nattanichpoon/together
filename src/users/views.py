@@ -39,6 +39,7 @@ def myprofile(request):
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
+
 		if projects.count() > 0:
 			for project in projects:
 				allTasks = Task.objects.filter(project=project).all()
@@ -51,8 +52,10 @@ def myprofile(request):
 				for task in tasks.filter(taskState = Task.AWAITING):
 					awaitingTasks.append(task)
 		# t = tasks.count()
+			total = awaiting+inprogress+completed
+
 		
-		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks})
+		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks, 'total':total})
 
 	except ObjectDoesNotExist:
 		print "nothing"

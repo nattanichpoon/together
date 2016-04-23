@@ -13,20 +13,24 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Progress', 'Tasks'],
-          ['Completed',     {{ completed }}],
-          ['In Progress',      {{ inprogress }}],
-          ['Awaiting',  {{ awaiting }}]
+          ['Awaiting',  {{ awaiting }}],
+          ['In progress', {{inprogress}}],
+          ['Completed', {{completed}}]
          
         ]);
-
+       
         var options = {
           pieHole: 0.3,
           colors: ['#1FB58F', '#EAB126', '#F24C4E'],
-          // legend: 'none'
+          legend: 'none'
         };
+      
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
+        
+    
+
       }
     </script>
 {% endblock %}
@@ -47,9 +51,12 @@
 				<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
 			</div>
 		{% endif %}
-		<div class="col-sm-6 pull-right">
-			<div id="donutchart" style="width:500px; height:500px; "></div>
-		</div>
+		<div class="row">
+			<div id="donutchart" style="width:300px; height:300px; "></div>
+			<!-- <div id="donutchart_inprogress" style="width:300px; height:300px; "></div> -->
+			<!-- <div id="donutchart_completed" style="width:300px; height:300px; "></div> -->
+	</div>
+
 		<div class="col-sm-6 pull-left">
 			<h4 class="lead">Tasks you're working on </h4>
 			<!-- {{myTasks}} -->
@@ -69,6 +76,8 @@
 
 			</div>
 		</div>
+
+	
 	</div>
 
 	

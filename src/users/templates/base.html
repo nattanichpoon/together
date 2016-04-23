@@ -529,7 +529,9 @@
 
   <div class="container">
         {% block topbar %}
+        {% if request.user.is_authenticated %}
           {% include 'topbar.html' %}
+        {% endif %}
         {% endblock %}
   </div>
    

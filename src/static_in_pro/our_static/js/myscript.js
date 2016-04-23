@@ -16,6 +16,7 @@ jQuery(document).ready(function() {
 
     $(document).on('click', function(event) {
       (!$(event.target).is('.cd-nav-trigger') && !$(event.target).is('.cd-nav-trigger span')) && stretchyNavs.removeClass('nav-is-visible');
+     
     });
 
   }

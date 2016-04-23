@@ -21,7 +21,7 @@
        
         var options = {
           pieHole: 0.7,
-          colors: ['#EAB126','#1FB58F', '#F24C4E'],
+          colors: ['#1FB58F','#EAB126', '#F24C4E'],
           // legend: 'none',
           pieSliceText: 'none',
           height: 400,
@@ -81,21 +81,30 @@
 		<div class="col-sm-3">
 			<div class="row" style="height:400px;">
 				<div style="height:70%; overflow:scroll; margin:10px; padding:20px; background-color:#484848; border-radius:5px">
-					<h4 class="lead">Tasks you're working on </h4>
+					<h4 class="lead">Your Tasks</h4>
 					<!-- {{myTasks}} -->
-					<div class="list-group">
-						{% for task in inProgressTasks %}
-						<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
-						{% endfor %}
-					</div>
-					<h4 class="lead">Tasks waiting for you </h4>
-					<!-- {{myTasks}} -->
-					<div class="list-group">
-						{% for task in awaitingTasks %}
-						<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
-						{% endfor %}
 
-					</div>
+						<div class="list-group">
+							{% for task in inProgressTasks  %}
+
+						<a href="#" class="list-group-item"> {{task}} ({{task.project}})
+							<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#18aa7c" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></a>
+							{% endfor %}
+
+							</div>
+
+						<div class="list-group">
+							{% for task in awaitingTasks  %}
+
+						<a href="#" class="list-group-item"> {{task}} ({{task.project}})
+							<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#e1a201" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></a>
+
+						{% endfor %}
+						</div>
+
+
+
+					
 				</div>
 			</div>
 		</div>

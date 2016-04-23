@@ -47,6 +47,8 @@ class Task(models.Model):
 	actualDate = models.DateField(default=timezone.now,blank=True)
 	description = models.CharField(blank = True, max_length = 200)
 	
-	
+	def get_state(self):
+		return self.taskState
+
 	def __str__(self):
 		return self.taskName

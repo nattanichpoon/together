@@ -7,8 +7,10 @@
 {% block content %}
 <div class='container'>
     <div class='col-sm-2' style='border-top:2px'>
+
+
         <button type='button' class='btn btn-clean'>
-            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span>Add a post</a>
+            <a href="{% url 'post_new' %}" class="top-menu"><i class="glyphicon glyphicon-plus"></i></a>
         </button>
         <p>Filter by projects:</p>
         <div id="project_filters">
@@ -34,7 +36,13 @@
                 <h3 class="panel-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
                 </div>
             <div class="panel-body">
+                <div>
                 {{post.text}}
+            </div>
+            <div>
+                {{post.}}
+            </div>
+
             </div>
             
         </div>

@@ -20,6 +20,8 @@ jQuery(document).ready(function() {
     });
 
   }
+  $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+});
 
 
   $('#project_filters > ul.nav-pills li').click(function(e) {
@@ -27,6 +29,5 @@ jQuery(document).ready(function() {
     var $this = $(this);
     $this.addClass('active');
     e.preventDefault();
-});
 });
 

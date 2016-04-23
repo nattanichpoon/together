@@ -141,7 +141,7 @@
           position: absolute;
           z-index: 2;
           top: 100px;
-          left: 3%;
+          right: 3%;
         }
         .cd-stretchy-nav .stretchy-nav-bg {
           /* this is the stretching navigation background */
@@ -152,7 +152,7 @@
           width: 60px;
           height: 60px;
           border-radius: 30px;
-          background: #9acd91; /* background color of burger*/
+          background: black; /* background color of burger*/
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
           -webkit-transition: height 0.2s, box-shadow 0.2s;
           -moz-transition: height 0.2s, box-shadow 0.2s;
@@ -281,7 +281,7 @@
           -o-transform: translateY(-50%) scale(0);
           transform: translateY(-50%) scale(0);
           opacity: .6;
-          background: url(https://codyhouse.co/demo/stretchy-navigation/img/cd-sprite-1.svg) no-repeat 0 0;
+          background: url(/static/img/cd-sprite-1.svg) no-repeat 0 0;
         }
         .cd-stretchy-nav ul a::before {
           /* line visible next to the active navigation item */
@@ -309,10 +309,10 @@
           background-position: -48px 0;
         }
         .cd-stretchy-nav ul li:nth-of-type(4) a::after {
-          background-position: 0 0;
+          background-position: -16px 0;
         }
         .cd-stretchy-nav ul li:nth-of-type(5) a::after {
-          background-position: -16px 0;
+          background-position: 0 0;
         }
         .cd-stretchy-nav ul span {
           /* navigation item labels */

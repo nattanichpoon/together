@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
 from .models import UserProfile
+from projects.models import Project, Task
 
 
 # Create your views here.
@@ -38,16 +39,17 @@ def myprofile(request):
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
-		for project in projects:
-			allTasks = Task.objects.filter(project=project).all()
-			tasks = allTasks.filter(assignee=request.user).all()
-			awaiting += tasks.filter(taskState = Task.AWAITING).count()
-			inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
-			completed += tasks.filter(taskState = Task.COMPLETED).count()
-			for task in tasks.filter(taskState = Task.IN_PROGRESS):
-				inProgressTasks.append(task)
-			for task in tasks.filter(taskState = Task.AWAITING):
-				awaitingTasks.append(task)
+		if projects.count() > 0:
+			for project in projects:
+				allTasks = Task.objects.filter(project=project).all()
+				tasks = allTasks.filter(assignee=request.user).all()
+				awaiting += tasks.filter(taskState = Task.AWAITING).count()
+				inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+				completed += tasks.filter(taskState = Task.COMPLETED).count()
+				for task in tasks.filter(taskState = Task.IN_PROGRESS):
+					inProgressTasks.append(task)
+				for task in tasks.filter(taskState = Task.AWAITING):
+					awaitingTasks.append(task)
 		# t = tasks.count()
 		
 		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks})

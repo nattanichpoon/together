@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
+    project = models.ForeignKey('projects.Project', related_name='posts', null=True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()

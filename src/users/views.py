@@ -6,6 +6,8 @@ from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
 from .models import UserProfile
 from projects.models import Project, Task
+from django.utils import timezone
+
 
 
 # Create your views here.
@@ -39,6 +41,8 @@ def myprofile(request):
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
+		projects_count= projects.count()
+		date = timezone.now().date()
 
 		if projects.count() > 0:
 			for project in projects:
@@ -55,7 +59,7 @@ def myprofile(request):
 			total = awaiting+inprogress+completed
 
 		
-		return render(request, "myprofile.html", {'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks, 'total':total})
+		return render(request, "myprofile.html", {'date':date, 'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks, 'total':total, 'projects_count':projects_count})
 
 	except ObjectDoesNotExist:
 		print "nothing"

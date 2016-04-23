@@ -13,16 +13,30 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Progress', 'Tasks'],
-          ['Awaiting',  {{ awaiting }}],
           ['In progress', {{inprogress}}],
+          ['Awaiting',  {{ awaiting }}],
           ['Completed', {{completed}}]
          
         ]);
        
         var options = {
-          pieHole: 0.3,
-          colors: ['#1FB58F', '#EAB126', '#F24C4E'],
-          legend: 'none'
+          pieHole: 0.7,
+          colors: ['#EAB126','#1FB58F', '#F24C4E'],
+          // legend: 'none',
+          pieSliceText: 'none',
+          height: 400,
+          width: 400,
+          legend: {
+                 position: 'right',
+                 alignment: 'center'
+             },
+             chartArea: { 
+                 left: 10, 
+                 top: 10, 
+                 width: '130%', 
+                 height: '65%'
+             },
+             // pieStartAngle: 180,
         };
       
 
@@ -42,7 +56,8 @@
 	<div class="row">
 		{% if profile %}
 			<div class="col-sm-10 col-sm-offset-1">
-				<h4 class="strong pull-right">Welcome, {{profile}}.</h4>
+				<div class="row">
+				<h4 class="pull-right">Welcome, <strong>{{profile}}</strong>.</h4>
 
 				
 			</div>
@@ -51,36 +66,47 @@
 				<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
 			</div>
 		{% endif %}
-		<div class="row">
-			<div id="donutchart" style="width:300px; height:300px; "></div>
-			<!-- <div id="donutchart_inprogress" style="width:300px; height:300px; "></div> -->
-			<!-- <div id="donutchart_completed" style="width:300px; height:300px; "></div> -->
 	</div>
+		<div class="row" style="height:100px;">
+			<div class="col-sm-5">
+			<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px"> 
+				{% if projects_count > 0 %}
 
-		<div class="col-sm-6 pull-left">
-			<h4 class="lead">Tasks you're working on </h4>
-			<!-- {{myTasks}} -->
-			<div class="list-group">
-				{% for task in inProgressTasks %}
-				<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
-				{% endfor %}
+				{{projects_count}} {% if projects_count > 1 %}projects{% else %}project{% endif %}
+				{% endif %}
+			</div>
+
+			<div id="donutchart"> </div>
+			</div>
+		<div class="col-sm-3">
+			<div class="row" style="height:400px;">
+				<div style="height:70%; overflow:scroll; margin:10px; padding:20px; background-color:#484848; border-radius:5px">
+					<h4 class="lead">Tasks you're working on </h4>
+					<!-- {{myTasks}} -->
+					<div class="list-group">
+						{% for task in inProgressTasks %}
+						<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
+						{% endfor %}
+					</div>
+					<h4 class="lead">Tasks waiting for you </h4>
+					<!-- {{myTasks}} -->
+					<div class="list-group">
+						{% for task in awaitingTasks %}
+						<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
+						{% endfor %}
+
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 pull-left">
-			<h4 class="lead">Tasks waiting for you </h4>
-			<!-- {{myTasks}} -->
-			<div class="list-group">
-				{% for task in awaitingTasks %}
-				<a href="#" class="list-group-item"> {{task}} <span class="badge">{{task.expectedDate}}</span></a>
-				{% endfor %}
-
+		<div class="col-sm-2">
+			<div class="row" style="background-color:#efefef">
+				<h3>Important Dates</h3>
 			</div>
 		</div>
-
-	
 	</div>
 
-	
+
 
 </div>
 

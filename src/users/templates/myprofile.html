@@ -8,17 +8,17 @@
 {% block extrahead %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
+      google.charts.load("current", {packages:["corechart", "bar"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
+      	//data for donut chart
         var data = google.visualization.arrayToDataTable([
           ['Progress', 'Tasks'],
           ['In progress', {{inprogress}}],
           ['Awaiting',  {{ awaiting }}],
           ['Completed', {{completed}}]
          
-        ]);
-       
+        ]);     
         var options = {
           pieHole: 0.7,
           colors: ['#1FB58F','#EAB126', '#F24C4E'],
@@ -28,7 +28,7 @@
           width: 400,
           legend: {
                  position: 'right',
-                 alignment: 'center'
+                 alignment: 'top'
              },
              chartArea: { 
                  left: 10, 
@@ -38,86 +38,88 @@
              },
              // pieStartAngle: 180,
         };
+        //date for bar graph
+        var data2 = google.visualization.arrayToDataTable([
+          ['Project', 'Total', 'Average', 'Your'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]);
+
+        var options2 = {
+          chart: {
+            title: 'Personal Performance',
+            subtitle: 'Personal contribution VS. Average contribution',
+          }
+        };
       
+
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
         
+        var chart2 = new google.charts.Bar(document.getElementById('columnchart_material'));
+		chart2.draw(data2, options2);
     
 
       }
+      
+    
+    </script>
     </script>
 {% endblock %}
 
 {% block content %}
-
-
-<div class="container">
+<div class="col-sm-10 col-sm-offset-1">
 	<div class="row">
 		{% if profile %}
-			<div class="col-sm-10 col-sm-offset-1">
-				<div class="row">
-				<h4 class="pull-right">Welcome, <strong>{{profile}}</strong>.</h4>
-
-				
-			</div>
+		<h4 class="pull-right">Welcome, <strong>{{profile}}</strong>.</h4>
 		{% else %}
-			<div class="col-sm-12">
-				<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
-			</div>
+		<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
 		{% endif %}
 	</div>
-		<div class="row" style="height:100px;">
-			<div class="col-sm-5">
-			<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px"> 
-				{% if projects_count > 0 %}
-
+	<div class="col-sm-5">
+		<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px"> 
+			{% if projects_count > 0 %}
 				{{projects_count}} {% if projects_count > 1 %}projects{% else %}project{% endif %}
-				{% endif %}
-			</div>
-
-			<div id="donutchart"> </div>
-			</div>
-		<div class="col-sm-4">
-			<div class="row" style="height:400px;">
-				<div style="height:70%; overflow:scroll; margin:10px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px">
-					<h4 class="lead">Your Tasks</h4>
-					<!-- {{myTasks}} -->
-
-						<div class="list-group">
-							{% for task in inProgressTasks  %}
-
-						<a href="#" class="list-group-item"> {{task}} ({{task.project}})
-							<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#18aa7c" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></a>
-							{% endfor %}
-
-							</div>
-
-						<div class="list-group">
-							{% for task in awaitingTasks  %}
-
-						<a href="#" class="list-group-item"> {{task}} ({{task.project}})
-							<span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#e1a201" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></a>
-
-						{% endfor %}
-						</div>
-
-
-
-					
-				</div>
-			</div>
+			{% endif %}
 		</div>
-		<div class="col-sm-2">
-			<div class="row" style="background-color:#efefef">
-				<h3>Important Dates</h3>
+		<div id="donutchart"> </div>
+	</div>
+	<div class="col-sm-4" style="z-index:3;position:absolute; right:5px;">
+		<!-- <div class="row" style="height:500px;"> -->
+		<div style="height:70%; overflow:scroll;  padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px">
+			<h4 class="lead">Your Tasks</h4>
+			<div class="list-group">
+				{% for task in inProgressTasks  %}
+   				<a href="#" class="list-group-item"> 
+					<h4 class="list-group-item-heading">{{task}} <span style="float:right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#18aa7c" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></h4>
+					<p class="list-group-item-text">{{task.project}}</p>
+				</a>
+				{% endfor %}
+			</div>
+			<div class="list-group">
+				{% for task in awaitingTasks  %}
+				<a href="#" class="list-group-item"> 
+					<h4 class="list-group-item-heading">{{task}} <span style="float:right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#e1a201" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></h4>
+					<p class="list-group-item-text">{{task.project}}
+					</p>
+				</a>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
-
-
-
 </div>
+<div class="row">
+		<div class="col-sm-8">
+		<h4>Stats</h4> 
+			<div id="columnchart_material"></div>
+
+	</div>
+</div>
+
+
 
 {% endblock %}
 

@@ -20,14 +20,17 @@ jQuery(document).ready(function() {
     });
 
   }
-  $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+  $('.cd-stretchy-nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+
+
+    $('#project_filters > ul.nav-pills li').click(function(e) {
+      $('.nav li.active').removeClass('active');
+      var $this = $(this);
+      $this.addClass('active');
+      e.preventDefault();
+  });
 });
 
 
-  $('#project_filters > ul.nav-pills li').click(function(e) {
-    $('.nav li.active').removeClass('active');
-    var $this = $(this);
-    $this.addClass('active');
-    e.preventDefault();
-});
+  
 

@@ -25,7 +25,7 @@ class Task(models.Model):
 	project = models.ForeignKey('projects.Project')
 	taskName = models.CharField(max_length=200)
 
-	assignee = models.ForeignKey(User, null=True)
+	assignee = models.ForeignKey(User, blank=True, null=True)
 
 	AWAITING = 'AW'
 	IN_PROGRESS = 'IP'
@@ -47,5 +47,8 @@ class Task(models.Model):
 	actualDate = models.DateField(default=timezone.now,blank=True)
 	description = models.CharField(blank = True, max_length = 200)
 	
+	def get_state(self):
+		return self.taskState
+
 	def __str__(self):
 		return self.taskName

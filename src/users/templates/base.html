@@ -129,10 +129,10 @@
           font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
         }
 
-        li a {
+        /*li a {
           color: ##353535;
           text-decoration: none;
-        }
+        }*/
 
 
         img {
@@ -380,7 +380,10 @@
         }
         .no-touch .cd-stretchy-nav.nav-is-visible ul a:hover {
           /*color:#353535;*/
-          color: rgb(35, 53, 88);
+          /*color: rgb(35, 53, 88);*/
+          color:#AF473C;
+          text-decoration:none;
+          /*text-decoration: bold;*/
         }
         .no-touch .cd-stretchy-nav.nav-is-visible ul a:hover::after {
           opacity: 1;
@@ -529,7 +532,9 @@
 
   <div class="container">
         {% block topbar %}
+        {% if request.user.is_authenticated %}
           {% include 'topbar.html' %}
+        {% endif %}
         {% endblock %}
   </div>
    

@@ -10,7 +10,7 @@ class Project(models.Model):
 	projectName = models.CharField(max_length=200, unique=True,default='Untitled Project')
 	members = models.ManyToManyField(User)
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
-	dueDate = models.DateField(default=timezone.now,blank=True)
+	dueDate = models.DateField(default=timezone.now)
 	completed = models.BooleanField(default=False)
 	
 

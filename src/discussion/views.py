@@ -32,8 +32,13 @@ def post_list(request):
 	projects = Project.objects.filter(members__username=request.user.username)
 	posts = Post.objects.order_by('-published_date') 
 	profile = UserProfile.objects.get(username=request.user)
+	
+
 
 	return render(request, 'post_list.html', {'posts': posts,'profile':profile,'projects':projects})
+
+
+
 def post_filter(request, pk):
 	projects = Project.objects.filter(members__username=request.user.username)
 	myproject = get_object_or_404(Project, pk=pk)
@@ -44,6 +49,11 @@ def post_filter(request, pk):
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
+	if request.method == "POST":
+		post.withYou+=1
+		post.isWithYou = True
+		post.save()
+
 	return render(request, 'post_detail.html', {'post': post})
 
 def post_new(request):

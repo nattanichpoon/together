@@ -13,6 +13,7 @@
 		<p>Filter by projects:</p>
 		<div id="project_filters">
 		    <ul class="list-group">
+		    	<li class="list-group-item"><a href="{% url 'post_list' %}">All Projects</a></li>	
 		    	{% for project in projects %}
 		    	<li class="list-group-item"><a href="{% url 'post_filter' pk=project.pk %}">{{ project.projectName }}</a></li>	
 		    	{% endfor %}
@@ -35,7 +36,16 @@
 				</div>
 			<div class="panel-body">
 				{{post.text}}
-			</div>
+				 <div class="pull-right">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}  
+                    <div class='row'>
+                        {{post.withYou}} people <strong>withYou</strong>
+                    </div>
+                </form>
+            </div>
+            </div>
+			
 			
 		</div>
 

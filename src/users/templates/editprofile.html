@@ -9,7 +9,6 @@
 	<div class='container'>
 		<form method="POST" class="post-form">
 		    {% csrf_token %}
-		    <!-- {{ form.as_p }} -->
 		    <div class='row'>
 		    <label for="full_name">Full name: </label>
 		    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px">
@@ -28,9 +27,6 @@
 	<form method="POST" class="post-form">
 	    {% csrf_token %}
 	    {{ form.as_p }}
-	   <!--  <div class='row'>
-	    <label for="full_name">Full name: </label>
-	    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px"> -->
 	</div>
 	    <div class='row'>
 	    <button type="submit" class="save btn">Save</button>

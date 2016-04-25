@@ -17,7 +17,8 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
-    # withYou = models.ManyToManyField(User)
+    withYou = models.IntegerField(default=0)
+    isWithYou = models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()

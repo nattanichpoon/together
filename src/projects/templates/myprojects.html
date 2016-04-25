@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-{% block head_title %} My Page {% endblock %}
+{% block head_title %} {{title}} {% endblock %}
 <!-- {% block topbar %}
 {% include 'topbar.html'%}
 {% endblock %} -->
@@ -12,6 +12,7 @@
     <div class="container">
 	<div class='row'>
 		<div class="col-sm-4">
+			{{title}}
 			<h4>Things you need to work on</h4>
 				<div class="list-group">
 				 	<a href="#" class="list-group-item">Task 1<span class="badge">3 days</span></a>

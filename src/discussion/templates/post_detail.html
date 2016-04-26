@@ -15,7 +15,21 @@
             </div>
         <div class="panel-body">
             {{post.text}}
+            <div class="pull-right">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}  
+                    <div class='row'>
+                        {{post.withYou}}
+                        {% if post.isWithYou %}
+                        <button type="button" class="btn btn-danger btn-circle" disabled><i class="glyphicon glyphicon-heart"></i></button>
+                        {% else %}
+                        <button type="submit" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-heart"></i></button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
         </div>
+
         
     </div>
 
@@ -26,6 +40,8 @@
         <p>{{ post.text }}</p>
     </div> -->
     <hr>
+   
+
     <a class="btn" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
 
     <div class='container pull-left' style='margin-top:10px'>

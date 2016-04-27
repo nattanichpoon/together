@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
+    url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
 
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),

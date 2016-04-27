@@ -10,6 +10,33 @@
 {% block content %}
 
     <div class="container">
+<<<<<<< HEAD
+	   <div class="btn-group">
+            <h4>Projects you need to work on</h4>
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a> 
+            <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+    
+    <div class='row'>
+		<!-- <div class="col-sm-4"> -->
+            <div class="col-sm-7">
+                 {% for project in projects %}   
+<!-- 				 	<a href="#" class="list-group-item">Task 1<span class="badge">3 days</span></a>
+				  	<a href="#" class="list-group-item">Task 2<span class="badge">3 days</span></a>
+				  	<a href="#" class="list-group-item">Task 3<span class="badge">3 days</span></a> -->
+                    <div class="item  col-xs-4 col-sm-4">
+                        <!-- <div class="thumbnail"> -->
+                            <!-- <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" /> -->
+                            <button type="button" class="btn btn-circle"> <a href = "{% url 'mytasks' %}"> {{ project.projectName}} <br>{{project.projectProgress}}<br>{{ project.dueDate|timeuntil:today}} </button>
+                        <!-- </div> -->
+                    </div>
+                    <!-- </li>  -->
+                    {% endfor %}
+
+				    </div>
+		<!-- </div> -->
+		<div class="col-sm-1">
+=======
 	<div class='row'>
 		<div class="col-sm-4">
 			{{title}}
@@ -23,6 +50,7 @@
 				</div>
 		</div>
 		<div class="col-sm-4">
+>>>>>>> p
 		</div>
 
 		<div class="col-sm-4 pull-right">
@@ -43,7 +71,5 @@
 		
 	</div>
 </div>
-
-
 
 {% endblock %}

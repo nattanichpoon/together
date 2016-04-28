@@ -2,13 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 from users.models import UserProfile
 import datetime
-<<<<<<< HEAD
 from .forms import ProjectForm
-=======
-
-from .forms import ProjectForm
-
->>>>>>> origin/p
 from projects.models import Project, Task
 
 # Create your views here.
@@ -66,10 +60,3 @@ def project_new(request):
 
 		
 	return render(request, "project_new.html", {"form":form})
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/p
->>>>>>> p

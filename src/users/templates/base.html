@@ -30,6 +30,10 @@
           line-height: 1.428571429;
           border-radius: 15px;
         }
+        body{
+          background-color: #F5F1ED;
+          color: #252323;
+        }
         h1,h2,h3,h4,h5{
           font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;    
         }
@@ -66,7 +70,7 @@
         }
         .navbar{
           font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-          background-color:#D96F6F;
+          background-color:#cf5c36;
         }
         
         .navbar-brand{
@@ -79,7 +83,7 @@
           color:white;
         }
         .nav.navbar-nav li a:hover{
-          background-color:#F2D3D3;
+          background-color:rgba(207,92,54,0.3);
           color:#4F4848;
         }
         .nav-tabs{
@@ -97,14 +101,15 @@
           border: 0 none;
 
         }
-        .btn-circle.btn-xl {
+        /*.btn-circle.btn-xl {
           width: 150px;
           height: 150px;
           padding: 10px 16px;
           font-size: 24px;
           line-height: 1.33;
           border-radius: 35px;
-        }
+        }*/
+
         .btn-add{
           background-color: green;
 
@@ -129,45 +134,37 @@
           height: 180px;
           text-align: center;
           padding: 6px 0;
-          font-size: 20px;
+          font-size: 0px;
           line-height: 1.428571429;
           border-radius: 90px;
           margin-top: 10px;
           margin-bottom:10px;
-          color
+          background-color: #586f7c;
+          white-space: normal;
         }
 
         .btn-circle:hover {
-/*          height: 120%;
-          left: -10%;
-          -webkit-transform: skewX(15deg);
-              -ms-transform: skewX(15deg);
-                  transform: skewX(15deg);
-          z-index: -1;*/
-          /*background-color: red;*/
           -webkit-animation-name: example; /* Chrome, Safari, Opera */
-          -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+          -webkit-animation-duration: 0.3s; /* Chrome, Safari, Opera */
           animation-name: example;
-          animation-duration: 2s;
+          animation-duration: 0.3s;
+          animation-fill-mode: forwards;
+          color:white;
         }
 
          @keyframes example {
-            /*0%   {background-color: red;}
-            25%  {background-color: yellow;}
-            50%  {background-color: blue;}*/
-            100% {background-color: blue;}
+            100% {
+            /*background-color: #cf5c36;*/
+            background-color: #6c8899;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            /*color:#586f7c;*/
+            }
           }
 
-        .btn-circle:hover:after {
+      /*  .btn-circle:hover:after {
           width: 100%;
           left: 0;
-        }
-
-        .btn-circle:hover {
-          cursor: pointer;
-          color: #5bcaff;
-        }
-
+        }*/
 
         .dropdown-menu .list-group-item{
           /*text-align: right;*/
@@ -286,7 +283,7 @@
           width: 60px;
           height: 60px;
           border-radius: 30px;
-          background: #353535; /* background color of burger*/
+          background: #252323; /* background color of burger*/
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
           -webkit-transition: height 0.2s, box-shadow 0.2s;
           -moz-transition: height 0.2s, box-shadow 0.2s;
@@ -512,7 +509,7 @@
         .no-touch .cd-stretchy-nav.nav-is-visible ul a:hover {
           /*color:#353535;*/
           /*color: rgb(35, 53, 88);*/
-          color:#AF473C;
+          color:#CF5C36;
           text-decoration:none;
           /*text-decoration: bold;*/
         }

@@ -8,7 +8,7 @@ Function views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home').
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
@@ -27,12 +27,8 @@ urlpatterns = [
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
-<<<<<<< HEAD
     url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
-=======
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
-
->>>>>>> p
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
     url(r'^discussions/post_list', 'discussion.views.post_list', name='post_list'),
     url(r'^discussions/post/(?P<pk>\d+)/$', 'discussion.views.post_detail', name='post_detail'),

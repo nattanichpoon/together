@@ -60,10 +60,3 @@ def project_new(request):
 
 		
 	return render(request, "project_new.html", {"form":form})
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/p
-=======
->>>>>>> origin/p

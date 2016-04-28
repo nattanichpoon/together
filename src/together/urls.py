@@ -29,10 +29,6 @@ urlpatterns = [
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
     url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
-<<<<<<< HEAD
-=======
-
->>>>>>> p
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
     url(r'^discussions/post_list', 'discussion.views.post_list', name='post_list'),
     url(r'^discussions/post/(?P<pk>\d+)/$', 'discussion.views.post_detail', name='post_detail'),

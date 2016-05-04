@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
+    url(r'^ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
 
 ] 
 if settings.DEBUG:

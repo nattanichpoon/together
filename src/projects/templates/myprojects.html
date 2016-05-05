@@ -20,7 +20,7 @@
         <div class="col-sm-7">
             {% for project in projects %}   
                 <div class="item  col-xs-4 col-sm-4">
-                     <a href = "{% url 'mytasks' %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h4>{{project.projectName}}</h4><br><h6>{{project.projectProgress}}%<br>{{ project.dueDate|timeuntil:today}} left</h6></button></a>
+                     <a href = "{% url 'project_detail' pk=project.pk %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h4>{{project.projectName}}</h4><br><h6>{{project.projectProgress}}%<br>{{ project.dueDate|timeuntil:today}} left</h6></button></a>
                 </div>
             {% endfor %}
 		</div>

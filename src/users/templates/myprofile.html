@@ -7,7 +7,7 @@
 
 {% block extrahead %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+  <script type="text/javascript">
       google.charts.load("current", {packages:["corechart", "bar"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -23,6 +23,7 @@
           pieHole: 0.7,
           colors: ['#1FB58F','#EAB126', '#F24C4E'],
           // legend: 'none',
+          backgroundColor: { fill: "#F5F1ED" },
           pieSliceText: 'none',
           height: 400,
           width: 400,
@@ -67,9 +68,6 @@
     
 
       }
-      
-    
-    </script>
     </script>
 {% endblock %}
 
@@ -88,7 +86,7 @@
 				{{projects_count}} {% if projects_count > 1 %}projects{% else %}project{% endif %}
 			{% endif %}
 		</div>
-		<div id="donutchart" style="background-color: #F5F1ED"> </div>
+		<div id="donutchart"> </div>
 	</div>
 	<div class="col-sm-4" style="z-index:3;position:absolute; right:5px;">
 		<!-- <div class="row" style="height:500px;"> -->
@@ -117,9 +115,15 @@
 <div class="row">
 		<div class="col-sm-8">
 		<h4>Stats</h4> 
-        <div class="col-sm-6">
+    <div class="col-sm-6">
 			<div id="columnchart_material" style="height:400px"></div>
     </div>
+        <div class="col-sm-6">
+          <h3>Your Ratings</h3>
+          <div class="item  col-xs-4 col-sm-4">
+               <a href = "{% url 'myratings' %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h4>{{avgRating}}%</h4></button></a>
+          </div>
+        </div>
 
 	</div>
 </div>

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'discussion',
     'django_messages',
     'schedule1',
+    'ratePeer'
 ]
 
 MIDDLEWARE_CLASSES = [

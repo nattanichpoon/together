@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from users.models import UserProfile
 import datetime
@@ -25,6 +25,18 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
+def project_detail(request,pk):
+	project = get_object_or_404(Project, pk=pk)
+	members = project.members.all()
+
+
+	context ={
+		'project': project,
+		'members': members
+	}
+	
+
+	return render(request, 'project_detail.html', context)
 
 def mytasks(request):
 	title = "My Projects"
@@ -34,6 +46,7 @@ def mytasks(request):
 	profile = UserProfile.objects.get(username=request.user)
 	projects = Project.objects.filter(members__username=request.user.username)
 	today = datetime.datetime.today()
+	task
 
 
 	context = {
@@ -55,12 +68,8 @@ def project_new(request):
 			project.members = request.POST.getlist('members')
 			return render(request, "project_new.html", '')
 	else:
-		form = ProjectForm(request.GET)
+		form = ProjectForm()
 
 
 		
 	return render(request, "project_new.html", {"form":form})
-<<<<<<< HEAD
-
-=======
->>>>>>> p

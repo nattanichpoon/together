@@ -8,7 +8,7 @@ Function views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home').
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
@@ -26,7 +26,9 @@ urlpatterns = [
     url(r'^contact/$', 'users.views.contact', name='contact'),
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
+    url(r'^profile/ratings/$', 'ratePeer.views.myratings', name='myratings'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
+    url(r'^projects/(?P<pk>\d+)/$', 'projects.views.project_detail', name='project_detail'),
     url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
@@ -41,6 +43,9 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
+    url(r'^projects/(?P<pk>\d+)/ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
+
+    # url(r'^ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
 
 ] 
 if settings.DEBUG:

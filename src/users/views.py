@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect
 from .models import UserProfile
 from projects.models import Project, Task
 from django.utils import timezone
-
+from ratePeer.models import Rating
+import math
 
 
 # Create your views here.
@@ -32,6 +33,9 @@ def about(request):
 	}
 	return render(request, "about.html", context)
 
+def myRoundingFunction(x, n):
+    return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
+
 def myprofile(request):
 	awaiting = 0
 	inprogress = 0
@@ -41,14 +45,18 @@ def myprofile(request):
 	currentTasks =[]
 	i=0
 	state=''
+	avgRating=0.0
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
 		projects_count= projects.count()
 		date = timezone.now().date()
+		ratings = Rating.objects.filter(user=request.user).all()
 
 
 		if projects.count() > 0:
+			for rating in ratings:
+				avgRating+=rating.total
 			for project in projects:
 				allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 				tasks = allTasks.filter(assignee=request.user).all()
@@ -63,15 +71,28 @@ def myprofile(request):
 				for task in tasks.filter(taskState = Task.AWAITING):
 					awaitingTasks.append(task)
 
-
-		# t = tasks.count()
 			total = awaiting+inprogress+completed
 			currentTasks = awaitingTasks+inProgressTasks
+			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 
+		context={
+			'currentTasks':currentTasks, 
+			'date':date, 
+			'profile': profile, 
+			'projects': projects, 'tasks': tasks, 
+			'awaiting': awaiting,
+			'inprogress': inprogress,
+			'completed':completed,
+			'inProgressTasks': inProgressTasks, 
+			'awaitingTasks':awaitingTasks, 
+			'total':total, 
+			'projects_count':projects_count,
+			'avgRating': avgRating
+		}
 
 
 		
-		return render(request, "myprofile.html", {'currentTasks':currentTasks, 'date':date, 'profile': profile, 'projects': projects, 'tasks': tasks, 'awaiting': awaiting,'inprogress': inprogress,'completed':completed,'inProgressTasks': inProgressTasks, 'awaitingTasks':awaitingTasks, 'total':total, 'projects_count':projects_count})
+		return render(request, "myprofile.html", context)
 
 	except ObjectDoesNotExist:
 		print "nothing"

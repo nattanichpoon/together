@@ -8,7 +8,7 @@ from decimal import Decimal
 # Create your models here.
 class Project(models.Model):
 	projectName = models.CharField(max_length=200, unique=True,default='Untitled Project')
-	members = models.ManyToManyField(User)
+	members = models.ManyToManyField(User, related_name="members")
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
 	dueDate = models.DateField(default=timezone.now)
 	completed = models.BooleanField(default=False)
@@ -19,7 +19,6 @@ class Project(models.Model):
 
 	def __str__(self):
 		return self.projectName
-	
 
 class Task(models.Model):
 	project = models.ForeignKey('projects.Project')

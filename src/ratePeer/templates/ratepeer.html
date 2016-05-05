@@ -11,11 +11,19 @@
 <div class="container">
 	<div class='row'>
         <div class="col-sm-10">
-			<h1>Rating</h1>
+			<h1>Rate Peer</h1>
+			{% if form %}
+			<p>Rate your peers in terms of their productivity (1=low, 5=high). Don’t worry, this will be submitted anonymously :)</p>
+			<div class="col-sm-8 col-sm-offset-1">
 			    <form method="POST">{% csrf_token %}
-			        {{ form.as_p }}
+			        {{ form|crispy }}
 			        <button type="submit" class="save btn">Save</button>
 			    </form>
+			</div>
+			{% else %}
+			<p>Thank you for your response!</p>
+			<button class="btn"><a href={% url 'ratepeer' %}>Rate another peer</a></button>
+			{% endif %}
 		</div>
 	</div>
 </div>

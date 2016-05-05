@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^contact/$', 'users.views.contact', name='contact'),
     url(r'^profile/$', 'users.views.myprofile', name='profile'),
     url(r'^profile/edit/$', 'users.views.editprofile', name='editprofile'),
+    url(r'^profile/ratings/$', 'ratePeer.views.myratings', name='myratings'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
     url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),

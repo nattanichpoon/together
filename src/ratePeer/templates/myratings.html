@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} My Page {% endblock %}
+<!-- {% block topbar %}
+{% include 'topbar.html'%}
+{% endblock %} -->
+
+{% block content %}
+<div class="row">
+	<h4>From ______ responses,</h4>
+</div>
+<div class="row">
+
+	<div class="col-xs-6 col-sm-6">
+	     <button class="btn btn-circle"><h6>Attends group meetings regularly and arrives on time:</h6></br><h4>80%</h4></button>
+	</div>
+	<div class="col-xs-4 col-sm-4">
+	     <a style= "color:white;"><button class="btn btn-circle"><h6>Contributes meaningfully to group discussions:</h6></br><h4>80%</h4></button></a>
+	</div>
+</div>
+{% endblock %}

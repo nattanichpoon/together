@@ -12,8 +12,8 @@ class Rating(models.Model):
 	c = 3
 	d = 4
 	e = 5
-	RATINGS = ((a, '1'),(b, '2'),(c, '3'),(d, '4'),(e, '5'))
-	rating1 = models.IntegerField(choices=RATINGS, default=e, max_length=200)
+	RATINGS = ((e, '5'),(d, '4'),(c, '3'),(b, '2'),(a, '1'))
+	rating1 = models.IntegerField(choices=RATINGS, default=e)
 	rating2 = models.IntegerField(choices=RATINGS, default=e, max_length=200)
 	rating3 = models.IntegerField(choices=RATINGS, default=e, max_length=200)
 	rating4 = models.IntegerField(choices=RATINGS, default=e, max_length=200)

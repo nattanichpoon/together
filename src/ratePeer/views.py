@@ -12,8 +12,11 @@ def ratepeer(request):
 			rating.save()
 			return render(request, "ratepeer.html", '')
 	else:
-		form = RatingForm(request.GET)
-
-
-		
+		form = RatingForm()
+	
 	return render(request, "ratepeer.html", {"form":form})
+
+def myratings(request):
+	
+	
+	return render(request, "myratings.html", '')

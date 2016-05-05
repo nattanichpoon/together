@@ -55,7 +55,7 @@ def project_new(request):
 			project.members = request.POST.getlist('members')
 			return render(request, "project_new.html", '')
 	else:
-		form = ProjectForm(request.GET)
+		form = ProjectForm()
 
 
 		

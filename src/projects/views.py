@@ -27,7 +27,7 @@ def myprojects(request):
 	return render(request, "myprojects.html", context)
 def project_detail(request,pk):
 	project = get_object_or_404(Project, pk=pk)
-	members = project.get_members()
+	members = project.members.all()
 
 
 	context ={

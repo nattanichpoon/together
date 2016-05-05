@@ -1,6 +1,10 @@
 from django import forms
 
 from .models import Rating
+from projects.models import Project
+from users.models import UserProfile
+from django.contrib.auth.models import User
+
 
 class RatingForm(forms.ModelForm):
 

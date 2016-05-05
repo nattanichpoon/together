@@ -22,10 +22,9 @@
 			</div>
 			{% else %}
 			<p>Thank you for your response!</p>
-			
+			<button class="btn"><a href={% url 'ratepeer' pk=project.pk %}>Rate another peer</a></button>
 			{% endif %}
-
-			</div>
+			
 		</div>
 		
 	</div>

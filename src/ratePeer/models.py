@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Rating(models.Model):
+	project = models.ForeignKey('projects.Project')
 	user = models.ForeignKey('auth.User')
 	a = 1
 	b = 2

@@ -21,6 +21,7 @@ class Project(models.Model):
 		return self.projectName
 	
 
+
 class Task(models.Model):
 	project = models.ForeignKey('projects.Project')
 	taskName = models.CharField(max_length=200)

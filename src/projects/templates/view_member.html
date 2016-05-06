@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %} My Page {% endblock %}
+
+
+
+{% block content %}
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="row">
+		{% if profile %}
+		<h4 class="pull-right">Welcome, <strong>{{profile}}</strong>.</h4>
+		{% else %}
+		<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
+		{% endif %}
+	</div>
+	
+<div class="row">
+		<div class="col-sm-12">
+      <hr>
+		<h3>Your History</h3> 
+    <!-- <div class="col-sm-6">
+			<div id="columnchart_material" style="height:400px"></div>
+    </div> -->
+        <div class="col-sm-12">
+          <div class="item  col-xs-3 col-sm-3">
+            <h4>Your Peer Ratings</h4>
+               <div id="circle-small" style="color:white;"> <h1>{{avgRating}}%</h1>
+                </div>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <h4>Completed Tasks</h4>
+            <div id="circle-small" style="color:white;"> <h1>{{completed}}</h1>
+             </div>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <h4>Task Score</h4>
+
+               <div id="circle-small" style="color:white;"><h1>{{avgTask}}</h1>
+                            </div>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <h4>Completed Projects</h4>
+
+               <div id="circle-small" style="color:white;"> <h1>{{projects_completed}}</h1>
+                            </div>
+          </div>
+        </div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+

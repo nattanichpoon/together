@@ -31,14 +31,7 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
-def project_detail(request,pk):
-	project = get_object_or_404(Project, pk=pk)
-	members = project.members.all()
-	context ={
-		'project': project,
-		'members': members
-	}
-	return render(request, 'project_detail.html', context)
+
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
@@ -103,7 +96,10 @@ def project_productivity(request,pk):
 
 def project_detail(request,pk):
 	project = get_object_or_404(Project, pk=pk)
-	members = project.members.all()
+	users = project.members.all()
+	members=[]
+	for user in users:
+		members.append(UserProfile.objects.get(username=user))
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
@@ -133,5 +129,69 @@ def project_new(request):
 
 		
 	return render(request, "project_new.html", {"form":form})
+
+def view_member(request, pk):
+	profile = get_object_or_404(UserProfile, pk=pk)
+	user = profile.username
+	projects = Project.objects.filter(members__username=user).all()
+	projects_count= projects.count()
+	ratings = Rating.objects.filter(user=user).all()
+	myTaskCount =0
+	awaiting = 0
+	inprogress = 0
+	completed = 0
+	projects_completed=0
+	inProgressTasks = []
+	awaitingTasks = []
+	currentTasks =[]
+	state=''
+	avgRating=0.0
+	avgTask=0.0
+	if projects.count() > 0:
+		for rating in ratings:
+			avgRating+=rating.total
+		for project in projects:
+			if project.completed:
+				projects_completed+=1
+			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+			tasks = allTasks.filter(assignee=user).all()
+			# currentTasks= tasks.filter(taskState__in=['AW','IP'])
+
+			awaiting += tasks.filter(taskState = Task.AWAITING).count()
+			inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+			completed += tasks.filter(taskState = Task.COMPLETED).count()
+			for task in tasks.filter(taskState = Task.IN_PROGRESS):
+				inProgressTasks.append(task)
+				
+			for task in tasks.filter(taskState = Task.AWAITING):
+				awaitingTasks.append(task)
+			for task in tasks.filter(taskState = Task.COMPLETED):
+				avgTask+=task.difficultyLevel
+
+		total = awaiting+inprogress+completed
+		currentTasks = awaitingTasks+inProgressTasks
+		avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
+		avgTask = myRoundingFunction(((avgTask/completed)),2)
+	context= {
+		'profile': profile,
+		'user': user,
+		'projects': projects, 'tasks': tasks, 
+		'awaiting': awaiting,
+		'inprogress': inprogress,
+		'completed':completed,
+		'inProgressTasks': inProgressTasks, 
+		'awaitingTasks':awaitingTasks, 
+		'total':total, 
+		'projects_count':projects_count,
+		'avgRating': avgRating,
+		'avgTask': avgTask,
+		'projects_completed': projects_completed
+
+	}
+	return render(request, "view_member.html", context)
+
+def myRoundingFunction(x, n):
+    return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
+
 
 

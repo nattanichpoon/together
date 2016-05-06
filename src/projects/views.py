@@ -6,6 +6,8 @@ from .forms import ProjectForm
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
+from django.utils import timezone
+
 
 
 # Create your views here.
@@ -40,10 +42,19 @@ def project_detail(request,pk):
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
+	progress = int(project.projectProgress)
+	rotate = (progress*360)/100
+	if rotate <= 180:
+		small = True
+	else:
+		small = False
 	users = project.members.all()
 	ratings = Rating.objects.filter(project=project)
+	tasks_aw = Task.objects.filter(project=project,taskState=Task.AWAITING)
+	tasks_inp = Task.objects.filter(project=project,taskState=Task.IN_PROGRESS)
 	tasks = Task.objects.filter(project=project,taskState=Task.COMPLETED)
 	members=[]
+	date = timezone.now().date()
 	#for task graph
 	data_task=[]
 	array_task=[]
@@ -74,8 +85,15 @@ def project_productivity(request,pk):
 	context ={
 		'project': project,
 		'members': members,
+		'tasks': tasks,
 		'array_task': json.dumps(array_task),
-		'array_rating': json.dumps(array_rating)
+		'array_rating': json.dumps(array_rating),
+		'date':date,
+		'progress':progress,
+		'rotate':rotate,
+		'small': small,
+		'tasks_inp': tasks_inp,
+		'tasks_aw': tasks_aw
 
 	}
 	

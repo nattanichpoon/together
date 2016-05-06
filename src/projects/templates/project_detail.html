@@ -9,6 +9,7 @@
 	<h2>
 	{{project.projectName}}
 	</h2>
+<<<<<<< HEAD
 	
 </div>
 <div class="row">
@@ -19,6 +20,47 @@
 	    {% endfor %}
 	</ul>
 	
+=======
+</div>
+<div class="row">
+	<div class="col-sm-11">
+		<table class="table table-hover">
+	    <thead>
+	      <tr>
+	        <th>Task</th>
+	        <th>Difficulty</th>
+	        <th>Status</th>
+	        <th></th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    {% for task in tasks %}
+	    	<tr>
+	        	<td>{{task}}</td>
+	        	<td>{{task.get_difficultyLevel_display}}</td>
+	        	<td>{{task.get_taskState_display}}</td>
+	        	{% if task.taskState == 'AW' %}
+	        		<td>
+	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
+	        		</td>
+	        	{% elif task.taskState == "IP" %}
+		        	<td><button class="btn">Update</button></td>
+		        {% else %}
+		        	<td> </td>
+		        {% endif %}
+	      	</tr>
+	    {% endfor %}
+	    </tbody>
+	  	</table>
+
+		<a href="{% url 'ratepeer' pk=project.pk %}">Rate peer:</a> 
+		<ul class="list-group">
+		    {% for member in members %}
+		    <li class="list-group-item">{{ member }}</li>  
+		    {% endfor %}
+		</ul>
+	</div>	
+>>>>>>> nice-from-p
 </div>
 {% endif %}
 {% endblock %}

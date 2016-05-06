@@ -12,6 +12,11 @@ class Project(models.Model):
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
 	dueDate = models.DateField(default=timezone.now)
 	completed = models.BooleanField(default=False)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> nice-from-p
 	grabBy = models.DateField(default=timezone.now)
 	
 
@@ -38,14 +43,18 @@ class Task(models.Model):
 	EASY = 1
 	MEDIUM = 3
 	DIFFICULT = 5
-	DIFFICULTY_STATE = ((EASY, 'Easy'), (MEDIUM, 'Medium'), (DIFFICULT, 'Difficult'))
+	DIFFICULTY_STATE = (
+		(EASY, 'Easy'),
+		(MEDIUM, 'Medium'),
+		(DIFFICULT, 'Difficult')
+	)
 
 	taskState = models.CharField(choices=STATE, default=AWAITING, max_length=200)
-	
 	difficultyLevel =models.IntegerField(choices=DIFFICULTY_STATE, default=EASY, max_length=200)
 	expectedDate = models.DateField(default=timezone.now,blank=True)
 	actualDate = models.DateField(default=timezone.now,blank=True)
 	description = models.CharField(blank = True, max_length = 200)
+
 	
 	def get_state(self):
 		return self.taskState

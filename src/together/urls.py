@@ -44,6 +44,8 @@ urlpatterns = [
     url(r'^messages/', include('django_messages.urls')),
     url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
     url(r'^projects/(?P<pk>\d+)/ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
+    url(r'^projects/(?P<pk>\d+)/productivity/$', 'projects.views.project_productivity', name='project_productivity'),
+
 
     # url(r'^ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
 

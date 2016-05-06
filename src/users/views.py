@@ -40,24 +40,28 @@ def myprofile(request):
 	awaiting = 0
 	inprogress = 0
 	completed = 0
+	projects_completed=0
 	inProgressTasks = []
 	awaitingTasks = []
 	currentTasks =[]
 	i=0
 	state=''
 	avgRating=0.0
+	avgTask=0.0
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
 		projects_count= projects.count()
 		date = timezone.now().date()
 		ratings = Rating.objects.filter(user=request.user).all()
-
+		myTaskCount =0
 
 		if projects.count() > 0:
 			for rating in ratings:
 				avgRating+=rating.total
 			for project in projects:
+				if project.completed:
+					projects_completed+=1
 				allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 				tasks = allTasks.filter(assignee=request.user).all()
 				# currentTasks= tasks.filter(taskState__in=['AW','IP'])
@@ -70,11 +74,13 @@ def myprofile(request):
 					
 				for task in tasks.filter(taskState = Task.AWAITING):
 					awaitingTasks.append(task)
+				for task in tasks.filter(taskState = Task.COMPLETED):
+					avgTask+=task.difficultyLevel
 
 			total = awaiting+inprogress+completed
 			currentTasks = awaitingTasks+inProgressTasks
 			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-
+			avgTask = myRoundingFunction(((avgTask/completed)),2)
 		context={
 			'currentTasks':currentTasks, 
 			'date':date, 
@@ -87,7 +93,9 @@ def myprofile(request):
 			'awaitingTasks':awaitingTasks, 
 			'total':total, 
 			'projects_count':projects_count,
-			'avgRating': avgRating
+			'avgRating': avgRating,
+			'avgTask': avgTask,
+			'projects_completed': projects_completed
 		}
 
 

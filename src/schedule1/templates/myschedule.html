@@ -1,39 +1,69 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
-{% load staticfiles %}
-
-{% block head_title %} My Page {% endblock %}
-<!-- {% block topbar %}
-{% include 'topbar.html'%}
-{% endblock %} -->
-
-{% block content %}
-
-    <div class="container">
-
-        <div class="header">
-
-            <h4>Click on the dates which you are available.</h4>
-
-        </div>
-
-        <div class="col-sm-3 pull-left">
-			<head>
-			        <title>Calendar</title>
-			    </head>
-			    <body>
-			        <div id="calendar-container">
-			            <div id="calendar-header">
-			                <span id="calendar-month-year"></span>
-			            </div>
-			            <div id="calendar-dates">
-			            </div>
-			        </div>
-			    </body>
-		</div>
-
-    </div>
-
-
-
+{% extends "base.html" %} 
+{% load crispy_forms_tags %} 
+{% load staticfiles %}  
+{% block head_title %} My Page {% endblock %} 
+<!-- {% block topbar %} {% include 'topbar.html'%} {% endblock %} -->  
+{% block content %}      
+<div class="container">          
+	<div class="header">              
+		<h2>&nbsp;&nbsp;My Calendar<br></h2>          
+	</div>          
+	<div class="col-sm-3 pull-left"> 			
+		<head> 			       
+			<title>Calendar</title> 			    
+		</head> 			    
+		<body> 			        
+			<div id="calendar-container"> 			            
+				<div id="calendar-header"> 			                
+					<span id="calendar-month-year"></span> 			            
+				</div> 			            
+				<div id="calendar-dates"> 			            
+				</div> 			        
+			</div> 			    
+		</body> 		
+	</div>          
+	<div class="col-sm-3 pull-right">             
+		<head>                 
+			<title>Information</title>                 
+			<style>                     
+			#meetinginfo-container{                         
+				width: 300px;                         
+				height: 600px;                         
+				box-shadow: 5px 5px 50px #cdcdcd;                         
+				font-size: 16px;                         
+				font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;    
+				padding:0px;                         
+				margin-top:20px;                         
+				margin-left:0px;                       
+			}                     
+			#meetinginfo-title{                         
+				background-color: #586F7C;                         
+				color:#F4F2F2;                         
+				padding: 0px;                         
+				margin-bottom: 0px;                         
+				margin-left: 0px;                      
+			}                     
+			#meetinginfo-body{                         
+				padding-left:20px;                     
+			}                 
+		</style>                  
+		<script src="/static_in_pro/our_static/js/calendar.js">                     //document.getElementById("meetinginfo-body").innerHTML="hi";                 
+	</script>             
+</head>             
+<body>                 
+	<div id="meetinginfo-container">                      
+		<div id="meetinginfo-title">                         
+			<h4><br>&nbsp;Meeting Information</h4>                     
+		</div>                      
+		<div id="meetinginfo-body">                         
+			<script>                              //document.write(5+6+"<br>");                             //document.write(5*2+"<br>");                             //document.write(10);                             document.getElementById("meetinginfo-body").innerHTML=produceMessage();                             document.getElementById("meetinginfo-body").innerHTML='hi';                           
+		</script>                          
+		<li>test element</li>                          
+		<input type="button" onclick="test()" value="test"/>                         
+		<button type="button" onclick="test()">click me</button>                        
+	</div>                 
+</div>             
+</body>         
+</div>      
+</div>    
 {% endblock %}

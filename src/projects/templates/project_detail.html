@@ -8,6 +8,7 @@
 	<h2>
 	{{project.projectName}}
 	</h2>
+		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span>View Productivity</span></a>
 </div>
 <div class="row">
 	<div class="col-sm-11">
@@ -40,12 +41,13 @@
 	    </tbody>
 	  	</table>
 
-		<a href="{% url 'ratepeer' pk=project.pk %}">Rate peer:</a> 
 	
 		<div class="col-sm-11 col-xs-11">
 		  <div class="at-section">
 		  </hr>
 		    <h3>The Team</h3>
+		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span>Rate Peers</span></a>
+
 		  </div>
 		  <div data-column='4' class="at-grid">
 		  	{% for member in members %}

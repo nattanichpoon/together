@@ -7,7 +7,9 @@ from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
 
+
 # Create your views here.
+
 def myprojects(request):
 	title = "My lalala"
 	title_align_center = True
@@ -69,12 +71,6 @@ def project_productivity(request,pk):
 
 	array_rating.append(member_list)
 	array_rating.append(rates_list)
-
-
-
-
-
-
 	context ={
 		'project': project,
 		'members': members,
@@ -85,6 +81,7 @@ def project_productivity(request,pk):
 	
 
 	return render(request, 'project_productivity.html', context)
+
 
 def mytasks(request):
 	title = "My Projects"
@@ -120,3 +117,5 @@ def project_new(request):
 
 		
 	return render(request, "project_new.html", {"form":form})
+
+

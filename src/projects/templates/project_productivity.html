@@ -4,6 +4,7 @@
 {% block extrahead %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
+
       google.charts.load("current", {packages:["corechart", "bar"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -55,7 +56,7 @@
 {% block content %}
 
 {% if project %}
-<div class="col-sm-11">
+<div id="printableArea" class="col-sm-11">
 <div style="text-align:center">
 	<div class="row">
 		<h3><strong>{{project.projectName}}</strong></h3>

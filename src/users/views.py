@@ -47,21 +47,15 @@ def myprofile(request):
 	i=0
 	state=''
 	avgRating=0.0
-<<<<<<< HEAD
 	avgTask=0.0
-=======
->>>>>>> nice-from-p
+
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
 		projects_count= projects.count()
 		date = timezone.now().date()
 		ratings = Rating.objects.filter(user=request.user).all()
-<<<<<<< HEAD
 		myTaskCount =0
-=======
-
->>>>>>> nice-from-p
 
 		if projects.count() > 0:
 			for rating in ratings:
@@ -87,11 +81,8 @@ def myprofile(request):
 			total = awaiting+inprogress+completed
 			currentTasks = awaitingTasks+inProgressTasks
 			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-<<<<<<< HEAD
 			avgTask = myRoundingFunction(((avgTask/completed)),2)
-=======
 
->>>>>>> nice-from-p
 		context={
 			'currentTasks':currentTasks, 
 			'date':date, 
@@ -104,13 +95,9 @@ def myprofile(request):
 			'awaitingTasks':awaitingTasks, 
 			'total':total, 
 			'projects_count':projects_count,
-<<<<<<< HEAD
 			'avgRating': avgRating,
 			'avgTask': avgTask,
 			'projects_completed': projects_completed
-=======
-			'avgRating': avgRating
->>>>>>> nice-from-p
 		}
 
 

@@ -12,11 +12,6 @@ class Project(models.Model):
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
 	dueDate = models.DateField(default=timezone.now)
 	completed = models.BooleanField(default=False)
-<<<<<<< HEAD
-=======
-
-
->>>>>>> nice-from-p
 	grabBy = models.DateField(default=timezone.now)
 	
 

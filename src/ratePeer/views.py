@@ -10,11 +10,7 @@ import math
 # Create your views here.
 def ratepeer(request,pk):
 	myproject = Project.objects.get(pk=pk)
-<<<<<<< HEAD
 	members= myproject.members.all()
-
-=======
->>>>>>> nice-from-p
 	if request.method == "POST":
 		form = RatingForm(request.POST)
 		if form.is_valid():
@@ -24,14 +20,8 @@ def ratepeer(request,pk):
 			return render(request, "ratepeer.html", {"project":myproject})
 	else:
 		form = RatingForm(instance=myproject)
-		
 
-	
-<<<<<<< HEAD
 	return render(request, "ratepeer.html", {"form":form, "project":myproject, "members": members})
-=======
-	return render(request, "ratepeer.html", {"form":form, "project":myproject})
->>>>>>> nice-from-p
 
 
 def myRoundingFunction(x, n):

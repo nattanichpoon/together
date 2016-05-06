@@ -16,15 +16,19 @@ window.onload = function(){
     var days = new Date(year, month+1, 0).getDate();    //30
     //Tue Sep 30 2014 ...
     var calendar = get_calendar(day_no, days, day_name);
+    var meetings = get_meetings();
     document.getElementById("calendar-month-year").innerHTML = month_name[month]+" "+year;
     document.getElementById("calendar-dates").appendChild(calendar);
-    var meetinginfo="";
+    document.getElementById("meetinginfo-title").innerHTML = "Meeting Information";
+    document.getElementById("meetinginfo-body").appendChild(meetings);
+    var str="Click on a date to see the meeting information.";
 
 
 }
 
 function get_calendar(day_no, days, day_name){
     var table = document.createElement('table');
+    table.style.backgroundColor="#F5F1ED";
     var tr = document.createElement('tr');
 
     //row for the days of the week
@@ -33,7 +37,6 @@ function get_calendar(day_no, days, day_name){
         td.innerHTML = day_name[c].toUpperCase();
         td.style.borderBottom="thin solid #586F7C";
         td.style.verticalAlign="bottom";
-        //td.style.marginBottom="5px";
         tr.appendChild(td);
 
     }
@@ -74,7 +77,6 @@ function get_calendar(day_no, days, day_name){
     for(; c<=6; c++){
         var td = document.createElement('td');
         if(count == (new Date()).getDate()){
-            td.style.color="#CF5C36";
         }
         if(count==2){ //.................................ADD ICON TO DATE HEREEEEE!!
             var trr = document.createElement('trr');
@@ -83,8 +85,27 @@ function get_calendar(day_no, days, day_name){
             img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
             img.id="img";
             img.type="button";
-            img.onclick=function(){alert("You've got a meeting!")};
-            meetinginfo="meeting on may 2";
+            //meetinginfo="meeting on may 2";
+            img.onclick=function(){document.getElementById("right").innerHTML =
+                "<br><u>Meetings for May 2, 2012</u><br><br>" +
+                "<li>Weekly group meeting" + "<ul>Project: A</ul><ul>Time: 10:30 AM</ul>" +
+                "<li>Something else" + "<ul>Project: Annoying Thing</ul><ul>Time: 13:00 AM</ul>"};
+            td.appendChild(trr);
+            td.appendChild(img);
+        }else if(count==5){ //.................................ADD ICON TO DATE HEREEEEE!!
+            var trr = document.createElement('trr');
+            trr.innerHTML=count+"<br>";
+            var img = document.createElement('img');
+            img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
+            img.id="img";
+            img.type="button";
+            //img.onclick=function(){alert("You've got a meeting!")};
+            //meetinginfo="meeting on may 5";
+            img.onclick=function(){document.getElementById("right").innerHTML=
+                "<br><u>Meetings for May 5, 2012</u><br><br>" +
+                "<li>Project Progress" + "<ul>Project: Something Cool</ul><ul>Time: 9:00 AM</ul>" +
+                "<li>Something else" + "<ul>Project: Another Thing</ul><ul>Time: 12:30 AM</ul>"};
+
 
             td.appendChild(trr);
             td.appendChild(img);
@@ -112,8 +133,6 @@ function get_calendar(day_no, days, day_name){
 
 
             var td = document.createElement('td');
-            td.style.backgroundColor="#F5F1ED";
-
             if(count == (new Date()).getDate()){
                 var a = document.createElement('a');
                 td.style.color="#CF5C36";
@@ -134,13 +153,32 @@ function get_calendar(day_no, days, day_name){
     }
     return table;
 }
+
+function get_meetings(){
+    var table = document.createElement('table');
+    table.style.backgroundColor="#F5F1ED";
+    var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.id='right';
+
+        td.style.verticalAlign="bottom";
+        tr.appendChild(td);
+
+    table.appendChild(tr);
+
+
+    return table;
+}
+
 function test(){
     alert("test");
 }
 
 function produceMessage(){
-    return meetinginfo;
-    //alert(meetinginfo);
+    //document.write('10');
+    //return "hello";
+    alert(meetinginfo);
 }
 
 

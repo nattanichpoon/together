@@ -11,7 +11,6 @@ import math
 def ratepeer(request,pk):
 	myproject = Project.objects.get(pk=pk)
 	members= myproject.members.all()
-
 	if request.method == "POST":
 		form = RatingForm(request.POST)
 		if form.is_valid():
@@ -21,9 +20,7 @@ def ratepeer(request,pk):
 			return render(request, "ratepeer.html", {"project":myproject})
 	else:
 		form = RatingForm(instance=myproject)
-		
 
-	
 	return render(request, "ratepeer.html", {"form":form, "project":myproject, "members": members})
 
 

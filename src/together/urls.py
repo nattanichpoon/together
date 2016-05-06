@@ -29,7 +29,9 @@ urlpatterns = [
     url(r'^profile/ratings/$', 'ratePeer.views.myratings', name='myratings'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
     url(r'^projects/(?P<pk>\d+)/$', 'projects.views.project_detail', name='project_detail'),
-    url(r'^projects/tasks/$', 'projects.views.mytasks', name='mytasks'),
+    
+    url(r'^projects/task/(?P<pk>\d+)/$', 'projects.views.task_detail', name='task_detail'),
+    
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),
     url(r'^discussions/post_list', 'discussion.views.post_list', name='post_list'),
@@ -44,8 +46,8 @@ urlpatterns = [
     url(r'^messages/', include('django_messages.urls')),
     url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
     url(r'^projects/(?P<pk>\d+)/ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
-    url(r'^projects/(?P<pk>\d+)/productivity/$', 'projects.views.project_productivity', name='project_productivity'),
 
+    url(r'^projects/(?P<pk>\d+)/productivity/$', 'projects.views.project_productivity', name='project_productivity'),
 
     # url(r'^ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
 

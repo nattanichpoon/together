@@ -48,6 +48,7 @@ def myprofile(request):
 	state=''
 	avgRating=0.0
 	avgTask=0.0
+
 	try:
 		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
@@ -81,6 +82,7 @@ def myprofile(request):
 			currentTasks = awaitingTasks+inProgressTasks
 			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 			avgTask = myRoundingFunction(((avgTask/completed)),2)
+
 		context={
 			'currentTasks':currentTasks, 
 			'date':date, 

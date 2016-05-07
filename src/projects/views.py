@@ -90,8 +90,10 @@ def project_detail(request,pk):
 	return render(request, 'project_detail.html', context)
 
 def task_detail(request, pk):
+	project = get_object_or_404(Project, pk=pk)
 	task = get_object_or_404(Task, pk=pk)
 	form = TaskForm(instance = task)
+	today = datetime.datetime.today()
 	
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
@@ -100,7 +102,7 @@ def task_detail(request, pk):
 			task.assignee = request.user
 			form.save()
 			return redirect('project_detail', pk = pk)
-	return render(request, 'task_detail.html', {'task': task,'form':form})
+	return render(request, 'task_detail.html', {'project':project, 'task': task,'form':form, 'today':today})
 
 
 # def grab_task(request, pk):

@@ -3,20 +3,65 @@
 {% load staticfiles %}
 
 {% block content %}
-
-{% if task.assignee %}
-
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="jquery.downCount.js"></script> 
+</head>
+<body>
+{% if task %}
 
 <div class='container'>
-	<form method="POST" class="post-form">
+	<div class="row">
+		<div class="col-sm-5">
+			Task: {{task.taskName}}<br>
+			Difficulty: {{task.get_difficultyLevel_display}}<br>
+			Task Points: {{task.difficultyLevel}}<br>
+			Due Date: {{task.expectedDate}}<br>
+			Description: {{task.description}}<br>
+		
+
+		<form method="POST" class="post-form">
 	    {% csrf_token %}
-	    {{ form|crispy }}
-	</div>
-	    <div class='row'>
+		    {% for field in form %}
+		    {{ field.as_hidden }}
+			{% endfor %}
+	    <!-- <div class='row'> -->
+	    <br>This task is unassigned. Are you up for the job?<br>
 	    <button type="submit" class="button-slide">Grab Task</button>
-	</div>
+		</div>
+
+
+		<div class="col-sm-4">
+			You have 
+			<h3>{{ project.grabBy|timeuntil:today }}</h3>
+			left to decide
+			<!-- {{project.grabBy}}
+			{{today}} -->
+
+			<!-- <ul class="countdown">
+				<li> <span class="days">00</span>
+				<p class="days_ref">days</p>
+				</li>
+				<li class="seperator">.</li>
+				<li> <span class="hours">00</span>
+				<p class="hours_ref">hours</p>
+				</li>
+				<li class="seperator">:</li>
+				<li> <span class="minutes">00</span>
+				<p class="minutes_ref">minutes</p>
+				</li>
+				<li class="seperator">:</li>
+				<li> <span class="seconds">00</span>
+				<p class="seconds_ref">seconds</p>
+				</li>
+			</ul> -->
+		</div>
 	</form>
+
+	
 </div>
+
+</body>
 
 
 {% endif %}

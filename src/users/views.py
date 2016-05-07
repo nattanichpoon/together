@@ -115,6 +115,14 @@ def editprofile(request):
 		if form.is_valid():
 			user = form.save(commit=False)
 			user.username = request.user
+			if '_female1' in request.POST:
+				user.avatar = UserProfile.FEMALE1
+			if '_female2' in request.POST:
+				user.avatar = UserProfile.FEMALE2
+			if '_male1' in request.POST:
+				user.avatar = UserProfile.MALE1
+			if '_male2' in request.POST:
+				user.avatar = UserProfile.MALE2
 			user.save()
 			return redirect('home')
 	else:

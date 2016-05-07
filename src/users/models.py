@@ -20,6 +20,16 @@ class SignUp(models.Model):
 class UserProfile(models.Model):
 	username = models.ForeignKey('auth.User', primary_key=True)
 	full_name = models.CharField(max_length=200)
+	FEMALE1 = 'female.png'
+	FEMALE2 = 'female2.png'
+	MALE1 = 'male.png'
+	MALE2 = 'male2.png'
+	PICS = ((FEMALE1, 'female1'),
+		(FEMALE2, 'female2'),
+		(MALE1, 'male1'),
+		(MALE2, 'male2')
+		)
+	avatar = models.CharField(choices=PICS,max_length=200, null=True)
 
 	
 	# def save(self):

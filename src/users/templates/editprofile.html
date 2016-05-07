@@ -1,27 +1,53 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
+
 {% load i18n %}
 
 {% block content %}
 
 {% if profile %}
-	<h1>Need to edit your name?</h1>
+	<h3>Edit Your Profile</h3>
 	<div class='container'>
 		<form method="POST" class="post-form">
 		    {% csrf_token %}
 		    <div class='row'>
 		    <label for="full_name">Full name: </label>
 		    <input id="full_name" type="text" name="full_name" value="{{ profile }}" style="width:200px">
+
+		    <input type="submit" value="" name="_female1">
 		</div>
 		    <div class='row'>
-		    <button type="submit" class="save btn">Save</button>
+		    <button type="submit" class="btn-x sixth">Submit</button>
+
 		</div>
 		</form>
+	</div>
+	<h3>Choose an avatar!</h3>
+	<div class="col-xs-3 col-sm-3">
+	     <button type="button" class="btn btn-circle" style="background:transparent">
+	     <img src="{% static 'img/female.png' %}">
+	 </button>
+	</div>
+	<div class="col-xs-3 col-sm-3">
+	     <button type="button" class="btn btn-circle" style="background:transparent">
+	     <img src="{% static 'img/female2.png' %}">
+	 </button>
+	</div>
+	<div class="col-xs-3 col-sm-3">
+	     <button type="button" class="btn btn-circle" style="background:transparent">
+	     <img src="{% static 'img/male.png' %}">
+	 </button>
+	</div>
+	<div class="col-xs-3 col-sm-3">
+	     <button type="button" class="btn btn-circle" style="background:transparent">
+	     <img src="{% static 'img/male2.png' %}">
+	 </button>
 	</div>
 
 
 {% else %}
-<h1>Tell us your name.</h1>
+<h3>Tell us your name.</h3>
 
 <div class='container'>
 	<form method="POST" class="post-form">
@@ -33,6 +59,8 @@
 	</div>
 	</form>
 </div>
+
+
 
 {% endif %}
 {% endblock %}

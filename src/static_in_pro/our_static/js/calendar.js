@@ -23,13 +23,13 @@ window.onload = function(){
     document.getElementById("meetinginfo-body").appendChild(meetings);
     var str="Click on a date to see the meeting information.";
 
-
 }
 
 function get_calendar(day_no, days, day_name){
     var table = document.createElement('table');
-    table.style.backgroundColor="#F5F1ED";
+    //table.style.backgroundColor="#d89d47";
     var tr = document.createElement('tr');
+    //tr.style.backgroundColor="#ffffff";
 
     //row for the days of the week
     for(var c=0; c<=6; c++){
@@ -37,6 +37,7 @@ function get_calendar(day_no, days, day_name){
         td.innerHTML = day_name[c].toUpperCase();
         td.style.borderBottom="thin solid #586F7C";
         td.style.verticalAlign="bottom";
+        td.style.backgroundColor='#f5f1ed';
         tr.appendChild(td);
 
     }
@@ -53,6 +54,7 @@ function get_calendar(day_no, days, day_name){
             break;
         }
         var td = document.createElement('td');
+        td.style.backgroundColor='#f5f1ed';
         td.innerHTML = "";
         /*var img = document.createElement('img');
         img.src='img/staricon.png'
@@ -76,44 +78,35 @@ function get_calendar(day_no, days, day_name){
     var count = 1;
     for(; c<=6; c++){
         var td = document.createElement('td');
+        td.id='date_'+count;
+        td.style.backgroundColor='#f5f1ed';
+        td.innerHTML=count+'<br>';
+        td.type='button';
+        td.onmouseover=function(){this.style.backgroundColor='#DBC8B3'};
+        td.onmouseout=function(){this.style.backgroundColor='#f5f1ed'};
+
         if(count == (new Date()).getDate()){
+            td.style.color="red";
         }
+
         if(count==2){ //.................................ADD ICON TO DATE HEREEEEE!!
-            var trr = document.createElement('trr');
-            trr.innerHTML=count+"<br>";
             var img = document.createElement('img');
             img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
-            img.id="img";
-            img.type="button";
-            //meetinginfo="meeting on may 2";
-            img.onclick=function(){document.getElementById("right").innerHTML =
+            td.appendChild(img);
+            td.onclick=function(){document.getElementById("right").innerHTML =
                 "<br><u>Meetings for May 2, 2012</u><br><br>" +
                 "<li>Weekly group meeting" + "<ul>Project: A</ul><ul>Time: 10:30 AM</ul>" +
-                "<li>Something else" + "<ul>Project: Annoying Thing</ul><ul>Time: 13:00 AM</ul>"};
-            td.appendChild(trr);
-            td.appendChild(img);
+                "<li>Something else" + "<ul>Project: Annoying Thing</ul><ul>Time: 13:00 AM</ul><br>"};
         }else if(count==5){ //.................................ADD ICON TO DATE HEREEEEE!!
-            var trr = document.createElement('trr');
-            trr.innerHTML=count+"<br>";
             var img = document.createElement('img');
             img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
-            img.id="img";
-            img.type="button";
-            //img.onclick=function(){alert("You've got a meeting!")};
-            //meetinginfo="meeting on may 5";
-            img.onclick=function(){document.getElementById("right").innerHTML=
-                "<br><u>Meetings for May 5, 2012</u><br><br>" +
-                "<li>Project Progress" + "<ul>Project: Something Cool</ul><ul>Time: 9:00 AM</ul>" +
-                "<li>Something else" + "<ul>Project: Another Thing</ul><ul>Time: 12:30 AM</ul>"};
-
-
-            td.appendChild(trr);
             td.appendChild(img);
+            td.onclick=function(){document.getElementById("right").innerHTML =
+                "<br><u>Meetings for May 5, 2012</u><br><br>" +
+                "<li>Project Progress" + "<ul>Project: Something Else</ul><ul>Time: 9:00 AM</ul>" +
+                "<li>Another Thing" + "<ul>Project: Together</ul><ul>Time: 12:30 AM</ul><br>"};
         }
-        else{
-            td.innerHTML=count;
-        }
-        /*td.innerHTML = count;*/
+
         count++;
         tr.appendChild(td);
     }
@@ -133,13 +126,18 @@ function get_calendar(day_no, days, day_name){
 
 
             var td = document.createElement('td');
+            td.style.backgroundColor='#f5f1ed';
+
+            td.type='button';
+            td.onmouseover=function(){this.style.backgroundColor='#DBC8B3'};
+            td.onmouseout=function(){this.style.backgroundColor='#f5f1ed'};
+
             if(count == (new Date()).getDate()){
                 var a = document.createElement('a');
-                td.style.color="#CF5C36";
-                td.style.backgroundColor="#CF5C36";
+                td.style.color="red";
             }
 
-              if(count<=31){td.innerHTML = count;} //adding extra days
+              if(count<=31){td.innerHTML = count+'<br>';} //adding extra days
 
             count++;
             tr.appendChild(td);
@@ -156,7 +154,7 @@ function get_calendar(day_no, days, day_name){
 
 function get_meetings(){
     var table = document.createElement('table');
-    table.style.backgroundColor="#F5F1ED";
+
     var tr = document.createElement('tr');
 
         var td = document.createElement('td');

@@ -15,6 +15,7 @@
 }
 
 #calendar-container>div{
+    /*may 2016*/
     padding: 0px;
     margin-bottom: 0px;
     margin-left: 0px;
@@ -30,6 +31,7 @@
 }
 
 #calendar-dates>table>tr>td{
+    /*main calendar*/
     padding: 10px;
     width: 220px;
     height: 90px;
@@ -37,7 +39,7 @@
     text-align: left;
     vertical-align: top;
     border-collapse: separate;
-    background-color: #F5F1ED;
+    /*background-color: #F5F1ED;*/
 }
 
 #meetinginfo-container{

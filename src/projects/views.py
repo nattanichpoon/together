@@ -29,6 +29,7 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
+
 def project_detail(request,pk):
 	project = get_object_or_404(Project, pk=pk)
 	members = project.members.all()

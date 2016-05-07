@@ -8,16 +8,16 @@
 {% endblock %} -->
 
 {% block content %}
-
     <div class="container">
 
         <div class="header">
 
-            <h2>&nbsp;&nbsp;My Calendar<br></h2>
+            <h2>&nbsp;&nbsp;Project Calendar<br></h2>
+            <h4>&nbsp;&nbsp;&nbsp;<i>Project Name</i></h4>
 
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-3 pull-left">
 			<head>
 			        <title>Calendar</title>
             </head>
@@ -35,32 +35,30 @@
 
           
 
-        <div class="col-sm-4"> 
+        <div class="col-sm-3 pull-right"> 
             <head> 
                 <title>Information</title>    
             </head>
              
             <body> 
-                    <div id="meetinginfo-container">  
+                    <div id="memberinfo-container">  
 
-                        <div id="meetinginfo-title"> 
+                        <div id="memberinfo-title"> 
+                            <h4>Member List</h4>
                         </div>
 
-                        <div id="meetinginfo-body">
+                        <div id="memberinfo-body">
+                            <p>Member1</p>
+                            <p>Member2</p>
+                            <ul class="list-group">
+		                        {% for member in members %}
+		                        <li class="list-group-item">{{ member }}</li>
+		                        {% endfor %}
+		                    </ul>
                         </div>
                     </div>
             </body>
         </div>
-
-
-        <div class="col-sm-7">
-            <h4>Test: list of projects</h4>
-                    {% for project in projects %}
-                    <a href="{% url 'project_detail' pk=project.pk %}"><button class="btn">{{ project.projectName }}</button></a>
-		            {% endfor %}
-
-
-		</div>
 
 
     </div>    

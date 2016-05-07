@@ -21,8 +21,7 @@ window.onload = function(){
     document.getElementById("calendar-dates").appendChild(calendar);
     document.getElementById("meetinginfo-title").innerHTML = "Meeting Information";
     document.getElementById("meetinginfo-body").appendChild(meetings);
-    var str="Click on a date to see the meeting information.";
-
+    
 }
 
 function get_calendar(day_no, days, day_name){

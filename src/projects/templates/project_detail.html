@@ -4,10 +4,13 @@
 
 {% block content %}
 {% if project %}
-
+<head>
+	lolol
 <script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
 <script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
+</head>
 
+<body>
 <div class="row">
 	<h2>
 	{{project.projectName}}
@@ -15,7 +18,7 @@
 </div>
 <div class="row">
 	<div class="col-sm-11">
-		<table id = "example" class="table table-hover tablesorter">
+		<table id = "taskTable" class="table-hover tablesorter">
 	    <thead>
 	      <tr>
 	        <th>Task</th>
@@ -61,7 +64,7 @@
 
 </div>
 
-
+</body>
 
 {% endif %}
 {% endblock %}

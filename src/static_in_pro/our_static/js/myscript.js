@@ -1,6 +1,8 @@
 
 
 jQuery(document).ready(function() {
+
+   $("#myTable").tablesorter(); 
   
   if ($('.cd-stretchy-nav').length > 0) {
     var stretchyNavs = $('.cd-stretchy-nav');

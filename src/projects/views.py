@@ -102,6 +102,7 @@ def task_detail(request, pk):
 			return redirect('project_detail', pk = pk)
 	return render(request, 'task_detail.html', {'task': task,'form':form})
 
+
 # def grab_task(request, pk):
 # 	task = get_object_or_404(Task, pk=pk)
 # 	form = TaskForm(instance = task)

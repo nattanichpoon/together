@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from users.models import UserProfile
 import datetime, json, math
-from .forms import ProjectForm
+from .forms import ProjectForm, TaskForm
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
@@ -31,7 +31,6 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
-
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
@@ -113,7 +112,36 @@ def project_detail(request,pk):
 
 def task_detail(request, pk):
 	task = get_object_or_404(Task, pk=pk)
-	return render(request, 'task_detail.html', {'task': task})
+	project = get_object_or_404(Project, pk=task.project.pk)
+	form = TaskForm(instance = task)
+	today = datetime.datetime.today().date()
+	# timeLeft = project.grabBy - today
+	# projkey = Project.objects.filter(projectName=task.project).pk
+
+	if request.method == "POST":
+		form = TaskForm(request.POST, instance=task)
+		if form.is_valid():
+			task = form.save(commit=False)			
+			task.assignee = request.user
+			task.taskState = task.IN_PROGRESS
+			form.save()
+			return redirect('project_detail', pk = project.pk)
+			
+	return render(request, 'task_detail.html', {'project':project, 'task': task,'form':form, 'today':today})
+
+def task_update(request, pk):
+	task = get_object_or_404(Task, pk=pk)
+	project = get_object_or_404(Project, pk=task.project.pk)
+	form = TaskForm(instance = task)
+
+	if request.method == "POST":
+		form = TaskForm(request.POST, instance=task)
+		if form.is_valid():
+			task = form.save(commit=False)	
+			form.save()
+			return redirect('project_detail', pk=project.pk)
+
+	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form})
 
 def project_new(request):
 	if request.method == "POST":

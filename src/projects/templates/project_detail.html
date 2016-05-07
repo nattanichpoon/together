@@ -3,17 +3,13 @@
 {% load staticfiles %}
 
 {% block content %}
-<<<<<<< HEAD
-{% if project %}
-<head>
-	lolol
-<script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
-<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
-</head>
-=======
->>>>>>> poon-new-p
 
-<body>
+{% if project %}
+
+<!-- <script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
+<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script>  -->
+
+
 <div class="row">
 	<h2>
 	{{project.projectName}}
@@ -36,16 +32,20 @@
 	    {% for task in tasks %}
 	    	<tr>
 	        	<td>{{task}}</td>
-	        	<td>{{task.assignee}}</td>
+	        	{% if task.assignee == None %}
+					<td> </td>	
+	        	{% else %}
+	        		<td>{{task.assignee}}</td>
+	        	{% endif %}
 	        	<td>{{task.get_difficultyLevel_display}}</td>
 	        	<td>{{task.get_taskState_display}}</td>
 	        	{% if task.taskState == 'AW' %}
 	        		<td>
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
 	        		</td>
-	        	{% elif task.taskState == "IP" %}
+	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
 		        	<td>
-		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></td>
+		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a></td>
 		        {% else %}
 		        	<td> </td>
 		        {% endif %}
@@ -53,17 +53,6 @@
 	    {% endfor %}
 	    </tbody>
 	  	</table>
-
-<<<<<<< HEAD
-
-
-		<a href="{% url 'ratepeer' pk=project.pk %}">Rate peer:</a> 
-		<ul class="list-group">
-		    {% for member in members %}
-		    <li class="list-group-item">{{ member }}</li>  
-		    {% endfor %}
-		</ul>
-=======
 	
 		<div class="col-sm-11 col-xs-11">
 		  <div class="at-section">
@@ -155,17 +144,13 @@
 		   
 		  </div>
 		</div>
->>>>>>> poon-new-p
 	</div>	
 
 
 
 </div>
-<<<<<<< HEAD
 
-</body>
 
 {% endif %}
-=======
->>>>>>> poon-new-p
+
 {% endblock %}

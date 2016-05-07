@@ -2,36 +2,53 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
+<!-- {% block extrahead %}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css"> 
+<script type="text/javascript" src="js/jquery.plugin.js"></script> 
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+<script type="text/javascript">
+$(selector).countdown({until: liftoffTime});
+</script>
+
+
+{% endblock %} -->
+
 {% block content %}
-<head>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="jquery.downCount.js"></script> 
-</head>
-<body>
+
 {% if task %}
 
 <div class='container'>
 	<div class="row">
 		<div class="col-sm-5">
-			Task: {{task.taskName}}<br>
-			Difficulty: {{task.get_difficultyLevel_display}}<br>
-			Task Points: {{task.difficultyLevel}}<br>
-			Due Date: {{task.expectedDate}}<br>
-			Description: {{task.description}}<br>
-		
-
-		<form method="POST" class="post-form">
-	    {% csrf_token %}
-		    {% for field in form %}
-		    {{ field.as_hidden }}
-			{% endfor %}
-	    <!-- <div class='row'> -->
-	    <br>This task is unassigned. Are you up for the job?<br>
-	    <button type="submit" class="button-slide">Grab Task</button>
+			<table id = "taskTable" class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th><h2>{{task.taskName}}</h2></th>
+			        <th> </th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      	<tr>
+				        <td>Difficulty:</td> <td>{{task.get_difficultyLevel_display}}</td>
+				    </tr>
+				    <tr>
+						<td>Task Points:</td> <td>{{task.difficultyLevel}}</td>
+					</tr>
+				    <tr>
+						<td>Due Date:</td> <td>{{task.expectedDate}}</td>
+					</tr>
+				    <tr>
+						<td>Description:</td> <td>{{task.description}}</td>
+				 	</tr>
+			    </tbody>
+			</table>
 		</div>
 
-
-		<div class="col-sm-4">
+		<div class="col-sm-5" align="right">
+			<br><br><br><br><br>
+			Today is {{today}} 
+			<br><br><br>
 			You have 
 			<h3>{{ project.grabBy|timeuntil:today }}</h3>
 			left to decide
@@ -51,18 +68,106 @@
 				<p class="minutes_ref">minutes</p>
 				</li>
 				<li class="seperator">:</li>
-				<li> <span class="seconds">00</span>
+				<li> <span class="seconds">10</span>
 				<p class="seconds_ref">seconds</p>
 				</li>
 			</ul> -->
+			<form method="POST" class="post-form">
+	    		{% csrf_token %}
+		    	{% for field in form %}
+		    		{{ field.as_hidden }}
+				{% endfor %}
+			    <br><br><br><br><br><br><br><br><br>This task is unassigned. Are you up for the job?<br>
+			    <button type="submit" class="button-slide">Grab Task</button>
+				</div>
+			</form>
 		</div>
-	</form>
-
-	
+	</div>
 </div>
 
-</body>
+<!-- 
+<div class="wrap">
 
+  <div class="countdown">
+    <div class="bloc-time hours" data-init-value="24">
+      <span class="count-title">Hours</span>
+
+      <div class="figure hours hours-1">
+        <span class="top">2</span>
+        <span class="top-back">
+          <span>2</span>
+        </span>
+        <span class="bottom">2</span>
+        <span class="bottom-back">
+          <span>2</span>
+        </span>
+      </div>
+
+      <div class="figure hours hours-2">
+        <span class="top">4</span>
+        <span class="top-back">
+          <span>4</span>
+        </span>
+        <span class="bottom">4</span>
+        <span class="bottom-back">
+          <span>4</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="bloc-time min" data-init-value="0">
+      <span class="count-title">Minutes</span>
+
+      <div class="figure min min-1">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+
+      <div class="figure min min-2">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="bloc-time sec" data-init-value="0">
+      <span class="count-title">Seconds</span>
+
+      <div class="figure sec sec-1">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+
+      <div class="figure sec sec-2">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 {% endif %}
 

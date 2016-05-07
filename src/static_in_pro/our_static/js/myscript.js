@@ -2,7 +2,8 @@
 
 jQuery(document).ready(function() {
 
-   $("#myTable").tablesorter(); 
+   // $("#myTable").tablesorter(); 
+  
   
   if ($('.cd-stretchy-nav').length > 0) {
     var stretchyNavs = $('.cd-stretchy-nav');
@@ -23,6 +24,7 @@ jQuery(document).ready(function() {
     });
 
   }
+
   $('.cd-stretchy-nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 
 
@@ -33,16 +35,5 @@ jQuery(document).ready(function() {
       e.preventDefault();
   });
 
-
 });
 
-
-  
-<script class="source" type="text/javascript">
-$('.countdown').downCount({
-<a href="http://www.jqueryscript.net/time-clock/">date</a>: '09/09/2014 12:00:00',
-offset: +10
-}, function () {
-alert('WOOT WOOT, done!');
-});
-</script>

@@ -111,12 +111,13 @@ def project_detail(request,pk):
 	return render(request, 'project_detail.html', context)
 
 def task_detail(request, pk):
-	project = get_object_or_404(Project, pk=pk)
 	task = get_object_or_404(Task, pk=pk)
+	project = get_object_or_404(Project, pk=task.project.pk)
 	form = TaskForm(instance = task)
 	today = datetime.datetime.today().date()
 	# timeLeft = project.grabBy - today
-	
+	# projkey = Project.objects.filter(projectName=task.project).pk
+
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
 		if form.is_valid():
@@ -124,23 +125,23 @@ def task_detail(request, pk):
 			task.assignee = request.user
 			task.taskState = task.IN_PROGRESS
 			form.save()
-			return redirect('project_detail', pk = pk)
+			return redirect('project_detail', pk = project.pk)
+			
 	return render(request, 'task_detail.html', {'project':project, 'task': task,'form':form, 'today':today})
 
 def task_update(request, pk):
-	# project = get_object_or_404(Project, pk=pk)
 	task = get_object_or_404(Task, pk=pk)
+	project = get_object_or_404(Project, pk=task.project.pk)
 	form = TaskForm(instance = task)
-	
+
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
 		if form.is_valid():
-			task = form.save(commit=False)
-						
+			task = form.save(commit=False)	
 			form.save()
-			return redirect('project_detail', pk = pk)
+			return redirect('project_detail', pk=project.pk)
 
-	return render(request, 'task_update.html', {'task': task, 'form': form})
+	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form})
 
 def project_new(request):
 	if request.method == "POST":

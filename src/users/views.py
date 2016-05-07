@@ -104,7 +104,19 @@ def myprofile(request):
 	except ObjectDoesNotExist:
 		print "nothing"
 
-	return render(request, "myprofile.html", {'profile':profile})
+	context ={'profile':profile,
+	'projects_count':projects_count,
+	'avgRating': avgRating,
+	'avgTask': avgTask,
+	'projects_completed': projects_completed,
+	'awaiting': awaiting,
+	'inprogress': inprogress,
+	'completed':completed,
+
+
+	}
+
+	return render(request, "myprofile.html", context)
 
 def editprofile(request):
 	if request.method == "POST":

@@ -4,9 +4,13 @@ from django.contrib.auth.models import User
 from registration.forms import RegistrationForm
 
 class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('full_name',)
+	class Meta:
+		model = UserProfile
+		fields = ('full_name','avatar')
+	def __init__(self, *args, **kwargs): 
+		super(UserProfileForm, self).__init__(*args, **kwargs)
+		self.fields['avatar'].label = 'Gender'
+	
 
 
 

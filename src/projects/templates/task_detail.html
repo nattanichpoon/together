@@ -4,23 +4,19 @@
 
 {% block content %}
 
-{% if task %}
-<ul>
-<li>Name: {{task.taskName}}</li>
-<li>Assignee: {{task.assignee}}</li>
-<li>Difficulty Level: {{task.difficultyLevel}}</li>
-<li>Task Due Date: {{task.expectedDate}}</li>
-<li>Description: {{task.description}}</li>
-</ul>
+{% if task.assignee %}
 
-<br>
-<form method="POST">
-	{% csrf_token %} 
-	{{ form }}
-	<!-- <a href="{% url 'project_detail' pk=task.pk %}"> -->
-	<button type='submit' class='button-slide'><span>Grab This Task!</span></button></a>
 
-</form>
+<div class='container'>
+	<form method="POST" class="post-form">
+	    {% csrf_token %}
+	    {{ form|crispy }}
+	</div>
+	    <div class='row'>
+	    <button type="submit" class="button-slide">Grab Task</button>
+	</div>
+	</form>
+</div>
 
 
 {% endif %}

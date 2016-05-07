@@ -29,14 +29,6 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
-def project_detail(request,pk):
-	project = get_object_or_404(Project, pk=pk)
-	members = project.members.all()
-	context ={
-		'project': project,
-		'members': members
-	}
-	return render(request, 'project_detail.html', context)
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
@@ -107,8 +99,8 @@ def task_detail(request, pk):
 			task = form.save(commit=False)			
 			task.assignee = request.user
 			form.save()
-			return redirect('project_detail')
-	return render(request, 'task_detail.html', {'task': task})
+			return redirect('project_detail', pk = pk)
+	return render(request, 'task_detail.html', {'task': task,'form':form})
 
 # def grab_task(request, pk):
 # 	task = get_object_or_404(Task, pk=pk)

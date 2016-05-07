@@ -3,16 +3,26 @@
 {% load staticfiles %}
 
 {% block content %}
-{% if project %}
 
-Name: {{task.taskName}}
-Assignee: {{task.assignee}}
-Difficulty Level: {{task.difficultyLevel}}
-Description: {{task.description}}
+{% if task %}
+<ul>
+<li>Name: {{task.taskName}}</li>
+<li>Assignee: {{task.assignee}}</li>
+<li>Difficulty Level: {{task.difficultyLevel}}</li>
+<li>Task Due Date: {{task.expectedDate}}</li>
+<li>Description: {{task.description}}</li>
+</ul>
 
+<br>
+<form method="POST">
+	{% csrf_token %} 
+	{{ form }}
+	<!-- <a href="{% url 'project_detail' pk=task.pk %}"> -->
+	<button type='submit' class='button-slide'><span>Grab This Task!</span></button></a>
 
-
+</form>
 
 
 {% endif %}
+
 {% endblock %}

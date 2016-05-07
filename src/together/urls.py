@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^projects/(?P<pk>\d+)/$', 'projects.views.project_detail', name='project_detail'),
     
     url(r'^projects/task/(?P<pk>\d+)/$', 'projects.views.task_detail', name='task_detail'),
+    url(r'^projects/task/update/(?P<pk>\d+)/$', 'projects.views.task_update', name='task_update'),
     
     url(r'^projects/new$', 'projects.views.project_new', name='project_new'),
     url(r'^discussions/$', 'discussion.views.discussions', name='discussions'),

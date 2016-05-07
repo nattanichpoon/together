@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^profile/ratings/$', 'ratePeer.views.myratings', name='myratings'),
     url(r'^projects/$', 'projects.views.myprojects', name='projects'),
     url(r'^projects/(?P<pk>\d+)/$', 'projects.views.project_detail', name='project_detail'),
-    
+    url(r'^members/(?P<pk>\d+)/$', 'projects.views.view_member', name='view_member'),
+
     url(r'^projects/task/(?P<pk>\d+)/$', 'projects.views.task_detail', name='task_detail'),
     url(r'^projects/task/update/(?P<pk>\d+)/$', 'projects.views.task_update', name='task_update'),
     

@@ -23,7 +23,7 @@ def home(request):
 		except ObjectDoesNotExist:
 			print "nothing"
 			# form = UserProfileForm()
-			# return render(request, "editprofile.html",{'form':form})
+			return HttpResponseRedirect("http://127.0.0.1:8000/profile/edit")
 	return render(request, "home.html", '')
 
 
@@ -48,9 +48,8 @@ def myprofile(request):
 	state=''
 	avgRating=0.0
 	avgTask=0.0
-
+	profile = UserProfile.objects.get(username=request.user)
 	try:
-		profile = UserProfile.objects.get(username=request.user)
 		projects = Project.objects.filter(members__username=request.user.username).all()
 		projects_count= projects.count()
 		date = timezone.now().date()
@@ -83,31 +82,29 @@ def myprofile(request):
 			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 			avgTask = myRoundingFunction(((avgTask/completed)),2)
 
-		context={
-			'currentTasks':currentTasks, 
-			'date':date, 
-			'profile': profile, 
-			'projects': projects, 'tasks': tasks, 
-			'awaiting': awaiting,
-			'inprogress': inprogress,
-			'completed':completed,
-			'inProgressTasks': inProgressTasks, 
-			'awaitingTasks':awaitingTasks, 
-			'total':total, 
-			'projects_count':projects_count,
-			'avgRating': avgRating,
-			'avgTask': avgTask,
-			'projects_completed': projects_completed
-		}
-
-
-		
-		return render(request, "myprofile.html", context)
+			context={
+				'currentTasks':currentTasks, 
+				'date':date, 
+				'profile': profile, 
+				'projects': projects, 
+				'tasks': tasks, 
+				'awaiting': awaiting,
+				'inprogress': inprogress,
+				'completed':completed,
+				'inProgressTasks': inProgressTasks, 
+				'awaitingTasks':awaitingTasks, 
+				'total':total, 
+				'projects_count':projects_count,
+				'avgRating': avgRating,
+				'avgTask': avgTask,
+				'projects_completed': projects_completed
+			}
+			return render(request, "myprofile.html", context)
 
 	except ObjectDoesNotExist:
 		print "nothing"
 
-	return render(request, "myprofile.html", '')
+	return render(request, "myprofile.html", {'profile':profile})
 
 def editprofile(request):
 	if request.method == "POST":
@@ -115,23 +112,12 @@ def editprofile(request):
 		if form.is_valid():
 			user = form.save(commit=False)
 			user.username = request.user
-			if '_female1' in request.POST:
-				user.avatar = UserProfile.FEMALE1
-			if '_female2' in request.POST:
-				user.avatar = UserProfile.FEMALE2
-			if '_male1' in request.POST:
-				user.avatar = UserProfile.MALE1
-			if '_male2' in request.POST:
-				user.avatar = UserProfile.MALE2
 			user.save()
-			return redirect('home')
+		return redirect('myprofile')
+
 	else:
 		form = UserProfileForm()
-		try:
-			profile = UserProfile.objects.get(username=request.user)
-			return render(request,'editprofile.html',{ 'form': form, 'profile': profile})
-		except ObjectDoesNotExist:
-			print "nothing"
+		
 	return render(request,'editprofile.html',{ 'form': form})
 
 	

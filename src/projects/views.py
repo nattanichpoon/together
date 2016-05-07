@@ -128,14 +128,15 @@ def task_detail(request, pk):
 	return render(request, 'task_detail.html', {'project':project, 'task': task,'form':form, 'today':today})
 
 def task_update(request, pk):
-	project = get_object_or_404(Project, pk=pk)
+	# project = get_object_or_404(Project, pk=pk)
 	task = get_object_or_404(Task, pk=pk)
 	form = TaskForm(instance = task)
 	
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
 		if form.is_valid():
-			task = form.save(commit=False)			
+			task = form.save(commit=False)
+						
 			form.save()
 			return redirect('project_detail', pk = pk)
 

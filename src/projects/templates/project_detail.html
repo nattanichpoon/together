@@ -45,7 +45,8 @@
 	        		</td>
 	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
 		        	<td>
-		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a></td>
+		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
+		        	</td>
 		        {% else %}
 		        	<td> </td>
 		        {% endif %}

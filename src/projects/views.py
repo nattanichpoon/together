@@ -153,7 +153,6 @@ def send_productivity(request):
 
 
 def project_detail(request,pk):
-	autoAssign(pk)
 	project = get_object_or_404(Project, pk=pk)
 	users = project.members.all()
 	members=[]
@@ -161,6 +160,12 @@ def project_detail(request,pk):
 		members.append(UserProfile.objects.get(username=user))
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+	tasks_AW = allTasks.filter(taskState=Task.AWAITING).order_by('-difficultyLevel')#high difficulty first
+	if tasks_AW.count() > 0:
+		if timezone.now().date() >= project.grabBy:
+			autoAssign(tasks_AW, users, allTasks)
+			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+
 
 	size = users.count()
 
@@ -199,6 +204,7 @@ def autoAssign(pk):
 			for mem in range(len(task_point)):
 				task.assignee == (x[mem] for x in tasks_AW)
 				task.taskState == task.IN_PROGRESS
+			task.save()
 
 		project.save()
 
@@ -261,6 +267,17 @@ def task_new(request, pk):
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})
 
+<<<<<<< HEAD
+=======
+def autoAssign(tasks_AW, users, allTasks):
+	for task in tasks_AW:
+		task.assignee = find_lazy_member(users, allTasks)
+		task.taskState = Task.IN_PROGRESS
+		task.save()
+
+
+
+>>>>>>> origin/nice-avatar
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)
 	user = profile.username
@@ -328,6 +345,22 @@ def view_member(request, pk):
 
 def myRoundingFunction(x, n):
     return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
+
+def find_lazy_member(userList, allTasks):
+	task_point=[]
+	#calculate pts for members
+	for member in userList: 
+		pt = 0
+		for task in allTasks:		
+			if task.assignee == member:
+				pt += task.difficultyLevel
+		pt_member = [pt, member]
+		task_point.append(pt_member)
+	task_point.sort()
+	#return the first user in list
+	return task_point[0][1]
+
+
 
 
 

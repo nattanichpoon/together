@@ -153,7 +153,6 @@ def send_productivity(request):
 
 
 def project_detail(request,pk):
-	autoAssign(pk)
 	project = get_object_or_404(Project, pk=pk)
 	users = project.members.all()
 	members=[]
@@ -161,6 +160,12 @@ def project_detail(request,pk):
 		members.append(UserProfile.objects.get(username=user))
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+	tasks_AW = allTasks.filter(taskState=Task.AWAITING).order_by('-difficultyLevel')#high difficulty first
+	if tasks_AW.count() > 0:
+		if timezone.now().date() >= project.grabBy:
+			autoAssign(tasks_AW, users, allTasks)
+			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+
 
 	size = users.count()
 
@@ -232,34 +237,13 @@ def task_new(request, pk):
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})
 
-def autoAssign(pk):
-	project = get_object_or_404(Project, pk=pk)
-	# task = get_object_or_404(Task, pk=pk)
-	if timezone.now().date() >= project.grabBy:
-		# tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
-		# 	if task_AW
-		tasks_taken = Task.objects.filter(project=project).exclude(taskState = Task.AWAITING)
-		tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
-		task_point=[]
-		pt = 0
-		
-		#calculate pts for members
-		for member in project.members.all(): 
-			for task in tasks_taken:		
-				if task.assignee == member.username:
-					pt + task.difficultyLevel
-			pt_member = [pt, member]
-			task_point.append(pt_member)
-		task_point.sort()
+def autoAssign(tasks_AW, users, allTasks):
+	for task in tasks_AW:
+		task.assignee = find_lazy_member(users, allTasks)
+		task.taskState = Task.IN_PROGRESS
+		task.save()
 
-		#assign difficult to members with lowest pts first
-		# mem = 0
-		for task in tasks_AW:
-			for mem in range(len(task_point)):
-				task.assignee == (x[mem] for x in tasks_AW)
-				task.taskState == task.IN_PROGRESS
 
-		project.save()
 
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)
@@ -328,6 +312,22 @@ def view_member(request, pk):
 
 def myRoundingFunction(x, n):
     return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
+
+def find_lazy_member(userList, allTasks):
+	task_point=[]
+	#calculate pts for members
+	for member in userList: 
+		pt = 0
+		for task in allTasks:		
+			if task.assignee == member:
+				pt += task.difficultyLevel
+		pt_member = [pt, member]
+		task_point.append(pt_member)
+	task_point.sort()
+	#return the first user in list
+	return task_point[0][1]
+
+
 
 
 

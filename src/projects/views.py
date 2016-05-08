@@ -1,19 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
+<<<<<<< HEAD
 import datetime, json, math
 from .forms import ProjectForm, TaskForm
+=======
+import datetime, json, math, re
+from .forms import ProjectForm,EmailForm
+>>>>>>> poon-new-p
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.core.urlresolvers import resolve
+
+
 
 
 
 # Create your views here.
 
 def myprojects(request):
-	title = "My lalala"
+	title = "My Projects"
 	title_align_center = True
 	navtab = True
 
@@ -74,6 +84,29 @@ def project_productivity(request,pk):
 
 	array_rating.append(member_list)
 	array_rating.append(rates_list)
+
+	form = EmailForm(request.POST or None)
+	if form.is_valid():
+		form_email = form.cleaned_data.get("email")
+		form_message = form.cleaned_data.get("message")
+
+		subject = "Productivity Report: %s"%(project.projectName)
+		from_email = settings.EMAIL_HOST_USER
+		to_email = [from_email,form_email]
+		current_url = ''.join(['http://127.0.0.1:8000',request.get_full_path()])
+
+		some_html_message = """
+		<h2> View report here </h2>
+		<p> %s </p>
+		""" %(current_url)
+	
+		send_mail(subject, 
+			form_message, 
+			from_email, 
+			to_email, html_message=some_html_message,
+			fail_silently=True)
+
+
 	context ={
 		'project': project,
 		'members': members,
@@ -85,12 +118,43 @@ def project_productivity(request,pk):
 		'rotate':rotate,
 		'small': small,
 		'tasks_inp': tasks_inp,
-		'tasks_aw': tasks_aw
+		'tasks_aw': tasks_aw,
+		'form':form
 
 	}
 	
 
 	return render(request, 'project_productivity.html', context)
+def send_productivity(request):
+	form = EmailForm(request.POST or None)
+	if form.is_valid():
+		form_email = form.cleaned_data.get("email")
+		form_message = form.cleaned_data.get("message")
+
+		subject = "Productivity Report: %s"%(project.projectName)
+		from_email = settings.EMAIL_HOST_USER
+		to_email = [from_email,form_email]
+		current_url = resolve(request.path_info).url_name
+
+
+		somestring='this is some string rec'
+
+		somestring = re.sub('send/$', '', somestring)
+		some_html_message = """
+		<h2> View report here </h2>
+		<p> %s </p>
+		""" %(current_url)
+	
+		send_mail(subject, 
+			form_message, 
+			from_email, 
+			to_email, html_message=some_html_message,
+			fail_silently=True)
+		context ={'form':form,
+
+		}
+	return render(request, 'send_productivity.html', context)
+
 
 
 def project_detail(request,pk):
@@ -102,10 +166,13 @@ def project_detail(request,pk):
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
+	size = users.count()
+
 	context ={
 		'project': project,
 		'members': members,
 		'tasks': allTasks,
+		'size':size
 	}
 
 	return render(request, 'project_detail.html', context)
@@ -153,8 +220,13 @@ def project_new(request):
 			project = form.save(commit=False)
 			project.save()
 			project.members = request.POST.getlist('members')
+<<<<<<< HEAD
 			return render(request, "project_new.html", '')
 			# return redirect('myprojects')
+=======
+			# return render(request, "project_new.html", '')
+			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
+>>>>>>> poon-new-p
 	else:
 		form = ProjectForm()
 
@@ -194,6 +266,7 @@ def view_member(request, pk):
 	projects = Project.objects.filter(members__username=user).all()
 	projects_count= projects.count()
 	ratings = Rating.objects.filter(user=user).all()
+
 	myTaskCount =0
 	awaiting = 0
 	inprogress = 0
@@ -205,47 +278,51 @@ def view_member(request, pk):
 	state=''
 	avgRating=0.0
 	avgTask=0.0
+
 	if projects.count() > 0:
-		for rating in ratings:
-			avgRating+=rating.total
 		for project in projects:
 			if project.completed:
 				projects_completed+=1
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+			
 			tasks = allTasks.filter(assignee=user).all()
 			# currentTasks= tasks.filter(taskState__in=['AW','IP'])
+			if tasks.count() > 0:
+				awaiting += tasks.filter(taskState = Task.AWAITING).count()
+				inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+				completed += tasks.filter(taskState = Task.COMPLETED).count()
+				for task in tasks.filter(taskState = Task.IN_PROGRESS):
+					inProgressTasks.append(task)
+					
+				for task in tasks.filter(taskState = Task.AWAITING):
+					awaitingTasks.append(task)
+				for task in tasks.filter(taskState = Task.COMPLETED):
+					avgTask+=task.difficultyLevel
 
-			awaiting += tasks.filter(taskState = Task.AWAITING).count()
-			inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
-			completed += tasks.filter(taskState = Task.COMPLETED).count()
-			for task in tasks.filter(taskState = Task.IN_PROGRESS):
-				inProgressTasks.append(task)
-				
-			for task in tasks.filter(taskState = Task.AWAITING):
-				awaitingTasks.append(task)
-			for task in tasks.filter(taskState = Task.COMPLETED):
-				avgTask+=task.difficultyLevel
+				total = awaiting+inprogress+completed
+				currentTasks = awaitingTasks+inProgressTasks
+				avgTask = myRoundingFunction(((avgTask/completed)),2)
+		if ratings.count() > 0:
+			for rating in ratings:
+				avgRating+=rating.total
+			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 
-		total = awaiting+inprogress+completed
-		currentTasks = awaitingTasks+inProgressTasks
-		avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-		avgTask = myRoundingFunction(((avgTask/completed)),2)
-	context= {
-		'profile': profile,
-		'user': user,
-		'projects': projects, 'tasks': tasks, 
-		'awaiting': awaiting,
-		'inprogress': inprogress,
-		'completed':completed,
-		'inProgressTasks': inProgressTasks, 
-		'awaitingTasks':awaitingTasks, 
-		'total':total, 
-		'projects_count':projects_count,
-		'avgRating': avgRating,
-		'avgTask': avgTask,
-		'projects_completed': projects_completed
+			context= {
+				'profile': profile,
+				'user': user,
+				'projects': projects, 'tasks': tasks, 
+				'awaiting': awaiting,
+				'inprogress': inprogress,
+				'completed':completed,
+				'inProgressTasks': inProgressTasks, 
+				'awaitingTasks':awaitingTasks, 
+				'total':total, 
+				'projects_count':projects_count,
+				'avgRating': avgRating,
+				'avgTask': avgTask,
+				'projects_completed': projects_completed
 
-	}
+			}
 	return render(request, "view_member.html", context)
 
 def myRoundingFunction(x, n):

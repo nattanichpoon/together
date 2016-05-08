@@ -17,6 +17,7 @@ def ratepeer(request,pk):
 			rating = form.save(commit=False)
 			rating.project = myproject
 			rating.save()
+			
 			return render(request, "ratepeer.html", {"project":myproject})
 	else:
 		form = RatingForm(instance=myproject)

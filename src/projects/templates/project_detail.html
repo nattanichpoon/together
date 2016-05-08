@@ -4,50 +4,75 @@
 
 {% block content %}
 
+{% if project %}
+
+<!-- <script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
+<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script>  -->
+
+
 <div class="row">
 	<h2>
 	{{project.projectName}}
 	</h2>
-		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span>View Productivity</span></a>
+		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span><i class="glyphicon glyphicon-stats"></i> View Productivity</span></a>
+		<a href="{% url 'task_new' pk=project.pk%}" class="fancy-button bg-gradient3"><span><i class="glyphicon glyphicon-plus"></i> Add Task</span></a>
 </div>
 <div class="row">
 	<div class="col-sm-11">
-		<table class="table table-hover">
+		<table id = "taskTable" class="table table-hover tablesorter">
 	    <thead>
 	      <tr>
 	        <th>Task</th>
+	        <th>Assignee</th>
 	        <th>Difficulty</th>
 	        <th>Status</th>
-	        <th></th>
+	        <th>Status</th>
+	        <th>Grab Task By</th>
+
 	      </tr>
 	    </thead>
 	    <tbody>
 	    {% for task in tasks %}
 	    	<tr>
 	        	<td>{{task}}</td>
+	        	{% if task.assignee == None %}
+					<td> </td>	
+	        	{% else %}
+	        		<td>{{task.assignee}}</td>
+	        	{% endif %}
 	        	<td>{{task.get_difficultyLevel_display}}</td>
 	        	<td>{{task.get_taskState_display}}</td>
 	        	{% if task.taskState == 'AW' %}
 	        		<td>
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
+	        			<td>{{project.grabBy}}</td>
 	        		</td>
-	        	{% elif task.taskState == "IP" %}
-		        	<td><button class="btn">Update</button></td>
+	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
+		        	<td>
+		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
+		        		<td></td>
+		        	</td>
 		        {% else %}
 		        	<td> </td>
+		        	<td></td>
 		        {% endif %}
+
 	      	</tr>
 	    {% endfor %}
 	    </tbody>
 	  	</table>
 
-	
+
+		<div class="col-sm-11 col-xs-11" align="center">
+			{% if not tasks %}
+	  			<i><h4> There are currently no tasks in this project. Click on "Add Task" to create one!</h4></i>
+	  		{% endif %}
 		<div class="col-sm-11 col-xs-11">
 
 		  <div class="at-section">
 		  </hr>
 		    <h3>The Team</h3>
-		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span>Rate Peers</span></a>
+		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span><i class="glyphicon glyphicon-check"></i> Rate Peers</span></a>
 
 		  </div>
 		  <div data-column='4' class="at-grid" style="background:transparent; border-style:none">
@@ -79,5 +104,12 @@
 		  
 		</div>
 	</div>	
+
+
+
 </div>
+
+
+{% endif %}
+
 {% endblock %}

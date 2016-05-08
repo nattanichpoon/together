@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% if task %}
+<div class='container'>
+	<div class="row">
+		<div class="col-sm-8">
+			<form method="POST" class="post-form">
+			    {% csrf_token %}
+			    <table id = "taskTable" class="table table-hover">
+				    <thead>
+				      <tr>
+				        <th><h2>{{task.taskName}}</h2></th>
+				        <th> </th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	{% for field in form %}
+		    				{{ field.as_hidden }}
+						{% endfor %}
+				      	<tr>
+					        <td>Difficulty:</td> <td>{{task.get_difficultyLevel_display}}</td>
+					    </tr>
+					    <tr>
+							<td>Task Points:</td> <td>{{task.difficultyLevel}}</td>
+						</tr>
+					    <tr>
+							<td>Due Date:</td> <td>{{task.expectedDate}}</td>
+						</tr>
+					    <tr>
+							<td>Description:</td> <td>{{task.description}}</td>
+					 	</tr>
+					 	<tr>
+							<td>Task Status:</td> <td>{{form.taskState}}</td> *Once marked as COMPLETED you won't be able to make changes to this task
+					 	</tr>
+				    </tbody>
+				</table>
+			    
+			    <br>
+		    	<button type="submit" class="button-slide">Submit Update</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+{% endif %}
+{% endblock%}

@@ -80,7 +80,10 @@ def myprofile(request):
 					total = awaiting+inprogress+completed
 					currentTasks = awaitingTasks+inProgressTasks
 					avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-					avgTask = myRoundingFunction(((avgTask/completed)),2)
+					if completed == 0:
+						avgTask = 0.0
+					else:
+						avgTask = myRoundingFunction(((avgTask/completed)),2)
 
 					context={
 						'currentTasks':currentTasks, 

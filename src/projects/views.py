@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
 import datetime, json, math, re
-from .forms import ProjectForm,EmailForm
+from .forms import ProjectForm, EmailForm, TaskForm
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
@@ -36,7 +36,6 @@ def myprojects(request):
 	"today":today,
 	}
 	return render(request, "myprojects.html", context)
-
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
@@ -161,6 +160,12 @@ def project_detail(request,pk):
 		members.append(UserProfile.objects.get(username=user))
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+	tasks_AW = allTasks.filter(taskState=Task.AWAITING).order_by('-difficultyLevel')#high difficulty first
+	if tasks_AW.count() > 0:
+		if timezone.now().date() >= project.grabBy:
+			autoAssign(tasks_AW, users, allTasks)
+			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+
 
 	size = users.count()
 
@@ -210,17 +215,35 @@ def project_new(request):
 	if request.method == "POST":
 		form = ProjectForm(request.POST)
 		if form.is_valid():
+			# if project.grabBy "None"
+			# find user with lowest score and assign harder tasks first
+			# everyone assigned, then assign low priority tasks
 			project = form.save(commit=False)
 			project.save()
 			project.members = request.POST.getlist('members')
-			# return render(request, "project_new.html", '')
 			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
 	else:
 		form = ProjectForm()
 
-
-		
 	return render(request, "project_new.html", {"form":form})
+
+def task_new(request, pk):
+	project = get_object_or_404(Project, pk=pk)
+	form = TaskForm(request.POST)
+	if request.method == "POST":
+		if form.is_valid():
+			task = form.save(commit=False)
+			task.save()
+			return redirect('project_detail', pk=project.pk)
+	return render(request, "task_new.html", {"form":form})
+
+def autoAssign(tasks_AW, users, allTasks):
+	for task in tasks_AW:
+		task.assignee = find_lazy_member(users, allTasks)
+		task.taskState = Task.IN_PROGRESS
+		task.save()
+
+
 
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)
@@ -289,6 +312,22 @@ def view_member(request, pk):
 
 def myRoundingFunction(x, n):
     return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
+
+def find_lazy_member(userList, allTasks):
+	task_point=[]
+	#calculate pts for members
+	for member in userList: 
+		pt = 0
+		for task in allTasks:		
+			if task.assignee == member:
+				pt += task.difficultyLevel
+		pt_member = [pt, member]
+		task_point.append(pt_member)
+	task_point.sort()
+	#return the first user in list
+	return task_point[0][1]
+
+
 
 
 

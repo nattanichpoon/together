@@ -1,6 +1,9 @@
 
 
 jQuery(document).ready(function() {
+
+   // $("#myTable").tablesorter(); 
+  
   
   if ($('.cd-stretchy-nav').length > 0) {
     var stretchyNavs = $('.cd-stretchy-nav');
@@ -21,6 +24,7 @@ jQuery(document).ready(function() {
     });
 
   }
+
   $('.cd-stretchy-nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 
 
@@ -31,6 +35,7 @@ jQuery(document).ready(function() {
       e.preventDefault();
   });
 
+<<<<<<< HEAD
     $(".dropdown dt a").on('click', function() {
       $(".dropdown dd ul").slideToggle('fast');
     });
@@ -66,8 +71,7 @@ jQuery(document).ready(function() {
     });
 
 
+=======
+>>>>>>> nice-avatar
 });
-
-
-  
 

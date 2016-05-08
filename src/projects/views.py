@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
 import datetime, json, math
@@ -151,7 +152,8 @@ def project_new(request):
 			project = form.save(commit=False)
 			project.save()
 			project.members = request.POST.getlist('members')
-			return render(request, "project_new.html", '')
+			# return render(request, "project_new.html", '')
+			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
 	else:
 		form = ProjectForm()
 
@@ -165,6 +167,7 @@ def view_member(request, pk):
 	projects = Project.objects.filter(members__username=user).all()
 	projects_count= projects.count()
 	ratings = Rating.objects.filter(user=user).all()
+
 	myTaskCount =0
 	awaiting = 0
 	inprogress = 0
@@ -176,47 +179,51 @@ def view_member(request, pk):
 	state=''
 	avgRating=0.0
 	avgTask=0.0
+
 	if projects.count() > 0:
-		for rating in ratings:
-			avgRating+=rating.total
 		for project in projects:
 			if project.completed:
 				projects_completed+=1
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
+			
 			tasks = allTasks.filter(assignee=user).all()
 			# currentTasks= tasks.filter(taskState__in=['AW','IP'])
+			if tasks.count() > 0:
+				awaiting += tasks.filter(taskState = Task.AWAITING).count()
+				inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+				completed += tasks.filter(taskState = Task.COMPLETED).count()
+				for task in tasks.filter(taskState = Task.IN_PROGRESS):
+					inProgressTasks.append(task)
+					
+				for task in tasks.filter(taskState = Task.AWAITING):
+					awaitingTasks.append(task)
+				for task in tasks.filter(taskState = Task.COMPLETED):
+					avgTask+=task.difficultyLevel
 
-			awaiting += tasks.filter(taskState = Task.AWAITING).count()
-			inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
-			completed += tasks.filter(taskState = Task.COMPLETED).count()
-			for task in tasks.filter(taskState = Task.IN_PROGRESS):
-				inProgressTasks.append(task)
-				
-			for task in tasks.filter(taskState = Task.AWAITING):
-				awaitingTasks.append(task)
-			for task in tasks.filter(taskState = Task.COMPLETED):
-				avgTask+=task.difficultyLevel
+				total = awaiting+inprogress+completed
+				currentTasks = awaitingTasks+inProgressTasks
+				avgTask = myRoundingFunction(((avgTask/completed)),2)
+		if ratings.count() > 0:
+			for rating in ratings:
+				avgRating+=rating.total
+			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 
-		total = awaiting+inprogress+completed
-		currentTasks = awaitingTasks+inProgressTasks
-		avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-		avgTask = myRoundingFunction(((avgTask/completed)),2)
-	context= {
-		'profile': profile,
-		'user': user,
-		'projects': projects, 'tasks': tasks, 
-		'awaiting': awaiting,
-		'inprogress': inprogress,
-		'completed':completed,
-		'inProgressTasks': inProgressTasks, 
-		'awaitingTasks':awaitingTasks, 
-		'total':total, 
-		'projects_count':projects_count,
-		'avgRating': avgRating,
-		'avgTask': avgTask,
-		'projects_completed': projects_completed
+			context= {
+				'profile': profile,
+				'user': user,
+				'projects': projects, 'tasks': tasks, 
+				'awaiting': awaiting,
+				'inprogress': inprogress,
+				'completed':completed,
+				'inProgressTasks': inProgressTasks, 
+				'awaitingTasks':awaitingTasks, 
+				'total':total, 
+				'projects_count':projects_count,
+				'avgRating': avgRating,
+				'avgTask': avgTask,
+				'projects_completed': projects_completed
 
-	}
+			}
 	return render(request, "view_member.html", context)
 
 def myRoundingFunction(x, n):

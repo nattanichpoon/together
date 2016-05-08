@@ -65,41 +65,41 @@ def myprofile(request):
 				allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 				tasks = allTasks.filter(assignee=request.user).all()
 				# currentTasks= tasks.filter(taskState__in=['AW','IP'])
+				if tasks.count() > 0:
+					awaiting += tasks.filter(taskState = Task.AWAITING).count()
+					inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
+					completed += tasks.filter(taskState = Task.COMPLETED).count()
+					for task in tasks.filter(taskState = Task.IN_PROGRESS):
+						inProgressTasks.append(task)
+						
+					for task in tasks.filter(taskState = Task.AWAITING):
+						awaitingTasks.append(task)
+					for task in tasks.filter(taskState = Task.COMPLETED):
+						avgTask+=task.difficultyLevel
 
-				awaiting += tasks.filter(taskState = Task.AWAITING).count()
-				inprogress += tasks.filter(taskState = Task.IN_PROGRESS).count()
-				completed += tasks.filter(taskState = Task.COMPLETED).count()
-				for task in tasks.filter(taskState = Task.IN_PROGRESS):
-					inProgressTasks.append(task)
-					
-				for task in tasks.filter(taskState = Task.AWAITING):
-					awaitingTasks.append(task)
-				for task in tasks.filter(taskState = Task.COMPLETED):
-					avgTask+=task.difficultyLevel
+					total = awaiting+inprogress+completed
+					currentTasks = awaitingTasks+inProgressTasks
+					avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
+					avgTask = myRoundingFunction(((avgTask/completed)),2)
 
-			total = awaiting+inprogress+completed
-			currentTasks = awaitingTasks+inProgressTasks
-			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
-			avgTask = myRoundingFunction(((avgTask/completed)),2)
-
-			context={
-				'currentTasks':currentTasks, 
-				'date':date, 
-				'profile': profile, 
-				'projects': projects, 
-				'tasks': tasks, 
-				'awaiting': awaiting,
-				'inprogress': inprogress,
-				'completed':completed,
-				'inProgressTasks': inProgressTasks, 
-				'awaitingTasks':awaitingTasks, 
-				'total':total, 
-				'projects_count':projects_count,
-				'avgRating': avgRating,
-				'avgTask': avgTask,
-				'projects_completed': projects_completed
-			}
-			return render(request, "myprofile.html", context)
+					context={
+						'currentTasks':currentTasks, 
+						'date':date, 
+						'profile': profile, 
+						'projects': projects, 
+						'tasks': tasks, 
+						'awaiting': awaiting,
+						'inprogress': inprogress,
+						'completed':completed,
+						'inProgressTasks': inProgressTasks, 
+						'awaitingTasks':awaitingTasks, 
+						'total':total, 
+						'projects_count':projects_count,
+						'avgRating': avgRating,
+						'avgTask': avgTask,
+						'projects_completed': projects_completed
+					}
+					return render(request, "myprofile.html", context)
 
 	except ObjectDoesNotExist:
 		print "nothing"

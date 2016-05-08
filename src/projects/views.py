@@ -268,7 +268,10 @@ def task_new(request, pk):
 	return render(request, "task_new.html", {"form":form})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> poon-new-p
 def autoAssign(tasks_AW, users, allTasks):
 	for task in tasks_AW:
 		task.assignee = find_lazy_member(users, allTasks)

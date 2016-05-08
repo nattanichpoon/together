@@ -235,6 +235,7 @@ def task_new(request, pk):
 	form = TaskForm(request.POST)
 	if request.method == "POST":
 		if form.is_valid():
+			task.project = project.projectName
 			task = form.save(commit=False)
 			task.save()
 			return redirect('project_detail', pk=project.pk)

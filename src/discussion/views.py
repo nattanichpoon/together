@@ -9,19 +9,13 @@ from projects.models import Project
 
  
 def discussions(request):
-	title = "Discussions"
-	title_align_center = True
-	navtab = True
+	projects = Project.objects.filter(members__username=request.user.username)
+	posts = Post.objects.order_by('-published_date') 
 	profile = UserProfile.objects.get(username=request.user)
-
-	context = {
-	"title": title,
-	"title_align_center":title_align_center,
-	"navtab":navtab,
-	"profile":profile,
-
-	}
-	return render(request, "discussion_home.html", context)
+	
+	context={'posts': posts,'profile':profile,'projects':projects}
+	
+	return render(request, "post_list.html", context)
 
 def post_new(request):
     form = PostForm()

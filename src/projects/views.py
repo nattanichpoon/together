@@ -201,6 +201,9 @@ def task_update(request, pk):
 	task = get_object_or_404(Task, pk=pk)
 	project = get_object_or_404(Project, pk=task.project.pk)
 	form = TaskForm(instance = task)
+	inprog = False
+	if task.taskState == Task.IN_PROGRESS:
+		inprog = True
 
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
@@ -209,7 +212,7 @@ def task_update(request, pk):
 			form.save()
 			return redirect('project_detail', pk=project.pk)
 
-	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form})
+	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form, 'inprog':inprog})
 
 def project_new(request):
 	if request.method == "POST":

@@ -13,7 +13,7 @@ class TaskForm(forms.ModelForm):
 
 	class Meta:
 		model = Task
-		fields = ('project','taskName','description','assignee','difficultyLevel', 'taskState')
+		fields = ('project','taskName','description','assignee','difficultyLevel', 'taskState', 'taskProgress')
 
 class EmailForm(forms.Form):
 	email = forms.EmailField()

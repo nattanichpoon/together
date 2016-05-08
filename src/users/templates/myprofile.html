@@ -99,20 +99,21 @@
 
   {% if projects_count > 0 %}
   
-  <div class="row">
+  <div class="row" style="height:400px">
   	<div class="col-sm-5">
   		<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px"> 
   				{{projects_count}} {% if projects_count > 1 %}projects{% else %}project{% endif %}
   		</div>
   		<div id="donutchart"> </div>
+
   	</div>
 
 
   	<div class="col-sm-4" style="z-index:3;position:absolute; right:5px;">
   		<!-- <div class="row" style="height:500px;"> -->
-  		<div style="height:400px; overflow:scroll;  padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px">
+  		<div style="height:400px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px">
   			<h4 class="lead">Your Tasks</h4>
-  			<div class="list-group">
+  			<div class="list-group" style="overflow:scroll; ">
   				{% for task in inProgressTasks  %}
      				<a href="#" class="list-group-item"> 
               <h4 class="list-group-item-heading">{{task}} <span style="float:right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#18aa7c" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></h4>

@@ -41,7 +41,7 @@
 	        		<td>{{task.assignee}}</td>
 	        	{% endif %}
 	        	<td>{{task.get_difficultyLevel_display}}</td>
-	        	<td>{{task.get_taskState_display}}</td>
+	        	<td>{{task.get_taskState_display}}{% if task.taskState == 'IP' %} ({{task.taskProgress}}%){%endif%}</td>
 	        	{% if task.taskState == 'AW' %}
 	        		<td>
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>

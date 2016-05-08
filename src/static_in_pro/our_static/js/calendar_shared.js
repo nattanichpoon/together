@@ -293,11 +293,4 @@ function get_members(){
 
 
     return table;
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
->>>>>>> nainachugh

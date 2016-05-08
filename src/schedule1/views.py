@@ -31,15 +31,11 @@ def schedule_shared(request):
 
 
 
-#def project_detail(request,pk):
-#	project = get_object_or_404(Project, pk=pk)
-#	members = project.members.all()
-#	context ={
-#		'project': project,
-#		'members': members
-#	}
-<<<<<<< HEAD
-#	return render(request, 'project_detail.html', context)
-=======
-#	return render(request, 'project_detail.html', context)
->>>>>>> nainachugh
+# def project_detail(request,pk):
+# 	project = get_object_or_404(Project, pk=pk)
+# 	members = project.members.all()
+# 	context ={
+# 		'project': project,
+# 		'members': members
+# 	}
+# 	return render(request, 'project_detail.html', context)

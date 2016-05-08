@@ -176,10 +176,4 @@ function produceMessage(){
     //document.write('10');
     //return "hello";
     alert(meetinginfo);
-<<<<<<< HEAD
 }
-=======
-}
-
-
->>>>>>> nainachugh

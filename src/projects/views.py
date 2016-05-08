@@ -153,6 +153,7 @@ def send_productivity(request):
 
 
 def project_detail(request,pk):
+	autoAssign(pk)
 	project = get_object_or_404(Project, pk=pk)
 	users = project.members.all()
 	members=[]
@@ -226,28 +227,39 @@ def task_new(request, pk):
 	form = TaskForm(request.POST)
 	if request.method == "POST":
 		if form.is_valid():
-			if timezone.now().date() > project.grabBy:
-				tasks_taken = Task.objects.filter(project=project).exclude(taskState = Task.AWAITING)
-				tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
-				task_points=[]
-				pt = 0
-				
-				#calculate pts for members
-				for member in project.members: 
-					for task in tasks_taken:		
-						if task.assignee == member.username:
-							pt + task.difficultyLevel
-					pt_member = [pt, member]
-					task_points.append(pt_member)
-
 			task = form.save(commit=False)
 			task.save()
-			
-			# 	else
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})
 
+def autoAssign(pk):
+	project = get_object_or_404(Project, pk=pk)
+	# task = get_object_or_404(Task, pk=pk)
+	if timezone.now().date() >= project.grabBy:
+		# tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
+		# 	if task_AW
+		tasks_taken = Task.objects.filter(project=project).exclude(taskState = Task.AWAITING)
+		tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
+		task_point=[]
+		pt = 0
+		
+		#calculate pts for members
+		for member in project.members.all(): 
+			for task in tasks_taken:		
+				if task.assignee == member.username:
+					pt + task.difficultyLevel
+			pt_member = [pt, member]
+			task_point.append(pt_member)
+		task_point.sort()
 
+		#assign difficult to members with lowest pts first
+		# mem = 0
+		for task in tasks_AW:
+			for mem in range(len(task_point)):
+				task.assignee == (x[mem] for x in tasks_AW)
+				task.taskState == task.IN_PROGRESS
+
+		project.save()
 
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)

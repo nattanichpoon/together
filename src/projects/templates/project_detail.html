@@ -14,8 +14,8 @@
 	<h2>
 	{{project.projectName}}
 	</h2>
-		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span>View Productivity</span></a>
-		<a href="{% url 'task_new' pk=project.pk%}" class="fancy-button bg-gradient3"><span>Add Task</span></a>
+		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span><i class="glyphicon glyphicon-stats"></i> View Productivity</span></a>
+		<a href="{% url 'task_new' pk=project.pk%}" class="fancy-button bg-gradient3"><span><i class="glyphicon glyphicon-plus"></i> Add Task</span></a>
 </div>
 <div class="row">
 	<div class="col-sm-11">
@@ -65,14 +65,14 @@
 
 		<div class="col-sm-11 col-xs-11" align="center">
 			{% if not tasks %}
-	  			<h4> There are currently no tasks in this project. Go to "Add Task" to create one!</h4>
+	  			<i><h4> There are currently no tasks in this project. Click on "Add Task" to create one!</h4></i>
 	  		{% endif %}
 		<div class="col-sm-11 col-xs-11">
 
 		  <div class="at-section">
 		  </hr>
 		    <h3>The Team</h3>
-		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span>Rate Peers</span></a>
+		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span><i class="glyphicon glyphicon-check"></i> Rate Peers</span></a>
 
 		  </div>
 		  <div data-column='4' class="at-grid" style="background:transparent; border-style:none">

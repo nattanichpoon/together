@@ -137,7 +137,7 @@ def task_update(request, pk):
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
 		if form.is_valid():
-			task = form.save(commit=False)	
+			task = form.save(commit=False)
 			form.save()
 			return redirect('project_detail', pk=project.pk)
 
@@ -147,16 +147,46 @@ def project_new(request):
 	if request.method == "POST":
 		form = ProjectForm(request.POST)
 		if form.is_valid():
+			# if project.grabBy "None"
+			# find user with lowest score and assign harder tasks first
+			# everyone assigned, then assign low priority tasks
 			project = form.save(commit=False)
 			project.save()
 			project.members = request.POST.getlist('members')
 			return render(request, "project_new.html", '')
+			# return redirect('myprojects')
 	else:
 		form = ProjectForm()
 
-
-		
 	return render(request, "project_new.html", {"form":form})
+
+def task_new(request, pk):
+	project = get_object_or_404(Project, pk=pk)
+	form = TaskForm(request.POST)
+	if request.method == "POST":
+		if form.is_valid():
+			if timezone.now().date() > project.grabBy:
+				tasks_taken = Task.objects.filter(project=project).exclude(taskState = Task.AWAITING)
+				tasks_AW = Task.objects.filter(project=project,taskState=Task.AWAITING).order_by('-difficultyLevel')
+				task_points=[]
+				pt = 0
+				
+				#calculate pts for members
+				for member in project.members: 
+					for task in tasks_taken:		
+						if task.assignee == member.username:
+							pt + task.difficultyLevel
+					pt_member = [pt, member]
+					task_points.append(pt_member)
+
+			task = form.save(commit=False)
+			task.save()
+			
+			# 	else
+			return redirect('project_detail', pk=project.pk)
+	return render(request, "task_new.html", {"form":form})
+
+
 
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)

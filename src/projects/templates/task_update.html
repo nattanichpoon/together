@@ -7,7 +7,7 @@
 {% if task %}
 <div class='container'>
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-8">
 			<form method="POST" class="post-form">
 			    {% csrf_token %}
 			    <table id = "taskTable" class="table table-hover">
@@ -18,6 +18,9 @@
 				      </tr>
 				    </thead>
 				    <tbody>
+				    	{% for field in form %}
+		    				{{ field.as_hidden }}
+						{% endfor %}
 				      	<tr>
 					        <td>Difficulty:</td> <td>{{task.get_difficultyLevel_display}}</td>
 					    </tr>
@@ -31,13 +34,11 @@
 							<td>Description:</td> <td>{{task.description}}</td>
 					 	</tr>
 					 	<tr>
-							<td>Task Status:</td> <td>{{form.taskState}}</td>
+							<td>Task Status:</td> <td>{{form.taskState}}</td> *Once marked as COMPLETED you won't be able to make changes to this task
 					 	</tr>
 				    </tbody>
 				</table>
-			    {% for field in form %}
-		    		{{ field.as_hidden }}
-				{% endfor %}
+			    
 			    <br>
 		    	<button type="submit" class="button-slide">Submit Update</button>
 			</form>

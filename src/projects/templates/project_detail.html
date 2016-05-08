@@ -15,6 +15,7 @@
 	{{project.projectName}}
 	</h2>
 		<a href="{% url 'project_productivity' pk=project.pk%}" class="fancy-button bg-gradient3"><span>View Productivity</span></a>
+		<a href="{% url 'task_new' pk=project.pk%}" class="fancy-button bg-gradient3"><span>Add Task</span></a>
 </div>
 <div class="row">
 	<div class="col-sm-11">
@@ -25,7 +26,9 @@
 	        <th>Assignee</th>
 	        <th>Difficulty</th>
 	        <th>Status</th>
-	        <th></th>
+	        <th>Status</th>
+	        <th>Grab Task By</th>
+
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -42,14 +45,18 @@
 	        	{% if task.taskState == 'AW' %}
 	        		<td>
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
+	        			<td>{{project.grabBy}}</td>
 	        		</td>
 	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
 		        	<td>
 		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
+		        		<td></td>
 		        	</td>
 		        {% else %}
 		        	<td> </td>
+		        	<td></td>
 		        {% endif %}
+
 	      	</tr>
 	    {% endfor %}
 	    </tbody>

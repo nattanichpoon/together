@@ -13,12 +13,8 @@ class TaskForm(forms.ModelForm):
 
 	class Meta:
 		model = Task
-<<<<<<< HEAD
-		fields = ('taskName','assignee','description','difficultyLevel','project', 'taskState')
-=======
-		fields = ('project','taskName','description','assignee','difficultyLevel',)
+		fields = ('project','taskName','description','assignee','difficultyLevel', 'taskState')
 
 class EmailForm(forms.Form):
 	email = forms.EmailField()
 	message = forms.CharField()
->>>>>>> poon-new-p

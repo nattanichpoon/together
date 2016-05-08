@@ -61,7 +61,12 @@
 	    {% endfor %}
 	    </tbody>
 	  	</table>
-	
+
+
+		<div class="col-sm-11 col-xs-11" align="center">
+			{% if not tasks %}
+	  			<h4> There are currently no tasks in this project. Go to "Add Task" to create one!</h4>
+	  		{% endif %}
 		<div class="col-sm-11 col-xs-11">
 
 		  <div class="at-section">

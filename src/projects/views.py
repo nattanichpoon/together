@@ -2,13 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
-<<<<<<< HEAD
-import datetime, json, math
-from .forms import ProjectForm, TaskForm
-=======
 import datetime, json, math, re
-from .forms import ProjectForm,EmailForm
->>>>>>> poon-new-p
+from .forms import ProjectForm, EmailForm, TaskForm
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
@@ -220,13 +215,7 @@ def project_new(request):
 			project = form.save(commit=False)
 			project.save()
 			project.members = request.POST.getlist('members')
-<<<<<<< HEAD
-			return render(request, "project_new.html", '')
-			# return redirect('myprojects')
-=======
-			# return render(request, "project_new.html", '')
 			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
->>>>>>> poon-new-p
 	else:
 		form = ProjectForm()
 

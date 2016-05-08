@@ -6,14 +6,14 @@
 
 
 <div class='row'>
-	<div class="col-sm-6 col-sm-offset-3">
+	<div class="col-sm-10 col-sm-offset-1">
 		{% if title %}
-			<h2 class='{% if title_align_center %}text-align-center{% endif %}'>{{ title }}</h2>
+			<h3 class='{% if title_align_center %}text-align-center{% endif %}'>{{ title }}</h3>
 			
 		{% endif %}
 		<form method='POST' action=''>{% csrf_token %} <!--method=post/get action=where-->
 		{{ form|crispy }}
-		<input class='btn btn-default' type='submit' value='Submit'/>
+		<input class='btn' type='submit' value='Submit'/>
 
 <!-- <input type='text'>
 

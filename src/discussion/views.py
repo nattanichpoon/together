@@ -44,7 +44,7 @@ def post_filter(request, pk):
 	myproject = get_object_or_404(Project, pk=pk)
 	posts = Post.objects.filter(project__projectName=myproject.projectName).order_by('-published_date') 
 	profile = UserProfile.objects.get(username=request.user)
-	return render(request, 'post_filter.html', {'posts': posts,'profile':profile,'projects':projects})
+	return render(request, 'post_filter.html', {'posts': posts,'profile':profile,'projects':projects,'myproject':myproject})
 
 
 def post_detail(request, pk):

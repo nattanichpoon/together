@@ -21,7 +21,7 @@ window.onload = function(){
     document.getElementById("calendar-dates").appendChild(calendar);
     document.getElementById("meetinginfo-title").innerHTML = "Meeting Information";
     document.getElementById("meetinginfo-body").appendChild(meetings);
-    
+
 }
 
 function get_calendar(day_no, days, day_name){
@@ -81,7 +81,7 @@ function get_calendar(day_no, days, day_name){
         td.style.backgroundColor='#f5f1ed';
         td.innerHTML=count+'<br>';
         td.type='button';
-        td.onmouseover=function(){this.style.backgroundColor='#DBC8B3'};
+        td.onmouseover=function(){this.style.backgroundColor='#C5DBE8'};
         td.onmouseout=function(){this.style.backgroundColor='#f5f1ed'};
 
         if(count == (new Date()).getDate()){
@@ -128,7 +128,7 @@ function get_calendar(day_no, days, day_name){
             td.style.backgroundColor='#f5f1ed';
 
             td.type='button';
-            td.onmouseover=function(){this.style.backgroundColor='#DBC8B3'};
+            td.onmouseover=function(){this.style.backgroundColor='#C5DBE8'};
             td.onmouseout=function(){this.style.backgroundColor='#f5f1ed'};
 
             if(count == (new Date()).getDate()){

@@ -16,8 +16,9 @@ def myschedule(request):
     }
     return render(request, "myschedule.html", context)
 
-def projectschedule(request):
-    title = "Project Schedule"
+
+def schedule_shared(request):
+    title = "Shared Schedule"
     title_align_center = True
     navtab = True
 
@@ -26,14 +27,15 @@ def projectschedule(request):
     "title_align_center":title_align_center,
     "navtab":navtab,
     }
-    return render(request, "projectschedule.html", context)
+    return render(request, "schedule_shared.html", context)
 
 
-def project_detail(request,pk):
-	project = get_object_or_404(Project, pk=pk)
-	members = project.members.all()
-	context ={
-		'project': project,
-		'members': members
-	}
-	return render(request, 'project_detail.html', context)
+
+#def project_detail(request,pk):
+#	project = get_object_or_404(Project, pk=pk)
+#	members = project.members.all()
+#	context ={
+#		'project': project,
+#		'members': members
+#	}
+#	return render(request, 'project_detail.html', context)

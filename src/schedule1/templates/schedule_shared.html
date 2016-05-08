@@ -8,25 +8,27 @@
 {% endblock %} -->
 
 {% block content %}
+
     <div class="container">
 
         <div class="header">
 
-            <h2>&nbsp;&nbsp;Project Calendar<br></h2>
-            <h4>&nbsp;&nbsp;&nbsp;<i>Project Name</i></h4>
+            <h2>&nbsp;&nbsp;Shared Project Calendar</h2>
+            <h4><i>&nbsp;&nbsp;&nbsp;My First Project</i></h4>
+
 
         </div>
 
         <div class="col-sm-3 pull-left">
 			<head>
-			        <title>Calendar</title>
+			        <title>Shared Calendar</title>
             </head>
             <body>
-			        <div id="calendar-container">
-			            <div id="calendar-header">
-			                <span id="calendar-month-year"></span>
+			        <div id="shared-calendar-container">
+			            <div id="shared-calendar-header">
+			                <span id="shared-calendar-month-year"></span>
 			            </div>
-			            <div id="calendar-dates">
+			            <div id="shared-calendar-dates">
 			            </div>
 			        </div>
             </body>
@@ -44,21 +46,23 @@
                     <div id="memberinfo-container">  
 
                         <div id="memberinfo-title"> 
-                            <h4>Member List</h4>
                         </div>
 
                         <div id="memberinfo-body">
-                            <p>Member1</p>
-                            <p>Member2</p>
-                            <ul class="list-group">
-		                        {% for member in members %}
-		                        <li class="list-group-item">{{ member }}</li>
-		                        {% endfor %}
-		                    </ul>
                         </div>
                     </div>
             </body>
         </div>
+
+
+        <div class="col-sm-7">
+            <h4>Test: list of projects</h4>
+                    {% for project in projects %}
+                    <a href="{% url 'project_detail' pk=project.pk %}"><button class="btn">{{ project.projectName }}</button></a>
+		            {% endfor %}
+
+
+		</div>
 
 
     </div>    

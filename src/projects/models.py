@@ -49,7 +49,7 @@ class Task(models.Model):
 	expectedDate = models.DateField(default=timezone.now,blank=True)
 	actualDate = models.DateField(default=timezone.now,blank=True)
 	description = models.CharField(blank = True, max_length = 200)
-	taskProgress = models.IntegerField(default=0)
+	taskProgress = models.IntegerField(default=0, null=True)
 	
 	def get_state(self):
 		return self.taskState

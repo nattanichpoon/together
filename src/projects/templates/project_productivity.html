@@ -56,7 +56,10 @@
 
 {% block content %}
 {% if project %}
+
+
 <div id="printableArea" class="col-sm-11 col-xs-11">
+	
 	<div class="row" style="text-align:center">
 		<h3><strong>{{project.projectName}}</strong></h3>
 		<p><strong>Project Productivity: {{date}}</strong></p>
@@ -153,6 +156,21 @@
 			<div id="columnchart_material_2" style="height:400px"></div>
 		</div>
 	</div>
+
+	<hr  style="height:5px;">
+	<h4>Submit the report</h4>
+
+
+	{% if request.user.is_authenticated %}
+
+	<form method='POST' action=''>
+		{% csrf_token %} 
+			{{ form|crispy }}
+			<input class='btn btn-default' type='submit' value='Submit'/>
+
+			</form>
+	<!-- <a href="" class="fancy-button bg-gradient2"><span>Send Report</span></a> -->
+	{% endif %}
 </div>
 {% endif %}
 {% endblock %}

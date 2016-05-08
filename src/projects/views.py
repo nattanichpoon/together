@@ -2,12 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
-import datetime, json, math
-from .forms import ProjectForm
+import datetime, json, math, re
+from .forms import ProjectForm,EmailForm
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.core.urlresolvers import resolve
+
+
 
 
 
@@ -76,6 +80,29 @@ def project_productivity(request,pk):
 
 	array_rating.append(member_list)
 	array_rating.append(rates_list)
+
+	form = EmailForm(request.POST or None)
+	if form.is_valid():
+		form_email = form.cleaned_data.get("email")
+		form_message = form.cleaned_data.get("message")
+
+		subject = "Productivity Report: %s"%(project.projectName)
+		from_email = settings.EMAIL_HOST_USER
+		to_email = [from_email,form_email]
+		current_url = ''.join(['http://127.0.0.1:8000',request.get_full_path()])
+
+		some_html_message = """
+		<h2> View report here </h2>
+		<p> %s </p>
+		""" %(current_url)
+	
+		send_mail(subject, 
+			form_message, 
+			from_email, 
+			to_email, html_message=some_html_message,
+			fail_silently=True)
+
+
 	context ={
 		'project': project,
 		'members': members,
@@ -87,12 +114,43 @@ def project_productivity(request,pk):
 		'rotate':rotate,
 		'small': small,
 		'tasks_inp': tasks_inp,
-		'tasks_aw': tasks_aw
+		'tasks_aw': tasks_aw,
+		'form':form
 
 	}
 	
 
 	return render(request, 'project_productivity.html', context)
+def send_productivity(request):
+	form = EmailForm(request.POST or None)
+	if form.is_valid():
+		form_email = form.cleaned_data.get("email")
+		form_message = form.cleaned_data.get("message")
+
+		subject = "Productivity Report: %s"%(project.projectName)
+		from_email = settings.EMAIL_HOST_USER
+		to_email = [from_email,form_email]
+		current_url = resolve(request.path_info).url_name
+
+
+		somestring='this is some string rec'
+
+		somestring = re.sub('send/$', '', somestring)
+		some_html_message = """
+		<h2> View report here </h2>
+		<p> %s </p>
+		""" %(current_url)
+	
+		send_mail(subject, 
+			form_message, 
+			from_email, 
+			to_email, html_message=some_html_message,
+			fail_silently=True)
+		context ={'form':form,
+
+		}
+	return render(request, 'send_productivity.html', context)
+
 
 
 def project_detail(request,pk):

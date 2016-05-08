@@ -267,20 +267,12 @@ def task_new(request, pk):
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> poon-new-p
 def autoAssign(tasks_AW, users, allTasks):
 	for task in tasks_AW:
 		task.assignee = find_lazy_member(users, allTasks)
 		task.taskState = Task.IN_PROGRESS
 		task.save()
 
-
-
->>>>>>> origin/nice-avatar
 def view_member(request, pk):
 	profile = get_object_or_404(UserProfile, pk=pk)
 	user = profile.username

@@ -1,4 +1,5 @@
-#calendar-container{
+
+#shared-calendar-container{
     padding: 0px;
     width: 800px;
     height: 600px;
@@ -13,23 +14,21 @@
 
 }
 
-#calendar-container>div{
+#shared-calendar-container>div{
     /*may 2016*/
-    padding: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
+
     background-color: #586F7C;
     color:#F4F2F2;
     /*border: 1px solid #586F7C;*/
 }
 
-#calendar-month-year{
+#shared-calendar-month-year{
     margin: 5px;
     font-size: 20px;
 
 }
 
-#calendar-dates>table>tr>td{
+#shared-calendar-dates>table>tr>td{
     /*main calendar*/
     padding: 10px;
     width: 220px;
@@ -41,7 +40,7 @@
     /*background-color: #F5F1ED;*/
 }
 
-#meetinginfo-container{
+#memberinfo-container{
     height:600px;
     width:300px;
     box-shadow:5px 5px 50px #cdcdcd;
@@ -51,23 +50,22 @@
     margin:0px;
     margin-top:0px;
     border-collapse:separate;
+    background-color: #F4F2F2;
 }
 
-#meetinginfo-title{
+#memberinfo-title{
     background-color: #586F7C;
     color: #F4F2F2;
     vertical-align:top;
     text-align:center;
     font-size:20px;
     font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    border-collapse: separate;
 
 }
 
-#meetinginfo-body{
+#memberinfo-body{
     padding-left:20px;
     text-align:left;
-<<<<<<< HEAD
+    background-color:#F4F2F2;
 }
-=======
-}
->>>>>>> nainachugh

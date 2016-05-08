@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^schedule/$', 'schedule1.views.myschedule', name='schedule'),
+    url(r'^schedule/shared$', 'schedule1.views.schedule_shared', name='schedule_shared'),
     url(r'^projects/(?P<pk>\d+)/ratepeer/$', 'ratePeer.views.ratepeer', name='ratepeer'),
 
     url(r'^projects/(?P<pk>\d+)/productivity/$', 'projects.views.project_productivity', name='project_productivity'),

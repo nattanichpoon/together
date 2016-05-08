@@ -38,4 +38,8 @@ def schedule_shared(request):
 #		'project': project,
 #		'members': members
 #	}
+<<<<<<< HEAD
 #	return render(request, 'project_detail.html', context)
+=======
+#	return render(request, 'project_detail.html', context)
+>>>>>>> nainachugh

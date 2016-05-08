@@ -37,6 +37,17 @@ def myprojects(request):
 	}
 	return render(request, "myprojects.html", context)
 
+<<<<<<< HEAD
+=======
+def project_detail(request,pk):
+	project = get_object_or_404(Project, pk=pk)
+	members = project.members.all()
+	context ={
+		'project': project,
+		'members': members
+	}
+	return render(request, 'project_detail.html', context)
+>>>>>>> nainachugh
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)

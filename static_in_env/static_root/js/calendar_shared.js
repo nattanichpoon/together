@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> nainachugh
 window.onload = function(){
     var d = new Date();
     var n = d.getDate();
@@ -289,4 +293,11 @@ function get_members(){
 
 
     return table;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+>>>>>>> nainachugh

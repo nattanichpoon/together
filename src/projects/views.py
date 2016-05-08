@@ -104,10 +104,13 @@ def project_detail(request,pk):
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
+	size = users.count()
+
 	context ={
 		'project': project,
 		'members': members,
 		'tasks': allTasks,
+		'size':size
 	}
 
 	return render(request, 'project_detail.html', context)

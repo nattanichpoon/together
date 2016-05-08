@@ -43,13 +43,16 @@
 
 	
 		<div class="col-sm-11 col-xs-11">
+			{{members}}
+
 		  <div class="at-section">
 		  </hr>
 		    <h3>The Team</h3>
 		    <a href="{% url 'ratepeer' pk=project.pk %}" class="fancy-button bg-gradient2"><span>Rate Peers</span></a>
 
 		  </div>
-		  <div data-column='4' class="at-grid">
+		  <div data-column='4' class="at-grid" style="background:transparent; border-style:none">
+		  
 		  	{% for member in members %}
 
 		    <div class="at-column">
@@ -74,6 +77,7 @@
 		  
 		   
 		  </div>
+		  
 		</div>
 	</div>	
 </div>

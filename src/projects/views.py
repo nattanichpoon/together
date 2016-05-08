@@ -163,7 +163,7 @@ def project_detail(request,pk):
 	tasks_AW = allTasks.filter(taskState=Task.AWAITING).order_by('-difficultyLevel')#high difficulty first
 	if tasks_AW.count() > 0:
 		if timezone.now().date() >= project.grabBy:
-			autoAssign(tasks_AW, users, allTasks)
+			autoAssign(tasks_AW, users, pk)
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
 
@@ -240,9 +240,9 @@ def task_new(request, pk):
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})
 
-def autoAssign(tasks_AW, users, allTasks):
+def autoAssign(tasks_AW, users, pk):
 	for task in tasks_AW:
-		task.assignee = find_lazy_member(users, allTasks)
+		task.assignee = find_lazy_member(users, pk)
 		task.taskState = Task.IN_PROGRESS
 		task.save()
 
@@ -316,7 +316,9 @@ def view_member(request, pk):
 def myRoundingFunction(x, n):
     return math.ceil(x * math.pow(10, n)) / math.pow(10, n)
 
-def find_lazy_member(userList, allTasks):
+def find_lazy_member(userList, pk):
+	project = Project.objects.get(pk=pk)
+	allTasks = Task.objects.filter(project=project).all()
 	task_point=[]
 	#calculate pts for members
 	for member in userList: 

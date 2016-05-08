@@ -35,7 +35,6 @@ jQuery(document).ready(function() {
       e.preventDefault();
   });
 
-<<<<<<< HEAD
     $(".dropdown dt a").on('click', function() {
       $(".dropdown dd ul").slideToggle('fast');
     });
@@ -70,8 +69,5 @@ jQuery(document).ready(function() {
       }
     });
 
-
-=======
->>>>>>> nice-avatar
 });
 

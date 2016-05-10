@@ -34,7 +34,11 @@ class Meeting(models.Model):
 	meetingDate = models.DateField(default=timezone.now)
 	CONFIRM = 'CF'
 	REJECT = 'RJ'
-	STATUS_CHOICES=((CONFIRM,'Confirm'),(REJECT,'Reject'))
+	PENDING = 'PD'
+	STATUS_CHOICES=(
+		(CONFIRM,'Confirm'),
+		(REJECT,'Reject'),
+		(PENDING, 'Pending'))
 	meetingStatus=models.CharField(choices=STATUS_CHOICES, max_length=200)
 	confirmedCount = models.IntegerField();
 

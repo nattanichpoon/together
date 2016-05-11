@@ -46,4 +46,4 @@ class Meeting(models.Model):
 		return self.meetingStatus
 
 	def __str__(self):
-		return self.taskName
+		return self.meetingName

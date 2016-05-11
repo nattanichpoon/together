@@ -10,8 +10,8 @@ class MeetingForm(forms.ModelForm):
 		fields = ('project','meetingName','meetingDate','meetingAgenda')
 
 # add summary when the meeting is done
-class SummaryForm(forms.ModelForm):
-
-	class Meta:
-		model = Meeting
-		fields = ('meetingSummary')
+#class SummaryForm(forms.ModelForm):
+#
+#	class Meta:
+#		model = Meeting
+#		fields = ('meetingSummary')

@@ -43,6 +43,7 @@
             </head>
              
             <body> 
+
                     <div id="memberinfo-container">  
 
                         <div id="memberinfo-title"> 
@@ -56,7 +57,9 @@
 
 
         <div class="col-sm-7">
+            <a href="{% url 'schedule_new'%}"><button type='button' class='button-slide'><span>New Meeting</span></button></a>
             <h4>Test: list of projects</h4>
+
                     {% for project in projects %}
                     <a href="{% url 'project_detail' pk=project.pk %}"><button class="btn">{{ project.projectName }}</button></a>
 		            {% endfor %}

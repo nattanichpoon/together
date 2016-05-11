@@ -94,16 +94,16 @@ function get_calendar(day_no, days, day_name){
             td.appendChild(img);
             td.onclick=function(){document.getElementById("right").innerHTML =
                 "<br><u>Meetings for May 2, 2012</u><br><br>" +
-                "<li>Weekly group meeting" + "<ul>Project: A</ul><ul>Time: 10:30 AM</ul>" +
-                "<li>Something else" + "<ul>Project: Annoying Thing</ul><ul>Time: 13:00 AM</ul><br>"};
+                "<li>Weekly group meeting<br></li>" + "<ul>Project: A</ul><ul>Time: 10:30 AM</ul>" +
+                "<li>Something else<br></li>" + "<ul>Project: Annoying Thing</ul><ul>Time: 13:00 AM</ul><br>"};
         }else if(count==5){ //.................................ADD ICON TO DATE HEREEEEE!!
             var img = document.createElement('img');
             img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
             td.appendChild(img);
             td.onclick=function(){document.getElementById("right").innerHTML =
                 "<br><u>Meetings for May 5, 2012</u><br><br>" +
-                "<li>Project Progress" + "<ul>Project: Something Else</ul><ul>Time: 9:00 AM</ul>" +
-                "<li>Another Thing" + "<ul>Project: Together</ul><ul>Time: 12:30 AM</ul><br>"};
+                "<li>Project Progress<br></li>" + "<ul>Project: Something Else</ul><ul>Time: 9:00 AM</ul>" +
+                "<li>Another Thing<br></li>" + "<ul>Project: Together</ul><ul>Time: 12:30 AM</ul><br>"};
         }
 
         count++;
@@ -166,16 +166,6 @@ function get_meetings(){
 
 
     return table;
-}
-
-function test(){
-    alert("test");
-}
-
-function produceMessage(){
-    //document.write('10');
-    //return "hello";
-    alert(meetinginfo);
 }
 
 

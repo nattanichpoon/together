@@ -55,6 +55,9 @@
 
         <div class="col-sm-7">
             <h4>Test: list of projects</h4>
+            <ul>Item 1</ul>
+            <ul>Item 2</ul>
+
                     {% for project in projects %}
                     <a href="{% url 'project_detail' pk=project.pk %}"><button class="btn">{{ project.projectName }}</button></a>
 		            {% endfor %}

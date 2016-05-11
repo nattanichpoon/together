@@ -12,43 +12,16 @@
 	<div class='row'>
         <div class="col-sm-10">
 			    <h1>New Task</h1>
-            <table id = "taskTable" class="table table-hover">
-			    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <form method="POST">{% csrf_token %}
-        <!--               {{ form|crispy }}
-                      {{ form.project.as_hidden }}
-                      {{ form.taskState.as_hidden }} -->
-                        {% for field in form %}
-                            {{ field.as_hidden }}
-                        {% endfor %}
-                        <tr>
-                            <td>Task Name:</td> <td>{{form.taskName}}</td>
-                        </tr>
-                        <tr>
-                            <td>Difficulty:</td> <td>{{form.difficultyLevel}}</td>
-                        </tr>
-                        <tr>
-                            <td>Assignee:</td> <td>{{form.assignee}}</td>
-                        </tr>
-                        <tr>
-                            <td>Due Date:</td> <td>{{form.expectedDate}}</td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td> <td>{{form.description}}</td>
-                        </tr>
-    			    </form>
-                    
-                </tbody>
-            </table>
-            <div align="right">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form|crispy}}
+
+        
                 <button type="submit" class="save btn">Save</button>
-            </div>
+            
+            </form>
+
+
 		</div>
 	</div>
 </div>

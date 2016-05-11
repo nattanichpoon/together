@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from users.models import UserProfile
 import datetime, json, math, re
-from .forms import ProjectForm, EmailForm, TaskForm
+from .forms import ProjectForm, EmailForm, TaskForm, TaskFormNew
 from projects.models import Project, Task
 from ratePeer.models import Rating
 from django.core import serializers
@@ -39,12 +39,8 @@ def myprojects(request):
 
 def project_productivity(request,pk):
 	project = get_object_or_404(Project, pk=pk)
-	progress = int(project.projectProgress)
-	rotate = (progress*360)/100
-	if rotate <= 180:
-		small = True
-	else:
-		small = False
+
+	
 	users = project.members.all()
 	ratings = Rating.objects.filter(project=project)
 	tasks_aw = Task.objects.filter(project=project,taskState=Task.AWAITING)
@@ -71,6 +67,14 @@ def project_productivity(request,pk):
 			if rating.user==user:
 				rates.append(rating.total)
 
+	totaltasks = Task.objects.filter(project=project).count()
+	completed = tasks.count()*100
+	progress = completed/totaltasks
+	rotate = (progress*360)/100
+	if rotate <= 180:
+		small = True
+	else:
+		small = False
 
 	member_list = [ str(t) for t in members ]
 	member_list.insert(0,'')
@@ -166,7 +170,9 @@ def project_detail(request,pk):
 			autoAssign(tasks_AW, users, pk)
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
-
+	tasks_CP = allTasks.filter(taskState=Task.COMPLETED)
+	project.projectProgress = int(tasks_CP.count()/allTasks.count())
+	project.save()
 	size = users.count()
 
 	context ={
@@ -232,11 +238,11 @@ def project_new(request):
 
 def task_new(request, pk):
 	project = get_object_or_404(Project, pk=pk)
-	form = TaskForm(request.POST)
+	form = TaskFormNew(request.POST)
 	if request.method == "POST":
 		if form.is_valid():
-			task.project = project.projectName
 			task = form.save(commit=False)
+			task.project = project
 			task.save()
 			return redirect('project_detail', pk=project.pk)
 	return render(request, "task_new.html", {"form":form})

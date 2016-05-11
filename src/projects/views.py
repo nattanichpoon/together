@@ -296,13 +296,15 @@ def view_member(request, pk):
 
 				total = awaiting+inprogress+completed
 				currentTasks = awaitingTasks+inProgressTasks
-				avgTask = myRoundingFunction(((avgTask/completed)),2)
+				if completed > 0:
+					avgTask = myRoundingFunction(((avgTask/completed)),2)
+				
 		if ratings.count() > 0:
 			for rating in ratings:
 				avgRating+=rating.total
 			avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 
-			context= {
+		context= {
 				'profile': profile,
 				'user': user,
 				'projects': projects, 'tasks': tasks, 

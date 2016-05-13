@@ -237,9 +237,14 @@ def project_new(request):
 			# if project.grabBy "None"
 			# find user with lowest score and assign harder tasks first
 			# everyone assigned, then assign low priority tasks
+			# members = []
+			# for member in form.members
+			# 	members.append(UserProfile.objects.get(username=user))
+
+			# form.members.append
 			project = form.save(commit=False)
 			project.save()
-			project.members = request.POST.getlist('members')
+			# project.members = request.POST.getlist('members')
 			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
 	else:
 		form = ProjectForm()

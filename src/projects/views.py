@@ -65,9 +65,14 @@ def project_productivity(request,pk):
 			if task.assignee==user:
 				totaltasklevel += int(task.difficultyLevel)
 		array_task.append([str(m),totaltasklevel])
-		for rating in ratings:
-			if rating.user==user:
-				rates.append(rating.total)
+		thisrating = ratings.filter(user=user).all()
+		totalrating = 0 
+		if thisrating.count() > 0:
+			for rating in thisrating:
+				totalrating += rating.total
+			rates.append(totalrating)
+		else:
+			rates.append(0)
 
 	totaltasks = Task.objects.filter(project=project).count()
 	completed = tasks.count()*100

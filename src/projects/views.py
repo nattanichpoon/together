@@ -60,9 +60,11 @@ def project_productivity(request,pk):
 	for user in users:
 		m=UserProfile.objects.get(username=user)
 		members.append(m)
+		totaltasklevel=0
 		for task in tasks:
 			if task.assignee==user:
-				array_task.append([str(m),int(task.difficultyLevel)])
+				totaltasklevel += int(task.difficultyLevel)
+		array_task.append([str(m),totaltasklevel])
 		for rating in ratings:
 			if rating.user==user:
 				rates.append(rating.total)

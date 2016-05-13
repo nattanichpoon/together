@@ -12,11 +12,20 @@ def myschedule(request):
     title = "My Schedule"
     title_align_center = True
     navtab = True
+    projects = Project.objects.filter(members__username=request.user.username)
+    meetings = Meeting.objects.all()
+    mymeetings = []
+    for meeting in meetings:
+        for project in projects:
+            if meeting.project==project:
+                mymeetings.append(meeting)
+
 
     context = {
     "title": title,
     "title_align_center":title_align_center,
     "navtab":navtab,
+    "mymeetings":mymeetings,
     }
     return render(request, "myschedule.html", context)
 

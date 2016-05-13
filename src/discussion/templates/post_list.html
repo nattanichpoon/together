@@ -49,10 +49,10 @@
 				{{ post.author }} | {{ post.published_date }} 
 			</div>
 			<div class='row'>
-			<div class="panel-heading">
+			<div class="panel-heading" style="padding-left:30px">
 				<h3 class="panel-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
 				</div>
-			<div class="panel-body">
+			<div class="panel-body" style="padding-left:30px">
 				{{post.text}}
 				<div style="text-align:right">
 				 <hr><a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a> | {{post.withYou}} people <strong>withYou</strong> | <a style="text-align:right;" href="{% url 'add_comment_to_post' pk=post.pk %}">Add a Comment</a></div>

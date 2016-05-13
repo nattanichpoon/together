@@ -43,12 +43,12 @@ def myratings(request):
 		rating3 += rating.rating3
 		rating4 += rating.rating4
 		rating5 += rating.rating5
-
-	rating1 = (rating1/ratings.count())*20
-	rating2 = (rating2/ratings.count())*20
-	rating3 = (rating3/ratings.count())*20
-	rating4 = (rating4/ratings.count())*20
-	rating5 = (rating5/ratings.count())*20
+	if ratings.count() > 0:
+		rating1 = (rating1/ratings.count())*20
+		rating2 = (rating2/ratings.count())*20
+		rating3 = (rating3/ratings.count())*20
+		rating4 = (rating4/ratings.count())*20
+		rating5 = (rating5/ratings.count())*20
 
 	context = {
 		'ratings': ratings,

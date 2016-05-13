@@ -128,7 +128,7 @@ def editprofile(request):
 			user = form.save(commit=False)
 			user.username = request.user
 			user.save()
-		return redirect('myprofile')
+		return HttpResponseRedirect("http://127.0.0.1:8000/profile/")
 
 	else:
 		form = UserProfileForm()

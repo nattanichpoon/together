@@ -60,16 +60,25 @@ def project_productivity(request,pk):
 	for user in users:
 		m=UserProfile.objects.get(username=user)
 		members.append(m)
+		totaltasklevel=0
 		for task in tasks:
 			if task.assignee==user:
-				array_task.append([str(m),int(task.difficultyLevel)])
-		for rating in ratings:
-			if rating.user==user:
-				rates.append(rating.total)
+				totaltasklevel += int(task.difficultyLevel)
+		array_task.append([str(m),totaltasklevel])
+		thisrating = ratings.filter(user=user).all()
+		totalrating = 0 
+		if thisrating.count() > 0:
+			for rating in thisrating:
+				totalrating += rating.total
+			rates.append(totalrating)
+		else:
+			rates.append(0)
 
 	totaltasks = Task.objects.filter(project=project).count()
 	completed = tasks.count()*100
-	progress = completed/totaltasks
+	progress = 0
+	if totaltasks > 0:
+		progress = completed/totaltasks
 	rotate = (progress*360)/100
 	if rotate <= 180:
 		small = True
@@ -171,8 +180,9 @@ def project_detail(request,pk):
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
 	tasks_CP = allTasks.filter(taskState=Task.COMPLETED)
-	project.projectProgress = int(tasks_CP.count()/allTasks.count())
-	project.save()
+	if allTasks.count() > 0:
+		project.projectProgress = int(tasks_CP.count()/allTasks.count())
+		project.save()
 	size = users.count()
 
 	context ={

@@ -3,7 +3,9 @@
 {% load staticfiles %}
 
 {% block content %}
-    <h1>New comment</h1>
+<a href="{% url 'post_detail' pk=post.pk%}"><button type='button' class='btn'><i class="glyphicon glyphicon-backward"></i>Back to Post</button></a>
+    <h2>{{post}}</h2>
+    <p class="lead">Add a Comment</p>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="save btn">Send</button>

@@ -903,6 +903,31 @@ input.button {
           right: 0;
         }
 
+        .button-slide-2 span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+        }
+
+        .button-slide-2 span:after {
+          content: '<<';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          right: -20px;
+          transition: 0.5s;
+        }
+
+        .button-slide-2:hover span {
+          padding-right: 25px;
+        }
+
+        .button-slide-2:hover span:after {
+          opacity: 1;
+          right: 0;
+        }
+
         .dropdown-menu .list-group-item{
           /*text-align: right;*/
           color:#0C131A !important;

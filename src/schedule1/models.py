@@ -8,8 +8,8 @@ from django.utils import timezone
 class Meeting(models.Model):
 	project = models.ForeignKey('projects.Project')
 	meetingName = models.CharField(max_length=500)
-	meetingAgenda = models.CharField(max_length=1000)
-	meetingSummary = models.CharField(max_length=1000)
+	meetingAgenda = models.CharField(max_length=1000,blank=True)
+	meetingSummary = models.CharField(max_length=1000,blank=True)
 	meetingDate = models.DateField(default=timezone.now)
 	CONFIRM = 'CF'
 	REJECT = 'RJ'
@@ -18,8 +18,8 @@ class Meeting(models.Model):
 		(CONFIRM,'Confirm'),
 		(REJECT,'Reject'),
 		(PENDING, 'Pending'))
-	meetingStatus=models.CharField(choices=STATUS_CHOICES, max_length=200)
-	confirmedCount = models.IntegerField();
+	meetingStatus=models.CharField(choices=STATUS_CHOICES, max_length=200, default=PENDING)
+	confirmedCount = models.IntegerField(default=0);
 
 	def get_status(self):
 		return self.meetingStatus

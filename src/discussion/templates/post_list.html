@@ -55,7 +55,7 @@
 			<div class="panel-body" style="padding-left:30px">
 				{{post.text}}
 				<div style="text-align:right">
-				 <hr><a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a> | {{post.withYou}} people <strong>withYou</strong> | <a style="text-align:right;" href="{% url 'add_comment_to_post' pk=post.pk %}">Add a Comment</a></div>
+				 <hr><a style="color:#586F7C" href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a> | {{post.withYou}} people <strong>withYou</strong> | <a style="text-align:right; color:#586F7C" href="{% url 'add_comment_to_post' pk=post.pk %}">Add a Comment</a></div>
                          
                
  

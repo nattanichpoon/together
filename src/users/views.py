@@ -60,7 +60,7 @@ def myprofile(request):
 			for rating in ratings:
 				avgRating+=rating.total
 			for project in projects:
-				if project.completed:
+				if project.completed == True:
 					projects_completed+=1
 				allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 				tasks = allTasks.filter(assignee=request.user).all()

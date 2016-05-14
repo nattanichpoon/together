@@ -9,6 +9,7 @@ from projects.models import Project, Task
 from django.utils import timezone
 from ratePeer.models import Rating
 import math
+from schedule1.models import Meeting
 
 
 # Create your views here.
@@ -50,11 +51,14 @@ def myprofile(request):
 	avgTask=0.0
 	profile = UserProfile.objects.get(username=request.user)
 	try:
-		projects = Project.objects.filter(members__username=request.user.username).all()
+		projects = Project.objects.filter(members__username=request.user.username).order_by('dueDate').all()
 		projects_count= projects.count()
 		date = timezone.now().date()
 		ratings = Rating.objects.filter(user=request.user).all()
 		myTaskCount =0
+		currentprojects =[]
+		meeting = Meeting.objects.all()
+		meetings = 0
 
 		if projects.count() > 0:
 			for rating in ratings:
@@ -62,6 +66,9 @@ def myprofile(request):
 			for project in projects:
 				if project.completed == True:
 					projects_completed+=1
+				else:
+					if project.dueDate >= date:
+						currentprojects.append(project)
 				allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 				tasks = allTasks.filter(assignee=request.user).all()
 				# currentTasks= tasks.filter(taskState__in=['AW','IP'])
@@ -84,25 +91,31 @@ def myprofile(request):
 						avgTask = 0.0
 					else:
 						avgTask = myRoundingFunction(((avgTask/completed)),2)
-
-					context={
-						'currentTasks':currentTasks, 
-						'date':date, 
-						'profile': profile, 
-						'projects': projects, 
-						'tasks': tasks, 
-						'awaiting': awaiting,
-						'inprogress': inprogress,
-						'completed':completed,
-						'inProgressTasks': inProgressTasks, 
-						'awaitingTasks':awaitingTasks, 
-						'total':total, 
-						'projects_count':projects_count,
-						'avgRating': avgRating,
-						'avgTask': avgTask,
-						'projects_completed': projects_completed
-					}
-					return render(request, "myprofile.html", context)
+				if meeting.count() > 0:
+					for m in meeting:
+						if m.meetingDate==date:
+							if m.project == project:
+								meetings += 1
+			context={
+				'currentTasks':currentTasks, 
+				'date':date, 
+				'profile': profile, 
+				'projects': projects, 
+				'total': total, 
+				'awaiting': awaiting,
+				'inprogress': inprogress,
+				'completed':completed,
+				'inProgressTasks': inProgressTasks, 
+				'awaitingTasks':awaitingTasks, 
+				'total':total, 
+				'projects_count':projects_count,
+				'avgRating': avgRating,
+				'avgTask': avgTask,
+				'projects_completed': projects_completed,
+				'currentprojects': currentprojects,
+				'meetings': meetings
+			}
+			return render(request, "myprofile.html", context)
 
 	except ObjectDoesNotExist:
 		print "nothing"

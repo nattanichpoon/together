@@ -23,6 +23,8 @@
       hr { 
           border-color: #BFBCB9;
       }
+
+    
       #timeline {
         list-style: none;
         /*width:100%;*/
@@ -263,19 +265,24 @@
           line-height: 1.428571429;
           border-radius: 15px;
         }
-        #circle {
-            width: 250px;
-            height: 250px;
+        .circle {
+            width: 150px;
+            height: 150px;
             background: #DB9D47;
-            -moz-border-radius: 125px;
-            -webkit-border-radius: 125px;
-            border-radius: 125px;
+            -moz-border-radius: 75px;
+            -webkit-border-radius: 75px;
+            border-radius: 75px;
             text-align: center;
             padding: 60px 0 60px 0;
             font-size: 12px;
             line-height: 1.428571429;
+            z-index: 0;
 
 
+
+        }
+        .circle:hover{
+          z-index:5;
         }
         #circle-small{
           width: 200px;

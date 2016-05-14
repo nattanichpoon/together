@@ -103,7 +103,7 @@
             <span class='circle-timeline'></span>
           </div>
           <div class='content'>
-            <p style="colorx:#f5f1ed">{{date}}
+            <p style="color:#f5f1ed">{{date}}
             </p>
           </div>
         </li>
@@ -139,12 +139,21 @@
 
    
 	</div>
+  <div class="row">
+    <hr>
+    <p style="text-transform:uppercase"><strong> Quick Add </strong></p>
+    <div class="col-sm-10 col-xs-10 col-lg-10 col-xl-10 col-sm-offset-1 col-xs-offset-1 col-lg-offset-1 col-xl-offset-1" style="text-align:center">
+    <a href="{% url 'project_new' %}" class="fancy-button bg-gradient2"><span><i class="glyphicon glyphicon-plus"></i> Add Project</span></a>
+    <a href="{% url 'schedule_new' %}" class="fancy-button bg-gradient2"><span><i class="glyphicon glyphicon-calendar"></i> Add Meeting</span></a>
+</div>
+
+  </div>
 
   {% if total > 0 %}
  
     <div class="row" style="height:200px">
       <hr>
-      <p style="text-transform:uppercase"><strong> Tasks summary </strong></p>
+      <p style="text-transform:uppercase"><strong> Task summary </strong></p>
 
     	<div class="col-sm-4 col-xs-4 col-lg-4 col-xl-4">
     		<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px;"> 
@@ -156,34 +165,45 @@
       <div class="col-sm-1 col-xs-1 col-lg-1 col-xl-1"></div>
         <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3">
           <p style="text-transform:uppercase; text-align:center"><span class="badge" style="background:#EAB126;">Awaiting</span></p>
+          {% if awaiting > 0 %}
           <div style="height:300px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px; overflow:scroll;">
+
+              <div class="list-group">
+                  {% for task in awaitingTasks  %}
+                    <a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
+                    <p class="list-group-item-heading"><strong>{{task}}</strong></p>
+                    <p class="list-group-item-text" style="color:#232323;">{{task.project}}</p>
+                  </a>
+                  {% endfor %}
+               
+
+              </div>
             
-            <div class="list-group">
-              {% for task in awaitingTasks  %}
-                <a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
-                <p class="list-group-item-heading"><strong>{{task}}</strong></p>
-                <p class="list-group-item-text" style="color:#232323;">{{task.project}}</p>
-              </a>
-              {% endfor %}
-            </div>
 
           </div>
+          {% else %}
+          No tasks here.
+          {% endif %}
         </div>
 
     	<div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3">
         <p style="text-transform:uppercase; text-align:center"><span class="badge"  style="background:#1FB58F">In progress</span></p>
-    		<div style="height:300px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px; overflow:scroll;">
-          
-    			<div class="list-group">
-    				{% for task in inProgressTasks  %}
-       				<a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
-                <p class="list-group-item-heading"><strong>{{task}}</strong></p>
-    					<p class="list-group-item-text" style="color:#232323">{{task.project}}</p>
-    				</a>
-    				{% endfor %}
-    			</div>
+        {% if inprogress > 0 %}
 
+    		<div style="height:300px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px; overflow:scroll;">
+
+      			<div class="list-group">
+      				{% for task in inProgressTasks  %}
+         				<a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
+                  <p class="list-group-item-heading"><strong>{{task}}</strong></p>
+      					<p class="list-group-item-text" style="color:#232323">{{task.project}}</p>
+      				</a>
+      				{% endfor %}
+      			</div>
     		</div>
+        {% else %}
+        No tasks here.
+        {% endif %}
     	</div>
     </div>
   {% endif %}
@@ -197,14 +217,14 @@
       </div> -->
           <div class="col-sm-12" >
             <div class="item  col-xs-3 col-sm-3">
-              <h4>Your Peer Ratings</h4>
+              <h4> Peer Ratings</h4>
                  <a href = "{% url 'myratings' %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h1>{{avgRating}}%</h1></button></a>
             </div>
-            <div class="item  col-xs-3 col-sm-3">
+            <!-- <div class="item  col-xs-3 col-sm-3">
               <h4>Completed Tasks</h4>
               <div id="circle-small" style="color:white;"> <h1>{{completed}}</h1>
                </div>
-            </div>
+            </div> -->
             <div class="item  col-xs-3 col-sm-3">
               <h4>Task Score</h4>
 

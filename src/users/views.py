@@ -86,7 +86,6 @@ def myprofile(request):
 
 					total = awaiting+inprogress+completed
 					currentTasks = awaitingTasks+inProgressTasks
-					avgRating = myRoundingFunction(((avgRating/ratings.count())*4),2)
 					if completed == 0:
 						avgTask = 0.0
 					else:
@@ -96,6 +95,8 @@ def myprofile(request):
 						if m.meetingDate==date:
 							if m.project == project:
 								meetings += 1
+			avgRating = myRoundingFunction(((avgRating*4)/ratings.count()),2)
+
 			context={
 				'currentTasks':currentTasks, 
 				'date':date, 

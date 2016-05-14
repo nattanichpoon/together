@@ -32,7 +32,7 @@
 	        <th>Difficulty</th>
 	        <th>Status</th>
 	        <th></th>
-	        <!-- <th>Grab Task By</th> -->
+
 
 	      </tr>
 	    </thead>
@@ -46,21 +46,24 @@
 	        		<td>{{task.assignee}}</td>
 	        	{% endif %}
 	        	<td>{{task.get_difficultyLevel_display}}</td>
-	        	<td>{{task.get_taskState_display}}{% if task.taskState == 'IP' %} ({{task.taskProgress}}%){%endif%}</td>
-	        	{% if task.taskState == 'AW' %}
-	        		<td>
+	        	<td>{{task.get_taskState_display}}
+	        		{% if task.taskState == 'IP' %} 
+	        			({{task.taskProgress}}%)
+	        		{%endif%}
+	        	</td>
+	        	<td>
+
+	        	{% if task.taskState == 'AW' and task.assignee == null %}
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
 	        			<!-- <td>{{project.grabBy}}</td> -->
-	        		</td>
-	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
-		        	<td>
+	        	{% elif task.taskState == "IP" or task.taskState == "AW" %}
+	        		{% if task.assignee == request.user %}
 		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
-		        		<td></td>
-		        	</td>
+		        	{% endif %}
 		        {% else %}
-		        	<td> </td>
-		        	<!-- <td></td> -->
+
 		        {% endif %}
+		    </td>
 
 	      	</tr>
 	    {% endfor %}

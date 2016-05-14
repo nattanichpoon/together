@@ -244,7 +244,7 @@ def project_new(request):
 			# form.members.append
 			project = form.save(commit=False)
 			project.save()
-			# project.members = request.POST.getlist('members')
+			project.members = request.POST.getlist('members')
 			return HttpResponseRedirect('http://127.0.0.1:8000/projects/')
 	else:
 		form = ProjectForm()

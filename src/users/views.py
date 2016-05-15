@@ -86,16 +86,17 @@ def myprofile(request):
 
 					total = awaiting+inprogress+completed
 					currentTasks = awaitingTasks+inProgressTasks
-					if completed == 0:
-						avgTask = 0.0
-					else:
-						avgTask = myRoundingFunction(((avgTask/completed)),2)
+					
 				if meeting.count() > 0:
 					for m in meeting:
 						if m.meetingDate==date:
 							if m.project == project:
 								meetings += 1
 			avgRating = myRoundingFunction(((avgRating*4)/ratings.count()),2)
+			if completed == 0:
+				avgTask = 0.0
+			else:
+				avgTask = myRoundingFunction(((avgTask/completed)),2)
 
 			context={
 				'currentTasks':currentTasks, 

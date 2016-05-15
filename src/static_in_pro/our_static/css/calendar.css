@@ -47,15 +47,12 @@
     box-shadow:5px 5px 50px #cdcdcd;
     font-size:16px;
     font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    padding:0px;
-    margin:0px;
-    margin-top:0px;
-    border-collapse:separate;
+    
+    
 }
 
 #meetinginfo-title{
-    background-color: #586F7C;
-    color: #F4F2F2;
+    
     vertical-align:top;
     text-align:center;
     font-size:20px;

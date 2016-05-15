@@ -4,65 +4,69 @@ from projects.models import Project
 from .forms import MeetingForm
 from django.http import HttpResponseRedirect
 from projects.models import Project
-from .models import Meeting
 from users.models import UserProfile
+from .models import Meeting
 
 # Create your views here.
 def myschedule(request):
     title = "My Schedule"
     title_align_center = True
     navtab = True
-    projects = Project.objects.filter(members__username=request.user.username)
-    meetings = Meeting.objects.all()
-    mymeetings = []
-    for meeting in meetings:
-        for project in projects:
-            if meeting.project==project:
-                mymeetings.append(meeting)
 
+    profile = UserProfile.objects.get(username=request.user)
+    meetings = Meeting.objects.all()
+    meeting1 = Meeting.objects.filter(id=1)
+    #projects = Project.objects.filter(members__username=request.user.username)
+    projects = Project.objects.all()
 
     context = {
     "title": title,
     "title_align_center":title_align_center,
     "navtab":navtab,
-    "mymeetings":mymeetings,
+    "profile":profile,
+    "meetings":meetings,
+    "meeting1":meeting1,
+    "projects":projects,
+
     }
-    return render(request, "myschedule.html", context)
+    return render(request, "schedule_shared.html", context)
 
 
 def schedule_shared(request):
     title = "Shared Schedule"
     title_align_center = True
     navtab = True
-    all_meetings = Meeting.objects.all()
 
-    current_project = Project.objects.filter(id=1)
-    #users = current_project.members.all()
-    #members = []
-    #for user in users:
-    #    members.append(UserProfile.objects.get(username=user))
+    meetings = Meeting.objects.all()
+    meeting1 = Meeting.objects.filter(id=1)
 
     context = {
     "title": title,
     "title_align_center":title_align_center,
     "navtab":navtab,
-    "all_meetings": all_meetings,
-    "current_project": current_project,
-    #"members": members,
+    'meetings':meetings,
+    "meeting1":meeting1,
     }
     return render(request, "schedule_shared.html", context)
 
-#def schedule_new(request):
-#    title = "New Meeting"
-#    title_align_center = True
-#    navtab = True
-#
-#    context = {
-#        "title": title,
-#        "title_align_center": title_align_center,
-#        "navtab": navtab,
-#    }
-#    return render(request, "meeting_new.html", context)
+def schedule_detail(request, pk):
+    meeting = get_object_or_404(Meeting, pk=pk)
+    title = "Meeting Detail"
+    title_align_center = True
+    navtab = True
+
+    #meeting = get_object_or_404(Meeting, pk=pk)
+    meetings = Meeting.objects.all()
+
+
+    context = {
+        "title": title,
+        "title_align_center": title_align_center,
+        "navtab": navtab,
+        "meetings":meetings,
+        "meeting":meeting,
+    }
+    return render(request, "meeting_detail.html", context)
 
 def schedule_new(request):
     if request.method == "POST":
@@ -79,11 +83,12 @@ def schedule_new(request):
 
     return render(request, "meeting_new.html", {"form": form})
 
+
 # def project_detail(request,pk):
-# 	project = Project.objects.filter(id=1)
-# 	members = Project.members.all()
-# 	context ={
-# 		'project': project,
-# 		'members': members
-# 	}
-# 	return render(request, 'project_detail.html', context)
+#   project = get_object_or_404(Project, pk=pk)
+#   members = project.members.all()
+#   context ={
+#       'project': project,
+#       'members': members
+#   }
+#   return render(request, 'project_detail.html', context)

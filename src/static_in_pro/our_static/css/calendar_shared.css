@@ -11,6 +11,7 @@
     margin-left:0px;
     font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     margin-top:20px;
+    border-radius:5px;
 
 }
 
@@ -19,12 +20,14 @@
 
     background-color: #586F7C;
     color:#F4F2F2;
-    /*border: 1px solid #586F7C;*/
+    border: 1px solid #586F7C;
+    border-radius:5px;
 }
 
 #shared-calendar-month-year{
     margin: 5px;
     font-size: 20px;
+    border-radius:5px;
 
 }
 
@@ -33,12 +36,15 @@
     padding: 10px;
     width: 220px;
     height: 90px;
-    color: #586F7C;
+    color: #ffffff;
     text-align: left;
     vertical-align: top;
     border-collapse: separate;
-    /*background-color: #F5F1ED;*/
+    border-radius:5px;
+    background-color: #ffffff;
 }
+
+
 
 #memberinfo-container{
     height:600px;
@@ -46,26 +52,28 @@
     box-shadow:5px 5px 50px #cdcdcd;
     font-size:16px;
     font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    padding:0px;
-    margin:0px;
-    margin-top:0px;
-    border-collapse:separate;
-    background-color: #F4F2F2;
+    background-color: #ffffff;
+    border-radius:5px;
 }
 
 #memberinfo-title{
     background-color: #586F7C;
     color: #F4F2F2;
-    vertical-align:top;
-    text-align:center;
+    vertical-align: center;
+    text-align: center;
     font-size:20px;
     font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    border-collapse: separate;
+    border-radius:5px;
 
 }
 
 #memberinfo-body{
     padding-left:20px;
     text-align:left;
-    background-color:#F4F2F2;
+    background-color:#ffffff;
+    border-radius:5px;
+}
+
+table td:hover {
+background-color: #C5DBE8;
 }

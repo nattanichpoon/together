@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
 
-</body>
-</html>
+<!-- {% block extrahead %}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.countdown.css"> 
+<script type="text/javascript" src="js/jquery.plugin.js"></script> 
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+<script type="text/javascript">
+$(selector).countdown({until: liftoffTime});
+</script>
+
+
+{% endblock %} -->
+
+{% block content %}
+
+
+<div class='container'>
+	<div class="row">
+		<div class="col-sm-8">
+                <h1>{{meeting.meetingName}}</h1>
+                <h4>{{ meeting.meetingDate }}</h4>
+                <h4><i>{{ meeting.project }}</i><br><br></h4>
+               	<h4>Members Attending: </h4>
+                <h4>Meeting Agenda: {{ meeting.meetingAgenda }}</h4>
+                <h4>Meeting Summary: {{ meeting.meetingSummary }}</h4>
+                <h4></h4>
+		</div>
+
+
+	</div>
+</div>
+
+{% endblock %}

@@ -76,10 +76,10 @@
 
 <div class="col-sm-11 col-xs-11 col-lg-11 col-xl-11">
   <!-- top row -->
-	<div class="row box" style="height:250px; background:transparent;">
+	<div class="row box" style="height:280px; background:transparent;">
     <!-- profile box -->
 		{% if profile %}
-    <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3 box" style="height:225px; margin:0px">
+    <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3 box" style="height:250px; margin:0px">
       <div class="row" style="text-align:center; width:100%">
         <img src="{% static 'img/' %}{{profile.avatar}}" style="width:100px; height:100px;">
       </div>
@@ -94,7 +94,7 @@
       <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9" >
 
 
-        <div class="row box" style="overflow-x:scroll;overflow-y:hidden; height:225px;margin:0px; margin-left:5px">
+        <div class="row box" style="overflow-x:scroll;overflow-y:hidden; height:250px;margin:0px; margin-left:5px">
           <p style="text-transform:uppercase"><strong> Due Dates </strong></p>
 
           <ul id='timeline'>
@@ -228,7 +228,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="at-column" style="background:#37BC9B; border-radius:15px;">
+              <div class="at-column" style="background:#37BC9B; border-radius:15px;width:100px">
                 <div class="at-user">
                   <div class="at-user__avatar" style="background:#37BC9B;color:white; width:130px;height:130px;">
                     <h3 style="line-height:100px">{{projects_completed}}</h3>

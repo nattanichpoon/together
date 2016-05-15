@@ -8,7 +8,7 @@ class Meeting(models.Model):
 	project = models.ForeignKey('projects.Project')
 	meetingName = models.CharField(max_length=500)
 	meetingAgenda = models.CharField(max_length=1000)
-	meetingSummary = models.CharField(max_length=1000)
+	meetingSummary = models.CharField(max_length=1000, blank=True)
 	meetingDate = models.DateField(default=timezone.now)
 	meetingTime = models.TimeField(default=timezone.now)
 	CONFIRM = 'CF'

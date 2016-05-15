@@ -70,7 +70,7 @@ def project_productivity(request,pk):
 		if thisrating.count() > 0:
 			for rating in thisrating:
 				totalrating += rating.total
-			rates.append(totalrating)
+			rates.append(totalrating/thisrating.count())
 		else:
 			rates.append(0)
 

@@ -23,19 +23,14 @@
 </div>
 <div class="row">
 	<div class="col-sm-11">
-<<<<<<< HEAD
 		<!-- <h4><i>*to grab tasks, click on "View Details"</i></h4> -->
 		<table id = "taskTable" class="table table-hover tablesorter">
-=======
-<!-- 		<h4>Click "</h4>
- -->		<table id = "taskTable" class="table table-hover tablesorter">
->>>>>>> poon-new-p
 	    <thead>
 	      <tr>
 	        <th>Task</th>
-	        <th>Assignee</th>
-	        <th>Difficulty</th>
-	        <th>Status</th>
+	        <th title="Member responsible for this task">Assignee<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	        <th title="Difficulty of tasks range from Easy, Medium, Hard">Difficulty<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	        <th title="Click on 'View Details' to grab an unassigned task, or 'Acknowledge' to start showing progress">Status<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
 	        <th></th>
 
 
@@ -61,10 +56,14 @@
 	        	{% if task.taskState == 'AW' and task.assignee == null %}
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
 	        			<!-- <td>{{project.grabBy}}</td> -->
-	        	{% elif task.taskState == "IP" or task.taskState == "AW" %}
-	        		{% if task.assignee == request.user %}
+	        	{% endif %}
+	        	{% if task.assignee == request.user %}
+	        		{% if task.taskState == 'AW' %}
+						<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Acknowledge</button></a>
+	        		{% elif task.taskState == 'IP' %}
 		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
 		        	{% endif %}
+
 		        {% else %}
 
 		        {% endif %}

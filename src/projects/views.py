@@ -173,9 +173,10 @@ def project_detail(request,pk):
 		members.append(UserProfile.objects.get(username=user))
 
 	allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
-	tasks_AW = allTasks.filter(taskState=Task.AWAITING).order_by('-difficultyLevel')#high difficulty first
+	tasks_AW = allTasks.filter(taskState=Task.AWAITING, assignee=None).order_by('-difficultyLevel')#high difficulty first
 	if tasks_AW.count() > 0:
 		if timezone.now().date() >= project.grabBy:
+			# if task_.assignee == None:
 			autoAssign(tasks_AW, users, pk)
 			allTasks = Task.objects.order_by('-expectedDate').filter(project=project).all()
 
@@ -253,13 +254,18 @@ def project_new(request):
 
 def task_new(request, pk):
 	project = get_object_or_404(Project, pk=pk)
-	form = TaskFormNew(request.POST)
+	task = Task(project=project)
+	# form.fields["assignee"].queryset = project.members.all()
 	if request.method == "POST":
+		form = TaskFormNew(request.POST, instance=project)
+		# form.fields["assignee"].queryset = project.members.all()
 		if form.is_valid():
 			task = form.save(commit=False)
 			task.project = project
 			task.save()
 			return redirect('project_detail', pk=project.pk)
+	# else:
+	# 	form = TaskFormNew()
 	return render(request, "task_new.html", {"form":form})
 
 def autoAssign(tasks_AW, users, pk):

@@ -8,13 +8,30 @@
 {% endblock %} -->
 
 {% block content %}
+
+
+<head>
+    <link rel="stylesheet" href="/themes/base/jquery.ui.all.css">
+    <script src="/jquery.js"></script>
+    <script src="/ui/jquery.ui.core.js"></script>
+    <script src="/ui/jquery.ui.widget.js"></script>
+    <script src="/ui/jquery.ui.datepicker.js"></script>
+    <script>
+    $(function() {
+        $( "#id_expectedDate" ).datepicker();
+    });
+    </script>
+</head>
+<body>
 <div class="container">
 	<div class='row'>
         <div class="col-sm-10">
-			    <h1>New Task</h1>
+			    <h1>Tell people about this new task!</h1>
                 <form method="POST">
+                    
                     {% csrf_token %}
                     {{form|crispy}}
+                    <!-- <input type="text" id="id_expectedDate"></p> -->
 
         
                 <button type="submit" class="save btn">Save</button>
@@ -25,5 +42,6 @@
 		</div>
 	</div>
 </div>
+</body>
 
 {% endblock %}

@@ -17,11 +17,6 @@ def discussions(request):
 	
 	return render(request, "post_list.html", context)
 
-def post_new(request):
-    form = PostForm()
-    profile = UserProfile.objects.get(username=request.user)
-    return render(request, 'post_edit.html', {'form': form,'profile':profile})
-
 def post_list(request):
 	projects = Project.objects.filter(members__username=request.user.username)
 	posts = Post.objects.order_by('-published_date') 

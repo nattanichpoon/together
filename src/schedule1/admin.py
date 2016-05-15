@@ -5,4 +5,4 @@ from schedule1.models import Meeting
 admin.site.register(Meeting)
 
 class MeetingAdmin(admin.ModelAdmin):
-	list_display = ('meetingName','project','meetingDate','meetingStatus','confirmedCount')
+	list_display = ('meetingName','project','meetingAgenda','meetingSummary','meetingDate','meetingTime','meetingStatus','confirmedCount')

@@ -13,8 +13,8 @@
 
         <div class="header">
 
-            <h2>&nbsp;&nbsp;Shared Project Calendar</h2>
-            <h4><i>&nbsp;&nbsp;&nbsp;My First Project</i></h4>
+            <h2>&nbsp;&nbsp;My Meeting Schedule</h2>
+            <!--h4><i>&nbsp;&nbsp;&nbsp;My First Project</i></h4-->
 
 
         </div>
@@ -22,14 +22,117 @@
         <div class="col-sm-3 pull-left">
 			<head>
 			        <title>Shared Calendar</title>
+
+            
             </head>
             <body>
-			        <div id="shared-calendar-container">
-			            <div id="shared-calendar-header">
+			        <div id="shared-calendar-container" style="background-color:#FFFFFF">
+
+                        <div id="shared-calendar-header" style="background-color:#586F7C">
 			                <span id="shared-calendar-month-year"></span>
+                            <h3>May 2016</h3>
 			            </div>
+
 			            <div id="shared-calendar-dates">
 			            </div>
+
+                        <table id="calendar2" class="table" style="background-color:#FFFFFF" height="55px">
+                            <thead>
+                            <tr id='day'>
+                                <td>SUN</td>
+                                <td>MON</td>
+                                <td>TUE</td>
+                                <td>WED</td>
+                                <td>THU</td>
+                                <td>FRI</td>
+                                <td>SAT</td>
+                            </tr>
+                            </thead>
+
+                            <tr id="row1" height="92px">
+                            {% for i in "1234567" %}
+                                <td id= "0{{ i }}" align="left" width="80px">
+                                    {{ i }}
+                                </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr id="row2" height="94px">
+                                <td id="08" align="left" width="80px">
+                                    8
+                                </td>
+                                <td id="09" align="left" width="80px">
+                                    9
+                                </td>
+                            {% for i in "34567" %}
+                                <td id="{%widthratio i|add:7 1 1 %}" align="left" width="80px">
+                                    {%widthratio i|add:7 1 1 %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr id="row3" height="94px">
+                            {% for i in "1234567" %}
+                                <td id="{%widthratio i|add:14 1 1 %}" align="left" width="80px">
+                                    {%widthratio i|add:14 1 1 %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr id="row4" height="94px">
+                            {% for i in "1234567" %}
+                                <td id="{%widthratio i|add:21 1 1 %}" align="left" width="80px">
+                                    {%widthratio i|add:21 1 1 %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+
+                            <tr id="row5" height="94px">
+                            {% for i in "123" %}
+                                <td id="{%widthratio i|add:28 1 1 %}" align="left" width="80px">
+                                    {%widthratio i|add:28 1 1 %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+
+                        </table>
+
+                        {% for meeting in meetings %}
+                            <script>
+                            var img = document.createElement('img');
+                            img.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/pin-24.png';
+                            var td = document.getElementById("{{ meeting.meetingDate|date:"d" }}");
+                            td.appendChild(img);
+                            var img2 = document.createElement('img');
+                            img2.src='https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/magnifyingglass-24.png';
+                            td.onclick=function(){
+                                
+                                var right = document.getElementById("memberinfo-body");
+                                right.innerHTML =
+                                "<br><u>Meetings for {{ meeting.meetingDate }}" + "</u><br><br>" +
+                                "<li> Meeting Name: {{ meeting.meetingName }}" + "<br><br><ul>Meeting Agenda: {{meeting.meetingAgenda}}</ul><ul>Time: 10:30 AM</ul><br>";
+
+                                
+                                right.appendChild(img2);
+
+                                var x = document.createElement("I");
+                                var t = document.createTextNode("   Click here for more information.");
+                                x.appendChild(t);
+                                right.appendChild(x);
+
+                                img2.onclick=function(){
+
+                                    var url = 'http://127.0.0.1:8000/schedule/'+"{{meeting.pk}}";
+                                    //alert(url);
+                                    window.location=url;
+                                }
+
+                            }
+
+                            </script>
+
+                        {% endfor %}
+
 			        </div>
             </body>
 		</div>
@@ -46,20 +149,30 @@
                     <div id="memberinfo-container">  
 
                         <div id="memberinfo-title"> 
+                            <h4>Meeting Information</h4>
                         </div>
 
                         <div id="memberinfo-body">
+                            <i>Click on pinned days to view meetings.</i>
+                            <br><u style="color:#FFFFFF">.</u><br><br>
+                                <li style="color:#FFFFFF">.
+                                <br><br><ul style="color:#FFFFFF">.</ul>
+                                <ul style="color:#FFFFFF">.</ul><br>
+
                         </div>
+                        <div id="memberinfo-body-bottom" align="right">
+                            <br><br><br><br><br><br><br><br><br><br><br>
+                                <a href="{% url 'schedule_new'%}"><button type='button' class='button-slide' align="right" border-radius="25px"><span>New Meeting</span></button></a>
+                                
+                            </div>
                     </div>
             </body>
         </div>
 
 
-        <div class="col-sm-7">
-            <h4>Test: list of projects</h4>
-                    {% for project in projects %}
-                    <a href="{% url 'project_detail' pk=project.pk %}"><button class="btn">{{ project.projectName }}</button></a>
-		            {% endfor %}
+        <div class="col-sm-7 pull-right">
+            
+
 
 
 		</div>

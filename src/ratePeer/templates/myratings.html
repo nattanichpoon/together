@@ -5,34 +5,89 @@
 {% block head_title %} My Page {% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="col-sm-10">
-<p>Here is a summary of what your friends have scored you by each corresponding category.</p>
-</div>
-</div>
-<div class="row">
-	<div class="col-sm-4">
-		<div id="circle" style="color:white; background: #232323"><h2>{{ratings.count}}</h2></br><h4>Submitted Responses</h4></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating1}}%</h2></br><h6>Attends group meetings regularly and arrives on time.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating2}}%</h2></br><h6>Contributes meaningfully to group discussions.</h6></div>
-	</div>
-</div>
-</br>
-</br>
+
+
+
 
 <div class="row">
-	<div class="col-sm-4">
-		<div id="circle" style="color:white;"><h2>{{rating3}}%</h2></br><h6>Prepares work in a quality manner.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating4}}%</h2></br><h6>Demonstrates a cooperative and supportive attitude.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating5}}%</h2></br><h6>Contributes significantly to the success of the project.</h6></div>
-	</div>
+	<h3><strong>{{ratings.count}} submitted ratings</strong></h3>
+	<p>Here is a summary of what your friends have scored you by each corresponding category.</p>
+
+</div>
+<div class='selector'>
+  <ul>
+    <li>
+      <input id='1' type='checkbox'>
+      <label for='1'>Option 1</label>
+    </li>
+    <li>
+      <input id='2' type='checkbox'>
+      <label for='2'>Option 2</label>
+    </li>
+    <li>
+      <input id='3' type='checkbox'>
+      <label for='3'>Option 3</label>
+    </li>
+    <li>
+      <input id='4' type='checkbox'>
+      <label for='4'>Option 4</label>
+    </li>
+    <li>
+      <input id='5' type='checkbox'>
+      <label for='5'>Option 5</label>
+    </li>
+    <li>
+      <input id='6' type='checkbox'>
+      <label for='6'>Option 6</label>
+    </li>
+    <li>
+      <input id='7' type='checkbox'>
+      <label for='7'>Option 7</label>
+    </li>
+    <li>
+      <input id='8' type='checkbox'>
+      <label for='8'>Option 8</label>
+    </li>
+  </ul>
+  <button>Click here</button>
+</div>
+
+
+
+
+<div class="row">
+	
+		<div class="row">
+			<div class="col-sm-2 col-xs-2 col-lg-2 col-xl-2">
+				<div class="circle" style="color:white; background:#DA4453"><h4 style="text-transform:uppercase"><strong>Attendance</strong></br>{{rating1}}%</h4></div>
+			</div>
+			<div class="col-sm-2 col-xs-2 col-lg-2 col-xl-2">
+				<div class="circle" style="color:white; background:#FCBB42"><h4 style="text-transform:uppercase"><strong>Discussions</strong></br>{{rating2}}</br></h4></div>
+			</div>
+
+			<div class="col-sm-2 col-xs-2 col-lg-2 col-xl-2">
+				<div class="circle" style="color:white;background:#37BC9B"><h4 style="text-transform:uppercase"><strong>Work quality</strong></br>{{rating3}}%</h4></br></div>
+			</div>
+			<div class="col-sm-2 col-xs-2 col-lg-2 col-xl-2">
+				<div class="circle" style="color:white; background:#4A89DC"><h4 style="text-transform:uppercase"><strong>Attitude</strong></br>{{rating4}}%</h4></br></div>
+			</div>
+			<div class="col-sm-2 col-xs-2 col-lg-2 col-xl-2">
+				<div class="circle" style="color:white; background:#967ADC"><h4 style="text-transform:uppercase"><strong>Contribution</strong></br>{{rating5}}%</h4></br></div>
+			</div>
+		</div>
+</div>
+<div class="row">
+</br></br>
+	<div class="col-sm-10">
+
+		<span class="badge" style="background:#DA4453; font-size:15px"> </span> Attends group meetings regularly and arrives on time.</br>
+		<span class="badge" style="background:#FCBB42; font-size:15px"> </span> Contributes meaningfully to group discussions.</br>
+		<span class="badge" style="background:#37BC9B; font-size:15px"> </span> Prepares work in a quality manner.</br>
+		<span class="badge" style="background:#4A89DC; font-size:15px"> </span> Demonstrates a cooperative and supportive attitude.</br>
+		<span class="badge" style="background:#967ADC; font-size:15px"> </span> Contributes significantly to the success of the project.
+
+	
+
+</div>
 </div>
 {% endblock %}

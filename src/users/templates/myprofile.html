@@ -86,7 +86,7 @@
       <h4><strong>{{profile}}</strong></h4>
       <a href="{% url 'messages_inbox' %}">
       <span class="badge">{{ messages_inbox_count }} new mail</span></a></br>
-      <span class="badge">{{ meetings }} meetings today</span></a>
+      <a href="{% url 'schedule' %}"><span class="badge">{{ meetings }} meetings today</span></a>
     </div>
     <!-- end profile box -->
     <!-- timeline box -->

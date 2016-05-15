@@ -21,7 +21,7 @@ class ProjectForm(forms.ModelForm):
 		dueDate = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'}))
 		fields = ('projectName','members', 'dueDate', 'grabBy')
 		widgets = {
-        	'members' : forms.CheckboxSelectMultiple(),
+        	# 'members' : forms.CheckboxSelectMultiple(),
         	'dueDate': forms.DateInput(attrs = {'class':'datepicker'})
         }
 

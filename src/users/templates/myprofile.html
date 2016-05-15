@@ -24,9 +24,9 @@
           pieHole: 0.7,
           colors: ['#1FB58F','#EAB126', '#F24C4E'],
           // legend: 'none',
-          backgroundColor: { fill: "#F5F1ED" },
+          // backgroundColor: { fill: "#F5F1ED" },
           pieSliceText: 'none',
-          height: 400,
+          height: 300,
           width: 400,
           legend: {
                  position: 'right',
@@ -35,8 +35,8 @@
              chartArea: { 
                  left: 10, 
                  top: 10, 
-                 width: '130%', 
-                 height: '65%',
+                 width: 400, 
+                 height: 300,
              },
              // pieStartAngle: 180,
         };
@@ -73,99 +73,161 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-sm-10 col-sm-offset-1">
-	<div class="row">
+
+<div class="col-sm-11 col-xs-11 col-lg-11 col-xl-11">
+  <!-- top row -->
+	<div class="row box" style="height:280px; background:transparent;">
+    <!-- profile box -->
 		{% if profile %}
-		<h4 style="text-align:center">Welcome, <strong>{{profile}}</strong>.</h4>
+    <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3 box" style="height:250px; margin:0px">
+      <div class="row" style="text-align:center; width:100%">
+        <img src="{% static 'img/' %}{{profile.avatar}}" style="width:100px; height:100px;">
+      </div>
+      <h4><strong>{{profile}}</strong></h4>
+      <a href="{% url 'messages_inbox' %}">
+      <span class="badge">{{ messages_inbox_count }} new mail</span></a></br>
+      <a href="{% url 'schedule' %}"><span class="badge">{{ meetings }} meetings today</span></a>
+    </div>
+    <!-- end profile box -->
+    <!-- timeline box -->
+    {% if projects_count > 0 %}
+      <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9" >
+
+
+        <div class="row box" style="overflow-x:scroll;overflow-y:hidden; height:250px;margin:0px; margin-left:5px">
+          <p style="text-transform:uppercase"><strong> Due Dates </strong></p>
+
+          <ul id='timeline'>
+            <li class='work'>
+              <input class='radio' id='work5' name='works' type='radio' checked>
+              <div class="relative">
+                <label for='work5'>Today</label>
+                <span class='circle-timeline'></span>
+              </div>
+              <div class='content'>
+                <p style="color:#f5f1ed">{{date}}
+                </p>
+              </div>
+            </li>        
+            {% for project in currentprojects %}
+            <li class='work'>
+              <input class='radio' id='{{project}}' name='works' type='radio'>
+              <div class="relative">
+                <label for='{{project}}'>{{project.dueDate}}</label>
+              <span class='circle-timeline'></span>
+              </div>
+              <div class='content' >
+                <p style="color:#f5f1ed">{{project}}
+                </p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      <!-- end timeline -->
 		{% else %}
 		<h4 class="strong pull-right">Click Edit Profile to add your name.<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></h4>
 		{% endif %}
-
-   
 	</div>
-  <div class="row">
-   
-    <div class="col-sm-5 col-xs-5">
-      <!-- <a href="{% url 'about' %}" class="fancy-button bg-gradient3 "><span>See Our Features</span></a> -->
-      </div>
-      <div class="col-sm-3 col-xs-3">
-      <img src="{% static 'img/' %}{{profile.avatar}}" style="width:100px; height:100px;">
-    </div>
-      <a href="{% url 'project_new' %}" class="fancy-button bg-gradient2 "><span>Start New Project</span></a>
-  </div>
-  <hr>
+ 
+  {% if total > 0 %}
 
-  
+    <div class="row box" style="height:400px; margin-top:0px">
+      <p style="text-transform:uppercase"><strong> Task summary </strong></p>
+    	<div class="col-sm-4 col-xs-4 col-lg-4 col-xl-4">
+    		<div style="z-index:5; left:100px;top:120px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px;"> 
+    				{{total}} task{% if total > 1 %}s{% endif %}
+    		</div>
+    		<div class="box" style="width:420px" id="donutchart"> </div>
 
-  {% if projects_count > 0 %}
-  
-  <div class="row" style="height:400px">
-  	<div class="col-sm-5">
-  		<div style="z-index:5; left:90px;top:85px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px"> 
-  				{{projects_count}} {% if projects_count > 1 %}projects{% else %}project{% endif %}
-  		</div>
-  		<div id="donutchart"> </div>
+    	</div>
+      <div class="col-sm-1 col-xs-1 col-lg-1 col-xl-1"></div>
+        <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3">
+          <p style="text-transform:uppercase; text-align:center"><span class="badge" style="background:#EAB126;">Awaiting</span></p>
+          {% if awaiting > 0 %}
+          <div style="height:300px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px; overflow:scroll;">
 
-  	</div>
+              <div class="list-group">
+                  {% for task in awaitingTasks  %}
+                    <a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
+                    <p class="list-group-item-heading"><strong>{{task}}</strong></p>
+                    <p class="list-group-item-text" style="color:#232323;">{{task.project}}</p>
+                  </a>
+                  {% endfor %}
+               
 
+              </div>
+            
 
-  	<div class="col-sm-4" style="z-index:3;position:absolute; right:5px;">
-  		<!-- <div class="row" style="height:500px;"> -->
-  		<div style="height:400px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px">
-  			<h4 class="lead">Your Tasks</h4>
-  			<div class="list-group" style="overflow:scroll; ">
-  				{% for task in inProgressTasks  %}
-     				<a href="#" class="list-group-item"> 
-              <h4 class="list-group-item-heading">{{task}} <span style="float:right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#18aa7c" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></h4>
-  					<p class="list-group-item-text">{{task.project}}</p>
-  				</a>
-  				{% endfor %}
-  			</div>
-  			<div class="list-group">
-  				{% for task in awaitingTasks  %}
-  				<a href="#" class="list-group-item"> 
-  					<h4 class="list-group-item-heading">{{task}} <span style="float:right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g ><path fill="#e1a201" d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M6,5c0.6,0,1,0.4,1,1S6.6,7,6,7S5,6.6,5,6S5.4,5,6,5z&#10;&#9; M8,12c-1.7,0-3-1.3-3-3h6C11,10.7,9.7,12,8,12z M10,7C9.4,7,9,6.6,9,6s0.4-1,1-1s1,0.4,1,1S10.6,7,10,7z"/></g></svg></span></h4>
-  					<p class="list-group-item-text">{{task.project}}
-  					</p>
-  				</a>
-  				{% endfor %}
-  			</div>
-  		</div>
-  	</div>
-  </div>
-{% endif %}
-
-<div class="row">
-		<div class="col-sm-12">
-      <hr>
-		<h3>Your History</h3> 
-    <!-- <div class="col-sm-6">
-			<div id="columnchart_material" style="height:400px"></div>
-    </div> -->
-        <div class="col-sm-12">
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Your Peer Ratings</h4>
-               <a href = "{% url 'myratings' %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h1>{{avgRating}}%</h1></button></a>
           </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Completed Tasks</h4>
-            <div id="circle-small" style="color:white;"> <h1>{{completed}}</h1>
-             </div>
-          </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Task Score</h4>
-
-               <div id="circle-small" style="color:white;"><h1>{{avgTask}}</h1>
-                            </div>
-          </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Completed Projects</h4>
-
-               <div id="circle-small" style="color:white;"> <h1>{{projects_completed}}</h1>
-                            </div>
-          </div>
+          {% else %}
+          No tasks here.
+          {% endif %}
         </div>
-	</div>
+
+    	<div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3">
+        <p style="text-transform:uppercase; text-align:center;"><span class="badge"  style="background:#1FB58F">In progress</span></p>
+        {% if inprogress > 0 %}
+
+    		<div style="height:300px; padding:20px; background-color: rgba(0,0,0,0.1);border-radius:5px; overflow:scroll;">
+
+      			<div class="list-group">
+      				{% for task in inProgressTasks  %}
+         				<a href="{% url 'task_detail' pk=task.pk%}" class="list-group-item"> 
+                  <p class="list-group-item-heading"><strong>{{task}}</strong></p>
+      					<p class="list-group-item-text" style="color:#232323">{{task.project}}</p>
+      				</a>
+      				{% endfor %}
+      			</div>
+    		</div>
+        {% else %}
+        No tasks here.
+        {% endif %}
+    	</div>
+    </div>
+  {% endif %}
+
+  <div class="row box" style="background:#BFBCB9; text-align:center">
+  		<!-- <div class="col-sm-12"> -->
+     <p style="text-transform:uppercase"><strong>your history </strong></p>
+      <!-- <div class="col-sm-6">
+  			<div id="columnchart_material" style="height:400px"></div>
+      </div> -->
+      <div class="block">
+        <a href="{% url 'myratings'%}">
+      <i class="hovicon auto effect-3 sub-a" style="background:#DA4453;padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{avgRating}}%</strong></br>Peer Rating</h4>
+      </i></a>
+
+      <i class="hovicon auto effect-9 sub-b" style="background:#4A89DC;padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{avgTask}}</strong></br>Task score</h4>
+      </i>
+
+      <i class="hovicon auto effect-9 sub-b" style="background:#37BC9B; padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{projects_completed}}</strong></br>projects</h4>
+      </i>
+
+    </div>
+
+
+
+           <!--  <div class="item  col-xs-3 col-sm-3">
+      <p style="text-transform:uppercase"><strong>Peer Ratings </strong></p>
+                 <a href = "{% url 'myratings' %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h1>{{avgRating}}%</h1></button></a>
+            </div>
+            <div class="item  col-xs-3 col-sm-3">
+      <p style="text-transform:uppercase"><strong> Task Score </strong></p>
+
+                 <div id="circle-small" style="color:white;"><h1>{{avgTask}}</h1>
+                              </div>
+            </div>
+            <div class="item  col-xs-3 col-sm-3">
+      <p style="text-transform:uppercase"><strong> completed projects </strong></p>
+
+                 <div id="circle-small" style="color:white;"> <h1>{{projects_completed}}</h1>
+                              </div>
+            </div>
+          </div> -->
+  	<!-- </div> -->
 </div>
 
 

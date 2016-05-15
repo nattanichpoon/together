@@ -5,34 +5,42 @@
 {% block head_title %} My Page {% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="col-sm-10">
-<p>Here is a summary of what your friends have scored you by each corresponding category.</p>
-</div>
-</div>
-<div class="row">
-	<div class="col-sm-4">
-		<div id="circle" style="color:white; background: #232323"><h2>{{ratings.count}}</h2></br><h4>Submitted Responses</h4></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating1}}%</h2></br><h6>Attends group meetings regularly and arrives on time.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating2}}%</h2></br><h6>Contributes meaningfully to group discussions.</h6></div>
-	</div>
-</div>
-</br>
-</br>
 
 <div class="row">
-	<div class="col-sm-4">
-		<div id="circle" style="color:white;"><h2>{{rating3}}%</h2></br><h6>Prepares work in a quality manner.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating4}}%</h2></br><h6>Demonstrates a cooperative and supportive attitude.</h6></div>
-	</div>
-	<div class="col-sm-4">
-		<div id="circle" style="color:white"><h2>{{rating5}}%</h2></br><h6>Contributes significantly to the success of the project.</h6></div>
+	<h3><strong>{{ratings.count}} submitted ratings</strong></h3>
+	<p>Here is a summary of what your friends have scored you by each corresponding category.</p>
+
+</div>
+<div class="row">
+
+<div class="col-sm-6 col-xs-6 col-lg-6 col-xl-6">
+		<div class="block">
+			<i class="hovicon effect-1 sub-a" style="background:#DA4453"></br><h4 style="text-transform:uppercase;"><strong>Attendance</strong></br>{{rating1}}%</br></h4></i>
+			<i class="hovicon effect-1 sub-a" style="background:#FCBB42"></br><h4 style="text-transform:uppercase"><strong>Discussions</strong></br>{{rating2}}</br></h4></i>
+    </div>
+  </div>
+	<div class="col-sm-5 col-xs-5 col-lg-5 col-xl-5">
+	</br></br></br></br>
+		<span class="badge" style="background:#DA4453; font-size:15px"> </span> Attends group meetings regularly and arrives on time.</br>
+		<span class="badge" style="background:#FCBB42; font-size:15px"> </span> Contributes meaningfully to group discussions.</br>
+		<span class="badge" style="background:#37BC9B; font-size:15px"> </span> Prepares work in a quality manner.</br>
+		<span class="badge" style="background:#4A89DC; font-size:15px"> </span> Demonstrates a cooperative and supportive attitude.</br>
+		<span class="badge" style="background:#967ADC; font-size:15px"> </span> Contributes significantly to the success of the project.
 	</div>
 </div>
+	<div class="row">
+		<div class="block">
+	        <i class="hovicon effect-1 sub-a" style="background:#37BC9B"></br><h4 style="text-transform:uppercase"><strong>Work quality</strong></br>{{rating3}}%</br></h4>
+	        </i>
+	        
+	        <i class="hovicon effect-1 sub-a" style="background:#4A89DC"></br><h4 style="text-transform:uppercase"><strong>Attitude</strong></br>{{rating4}}%</br></h4>
+	        </i>
+	        <i class="hovicon effect-1 sub-a" style="background:#967ADC"></br><h4 style="text-transform:uppercase" ><strong>Contribution</strong></br>{{rating5}}%</br></h4>
+	        </i>
+	    </div>
+	  </div>
+    
+
+
+	
 {% endblock %}

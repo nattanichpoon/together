@@ -24,33 +24,32 @@
 		<h3>User's Statistics</h3> 
     <hr>
 
+
     <!-- <div class="col-sm-6">
 			<div id="columnchart_material" style="height:400px"></div>
     </div> -->
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="text-align:center">
           <div class="item  col-xs-3 col-sm-3">
-            <h4>Peer Rating Score</h4>
+            <p style="text-transform:uppercase; font-size:15px"><strong>Peer Rating Score</strong></p>
+            <i class="hovicon auto effect-1 sub-a" style="background:#37BC9B"></br><h4 style="text-transform:uppercase; font-size:30"><strong>{{avgRating}}%</strong></br></h4>
+            </i>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <p style="text-transform:uppercase; font-size:15px"><strong>Completed Tasks</strong></p>
+            <i class="hovicon auto effect-1 sub-a" style="background:#37BC9B"></br><h4 style="text-transform:uppercase"><strong>{{completed}}</strong></br></h4>
+            </i>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <p style="text-transform:uppercase; font-size:15px"><strong>Average Task Scores</strong></p>
+            <i class="hovicon auto effect-1 sub-a" style="background:#37BC9B"></br><h4 style="text-transform:uppercase"><strong>{{avgTask}}</strong></br></h4>
+            </i>
+          </div>
+          <div class="item  col-xs-3 col-sm-3">
+            <p style="text-transform:uppercase; font-size:15px"><strong>Completed Projects</strong></p>
+            <i class="hovicon auto effect-1 sub-a" style="background:#37BC9B"></br><h4 style="text-transform:uppercase"><strong>{{projects_completed}}</strong></br></h4>
+            </i>
+          </div>
 
-               <div id="circle-small" style="color:white;"> <h1>{{avgRating}}%</h1>
-                </div>
-          </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Completed Tasks</h4>
-            <div id="circle-small" style="color:white;"> <h1>{{completed}}</h1>
-             </div>
-          </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Average Task Scores</h4>
-
-               <div id="circle-small" style="color:white;"><h1>{{avgTask}}</h1>
-                            </div>
-          </div>
-          <div class="item  col-xs-3 col-sm-3">
-            <h4>Completed Projects</h4>
-
-               <div id="circle-small" style="color:white;"> <h1>{{projects_completed}}</h1>
-                            </div>
-          </div>
         </div>
 	</div>
 </div>

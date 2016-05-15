@@ -186,6 +186,14 @@ def project_detail(request,pk):
 		project.save()
 	size = users.count()
 
+	# if request.method =="POST":
+	# 	task = get_object_or_404(Task, pk=taskpk)
+	# 	form = TaskForm(request.POST, instance=task)
+	# 	if form.is_valid() and form.taskState == Task.AWAITING:
+	# 		task = form.save(commit=False)
+	# 		form.taskState == Task.IN_PROGRESS
+	# 		form.save()
+	# 	return redirect('project_detail', pk=project.pk)
 	context ={
 		'project': project,
 		'members': members,
@@ -218,9 +226,14 @@ def task_update(request, pk):
 	task = get_object_or_404(Task, pk=pk)
 	project = get_object_or_404(Project, pk=task.project.pk)
 	form = TaskForm(instance = task)
+
+	ack = False
 	inprog = False
 	if task.taskState == Task.IN_PROGRESS:
 		inprog = True
+
+	if task.taskState == Task.AWAITING:
+		ack = True
 
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=task)
@@ -229,7 +242,7 @@ def task_update(request, pk):
 			form.save()
 			return redirect('project_detail', pk=project.pk)
 
-	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form, 'inprog':inprog})
+	return render(request, 'task_update.html', {'project':project, 'task': task, 'form': form, 'inprog':inprog, 'ack':ack})
 
 def project_new(request):
 	if request.method == "POST":
@@ -271,7 +284,7 @@ def task_new(request, pk):
 def autoAssign(tasks_AW, users, pk):
 	for task in tasks_AW:
 		task.assignee = find_lazy_member(users, pk)
-		task.taskState = Task.IN_PROGRESS
+		# task.taskState = Task.IN_PROGRESS
 		task.save()
 
 

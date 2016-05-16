@@ -43,7 +43,6 @@ class TaskFormNew(forms.ModelForm):
 	class Meta:
 		model = Task
 		fields = ('taskName','description','assignee','difficultyLevel', 'expectedDate','taskState')
-
 		labels = {
 			'taskName' : ('Task Name'),
 			# 'description' : ('What to do for this task?'),

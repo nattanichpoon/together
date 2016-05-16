@@ -268,9 +268,10 @@ def project_new(request):
 def task_new(request, pk):
 	project = get_object_or_404(Project, pk=pk)
 	task = Task(project=project)
+	form = TaskFormNew(request.POST)
 	# form.fields["assignee"].queryset = project.members.all()
 	if request.method == "POST":
-		form = TaskFormNew(request.POST, instance=project)
+		
 		# form.fields["assignee"].queryset = project.members.all()
 		if form.is_valid():
 			task = form.save(commit=False)

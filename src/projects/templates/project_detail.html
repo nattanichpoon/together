@@ -23,16 +23,16 @@
 </div>
 <div class="row">
 	<div class="col-sm-11">
-<!-- 		<h4>Click "</h4>
- -->		<table id = "taskTable" class="table table-hover tablesorter">
+		<!-- <h4><i>*to grab tasks, click on "View Details"</i></h4> -->
+		<table id = "taskTable" class="table table-hover tablesorter">
 	    <thead>
 	      <tr>
 	        <th>Task</th>
-	        <th>Assignee</th>
-	        <th>Difficulty</th>
-	        <th>Status</th>
+	        <th title="Member responsible for this task">Assignee<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	        <th title="Difficulty of tasks range from Easy, Medium, Hard">Difficulty<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	        <th title="Click on 'View Details' to grab an unassigned task, or 'Acknowledge' to start showing progress">Status<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
 	        <th></th>
-	        <!-- <th>Grab Task By</th> -->
+
 
 	      </tr>
 	    </thead>
@@ -46,21 +46,28 @@
 	        		<td>{{task.assignee}}</td>
 	        	{% endif %}
 	        	<td>{{task.get_difficultyLevel_display}}</td>
-	        	<td>{{task.get_taskState_display}}{% if task.taskState == 'IP' %} ({{task.taskProgress}}%){%endif%}</td>
-	        	{% if task.taskState == 'AW' %}
-	        		<td>
+	        	<td>{{task.get_taskState_display}}
+	        		{% if task.taskState == 'IP' %} 
+	        			({{task.taskProgress}}%)
+	        		{%endif%}
+	        	</td>
+	        	<td>
+
+	        	{% if task.taskState == 'AW' and task.assignee == null %}
 	        			<a href="{% url 'task_detail' pk=task.pk %}"><button class="btn">View Details</button></a>
 	        			<!-- <td>{{project.grabBy}}</td> -->
-	        		</td>
-	        	{% elif task.taskState == "IP" and task.assignee == request.user %}
-		        	<td>
+	        	{% endif %}
+	        	{% if task.assignee == request.user %}
+	        		{% if task.taskState == 'AW' %}
+						<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Acknowledge</button></a>
+	        		{% elif task.taskState == 'IP' %}
 		        		<a href="{% url 'task_update' pk=task.pk %}"><button class="btn">Update</button></a>
-		        		<td></td>
-		        	</td>
+		        	{% endif %}
+
 		        {% else %}
-		        	<td> </td>
-		        	<!-- <td></td> -->
+
 		        {% endif %}
+		    </td>
 
 	      	</tr>
 	    {% endfor %}

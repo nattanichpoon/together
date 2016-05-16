@@ -76,10 +76,17 @@
 
 <div class="col-sm-11 col-xs-11 col-lg-11 col-xl-11">
   <!-- top row -->
+<<<<<<< HEAD
 	<div class="row box" style="height:250px; background:transparent;">
     <!-- profile box -->
 		{% if profile %}
     <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3 box" style="height:225px; margin:0px">
+=======
+	<div class="row box" style="height:280px; background:transparent;">
+    <!-- profile box -->
+		{% if profile %}
+    <div class="col-sm-3 col-xs-3 col-lg-3 col-xl-3 box" style="height:250px; margin:0px">
+>>>>>>> nice-debug-branch
       <div class="row" style="text-align:center; width:100%">
         <img src="{% static 'img/' %}{{profile.avatar}}" style="width:100px; height:100px;">
       </div>
@@ -94,7 +101,11 @@
       <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9" >
 
 
+<<<<<<< HEAD
         <div class="row box" style="overflow-x:scroll;overflow-y:hidden; height:225px;margin:0px; margin-left:5px">
+=======
+        <div class="row box" style="overflow-x:scroll;overflow-y:hidden; height:250px;margin:0px; margin-left:5px">
+>>>>>>> nice-debug-branch
           <p style="text-transform:uppercase"><strong> Due Dates </strong></p>
 
           <ul id='timeline'>
@@ -134,7 +145,11 @@
  
   {% if total > 0 %}
 
+<<<<<<< HEAD
     <div class="row box" style="height:450px">
+=======
+    <div class="row box" style="height:400px; margin-top:0px">
+>>>>>>> nice-debug-branch
       <p style="text-transform:uppercase"><strong> Task summary </strong></p>
     	<div class="col-sm-4 col-xs-4 col-lg-4 col-xl-4">
     		<div style="z-index:5; left:100px;top:120px; width: 100px; height: 100px; line-height:100px; text-align:center; position: absolute; font-size:20px;"> 
@@ -189,12 +204,17 @@
     </div>
   {% endif %}
 
+<<<<<<< HEAD
   <div class="row box">
+=======
+  <div class="row box" style="background:#BFBCB9; text-align:center">
+>>>>>>> nice-debug-branch
   		<!-- <div class="col-sm-12"> -->
      <p style="text-transform:uppercase"><strong>your history </strong></p>
       <!-- <div class="col-sm-6">
   			<div id="columnchart_material" style="height:400px"></div>
       </div> -->
+<<<<<<< HEAD
           <div class="col-sm-12" >
             <div data-column='3' class="at-grid" style="background:transparent; border-style:none; border-color:transparent; height: 200px">
             
@@ -243,6 +263,21 @@
             
              
             </div>
+=======
+      <div class="block">
+        <a href="{% url 'myratings'%}">
+      <i class="hovicon auto effect-3 sub-a" style="background:#DA4453;padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{avgRating}}%</strong></br>Peer Rating</h4>
+      </i></a>
+
+      <i class="hovicon auto effect-9 sub-b" style="background:#4A89DC;padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{avgTask}}</strong></br>Task score</h4>
+      </i>
+
+      <i class="hovicon auto effect-9 sub-b" style="background:#37BC9B; padding:3px"></br><h4 style="text-transform:uppercase"><strong>{{projects_completed}}</strong></br>projects</h4>
+      </i>
+
+    </div>
+
+>>>>>>> nice-debug-branch
 
 
            <!--  <div class="item  col-xs-3 col-sm-3">

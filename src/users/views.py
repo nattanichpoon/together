@@ -86,16 +86,27 @@ def myprofile(request):
 
 					total = awaiting+inprogress+completed
 					currentTasks = awaitingTasks+inProgressTasks
+<<<<<<< HEAD
 					if completed == 0:
 						avgTask = 0.0
 					else:
 						avgTask = myRoundingFunction(((avgTask/completed)),2)
+=======
+					
+>>>>>>> nice-debug-branch
 				if meeting.count() > 0:
 					for m in meeting:
 						if m.meetingDate==date:
 							if m.project == project:
 								meetings += 1
 			avgRating = myRoundingFunction(((avgRating*4)/ratings.count()),2)
+<<<<<<< HEAD
+=======
+			if completed == 0:
+				avgTask = 0.0
+			else:
+				avgTask = myRoundingFunction(((avgTask/completed)),2)
+>>>>>>> nice-debug-branch
 
 			context={
 				'currentTasks':currentTasks, 

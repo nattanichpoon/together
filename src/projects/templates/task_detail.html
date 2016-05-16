@@ -15,10 +15,119 @@ $(selector).countdown({until: liftoffTime});
 {% endblock %} -->
 
 {% block content %}
+<style>
+@import "compass/css3";
+
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:600');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #eee;
+}
+
+.wrapper {
+  margin: 20px auto;
+}
+
+[class*="col-"] {
+  margin-bottom: 20px;
+  min-height: 30px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+@media all and (min-width: 500px) {
+
+  .wrapper {
+    padding: 0 20px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  [class*="col-"] {
+    margin-right: 20px;
+  }
+
+  [class*="col-"]:last-child {
+    margin-right: 0;
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i}{
+      flex: $i; 
+    }
+  }
+
+}
+
+@media all and (min-width: 1000px) {
+
+  .wrapper {
+    max-width: 1000px;
+  }
+
+}
+
+header {
+  padding: 30px;`
+  font: 600 20px/1 'Open Sans', sans-serif;
+  text-align: center;
+  color: #777;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+</style>
 
 {% if task %}
 
 <div class='container'>
+
+  <div class="row">
+    <div class="col-sm-11" align="center" style=" margin: 15px 15px 15px 15px;">
+    <h3> You have <b>{{ project.grabBy|timeuntil:today }}</b> left to decide</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3" style="min-height: 300px; background:#586f7c; margin: 15px 15px 15px 15px; word-wrap: break-word; color:white;" align="center">
+      <h1 align="center"><h5>Task Name:</h5><h1>{{task.taskName}}</h1>
+    </div>
+    <div class="col-sm-3" style="min-height: 300px; background:#586f7c; margin: 15px 15px 15px 15px; color:white;" align="center">
+      <h5>Difficulty:</h5><h1>{{task.get_difficultyLevel_display}}</h1>
+    </div>
+    <div class="col-sm-3" style="min-height: 300px; background:#586f7c; margin: 15px 15px 15px 15px; color:white;" align="center">
+      <h5>Due Date:</h5><h1>{{task.expectedDate}}</h1>
+    </div>
+    <div class="col-sm-3" style="min-height: 300px; background:#586f7c; margin: 15px 15px 15px 15px; word-wrap: break-word; color:white;" align="center">
+      <h1 align="left"><h5>Description:</h5><h3>{{task.description}}</h3>
+    </div>
+          <form method="POST" class="post-form">
+          {% csrf_token %}
+          {% for field in form %}
+            {{ field.as_hidden }}
+        {% endfor %}
+      </form>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-11" style="background:white; margin: 15px 15px 15px 15px;" align="center">
+      
+      <h4>This task is unassigned. Are you up for the job?</h4><br>
+          <button type="submit" class="button-slide">Grab Task Now!</button>
+    </div>
+  </div>
+
+
+
+<!-- <div class='container'>
 	<div class="row">
 		<div class="col-sm-8">
 			<table id = "taskTable" class="table table-hover">
@@ -52,123 +161,17 @@ $(selector).countdown({until: liftoffTime});
 			You have 
 			<h3>{{ project.grabBy|timeuntil:today }}</h3>
 			left to decide
-			<!-- {{project.grabBy}}
-			{{today}} -->
 
-			<!-- <ul class="countdown">
-				<li> <span class="days">00</span>
-				<p class="days_ref">days</p>
-				</li>
-				<li class="seperator">.</li>
-				<li> <span class="hours">00</span>
-				<p class="hours_ref">hours</p>
-				</li>
-				<li class="seperator">:</li>
-				<li> <span class="minutes">00</span>
-				<p class="minutes_ref">minutes</p>
-				</li>
-				<li class="seperator">:</li>
-				<li> <span class="seconds">10</span>
-				<p class="seconds_ref">seconds</p>
-				</li>
 			</ul> -->
-			<form method="POST" class="post-form">
-	    		{% csrf_token %}
-		    	{% for field in form %}
-		    		{{ field.as_hidden }}
-				{% endfor %}
-			    <br><br><br><br><br><br><br>This task is unassigned. Are you up for the job?<br>
+
+			    <!-- <br><br><br><br><br><br><br>This task is unassigned. Are you up for the job?<br>
 			    <button type="submit" class="button-slide">Grab Task</button>
 				</div>
 			</form>
 		</div>
 	</div>
-</div>
+</div> --> 
 
-<!-- <div class='container'>
-<div class="wrap">
-
-  <div class="countdown">
-    <div class="bloc-time hours" data-init-value="24">
-      <span class="count-title">Hours</span>
-
-      <div class="figure hours hours-1">
-        <span class="top">2</span>
-        <span class="top-back">
-          <span>2</span>
-        </span>
-        <span class="bottom">2</span>
-        <span class="bottom-back">
-          <span>2</span>
-        </span>
-      </div>
-
-      <div class="figure hours hours-2">
-        <span class="top">4</span>
-        <span class="top-back">
-          <span>4</span>
-        </span>
-        <span class="bottom">4</span>
-        <span class="bottom-back">
-          <span>4</span>
-        </span>
-      </div>
-    </div>
-
-    <div class="bloc-time min" data-init-value="0">
-      <span class="count-title">Minutes</span>
-
-      <div class="figure min min-1">
-        <span class="top">0</span>
-        <span class="top-back">
-          <span>0</span>
-        </span>
-        <span class="bottom">0</span>
-        <span class="bottom-back">
-          <span>0</span>
-        </span>
-      </div>
-
-      <div class="figure min min-2">
-        <span class="top">0</span>
-        <span class="top-back">
-          <span>0</span>
-        </span>
-        <span class="bottom">0</span>
-        <span class="bottom-back">
-          <span>0</span>
-        </span>
-      </div>
-    </div>
-
-    <div class="bloc-time sec" data-init-value="0">
-      <span class="count-title">Seconds</span>
-
-      <div class="figure sec sec-1">
-        <span class="top">0</span>
-        <span class="top-back">
-          <span>0</span>
-        </span>
-        <span class="bottom">0</span>
-        <span class="bottom-back">
-          <span>0</span>
-        </span>
-      </div>
-
-      <div class="figure sec sec-2">
-        <span class="top">0</span>
-        <span class="top-back">
-          <span>0</span>
-        </span>
-        <span class="bottom">0</span>
-        <span class="bottom-back">
-          <span>0</span>
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
-</div> -->
 
 {% endif %}
 

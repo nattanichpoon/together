@@ -20,10 +20,201 @@
     {% include 'head_css.html' %}
 
       <style>
+<<<<<<< HEAD
+=======
+      ::-webkit-scrollbar {
+          -webkit-appearance: none;
+          width: 3px;
+      }
+      ::-webkit-scrollbar-thumb {
+          border-radius: 4px;
+          background-color: rgba(0,0,0,.5);
+          -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+      }
+>>>>>>> nice-debug-branch
       hr { 
           border-color: #BFBCB9;
       }
 
+<<<<<<< HEAD
+=======
+      .hovicon {
+        display: inline-block;
+        font-size: 45px;
+        line-height: 80px;
+        /*cursor: pointer;*/
+        margin: 20px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        z-index: 1;
+        color: #fff;
+      }
+
+      .hovicon.small {
+        font-size: 20px;
+        line-height: 45px;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+      }
+
+      .hovicon.mini {
+        font-size: 15px;
+        line-height: 32px;
+        width: 30px;
+        height: 30px;
+        margin: 7px;
+      }
+
+      .hovicon.auto-width {
+        width: auto;
+        height: auto;
+        padding: 15px;
+      }
+
+      .hovicon:after {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        content: '';
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+
+      .hovicon:before {
+        speak: none;
+        font-size: 48px;
+        line-height: 90px;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        display: block;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Effect 1 */
+      .hovicon.effect-1 {
+        background: rgba(255, 255, 255, 0.1);
+        -webkit-transition: background 0.2s, color 0.2s;
+        -moz-transition: background 0.2s, color 0.2s;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      .hovicon.effect-1:after {
+        top: -7px;
+        left: -7px;
+        padding: 7px;
+        box-shadow: 0 0 0 4px #fff;
+        -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+        -webkit-transform: scale(0.8);
+        -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        transition: transform 0.2s, opacity 0.2s;
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      /* Effect 1a */
+      .hovicon.effect-1.sub-a:hover {
+        background: white;
+        color: #232323;
+        font-size:60px;
+
+
+      }
+
+      .hovicon.effect-1.sub-a:hover i {
+        color: #232323;
+        font-size:60px;
+
+
+      }
+
+      .hovicon.effect-1.sub-a:hover:after {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+      /* Effect 3 */
+      .hovicon.effect-3 {
+        box-shadow: 0 0 0 4px #fff;
+        -webkit-transition: color 0.3s;
+        -moz-transition: color 0.3s;
+        transition: color 0.3s;
+      }
+
+      .hovicon.effect-3:after {
+        top: -2px;
+        left: -2px;
+        padding: 2px;
+        z-index: -1;
+        background: #fff;
+        -webkit-transition: -webkit-transform 0.2s, opacity 0.3s;
+        -moz-transition: -moz-transform 0.2s, opacity 0.3s;
+        transition: transform 0.2s, opacity 0.3s;
+      }
+
+      /* Effect 3a */
+      .hovicon.effect-3.sub-a, .hovicon.effect-3.sub-a i {
+        color: #f06060;
+      }
+
+      .hovicon.effect-3.sub-a:hover, .hovicon.effect-3.sub-a:hover i {
+        color: #fff;
+      }
+
+      .hovicon.effect-3.sub-a:hover:after {
+        -webkit-transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        transform: scale(1.3);
+        opacity: 0;
+      }
+      /* Effect 9 */
+      .hovicon.effect-9 {
+        -webkit-transition: box-shadow 0.2s;
+        -moz-transition: box-shadow 0.2s;
+        transition: box-shadow 0.2s;
+      }
+
+      .hovicon.effect-9:after {
+        top: 0;
+        left: 0;
+        padding: 0;
+        box-shadow: 0 0 0 3px #fff;
+        -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+        -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+        transition: transform 0.2s, opacity 0.2s;
+      }
+
+      /* Effect 9b */
+      .hovicon.effect-9.sub-b:hover:after {
+        -webkit-transform: scale(0.85);
+        -moz-transform: scale(0.85);
+        -ms-transform: scale(0.85);
+        transform: scale(0.85);
+      }
+
+      .hovicon.effect-9.sub-b:hover {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4);
+        color: #fff;
+      }
+
+      .hovicon.effect-9.sub-b:hover i {
+        color: #fff;
+      }
+
+>>>>>>> nice-debug-branch
       .box{
         background:white;
         border-radius:10px;
@@ -2182,6 +2373,224 @@ input.button {
           -webkit-transition: all 0.2s ease-out;
           transition: all 0.2s ease-out;
         }
+
+.boxproj {
+  background:#fff;
+  transition:all 0.2s ease;
+  border:2px dashed #dadada;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-clip: padding-box;
+  padding:20px 20px 20px 20px;
+  min-height:340px;
+}
+
+.boxproj:hover {
+  border:2px solid #525C7A;
+}
+
+.boxproj span.box-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.boxproj .box-content {
+  padding: 16px;
+  border-radius: 0 0 2px 2px;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+.boxproj .box-content p {
+  color:#515c66;
+  text-transform:none;
+}
+
+
+body{
+  background:#eeeeee;
+}
+
+section{
+    /*float: left;*/
+    padding-top: 50px;
+    padding-bottom: 100px;
+    width: 100%;
+    padding-left:0;
+    padding-right:0;
+}
+
+#icon-wrapper{
+  width:100%;
+  /*float:left;*/
+  height:300px;
+}
+
+.icons {
+  width:25%;
+  /*float:left;*/
+  position:relative;
+}
+
+.icon-slide-container{
+  height:300px;
+  overflow:hidden;
+  /*text-align: left;*/
+  position: absolute;
+  float: left;
+  width: 300px;
+  left: 50%;
+  /*margin-left: -150px;*/
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.slide-icon{
+  width:300px;
+  height:auto;
+  /*position:absolute;*/
+  margin-top:-300px;
+
+  margin-bottom: 20px;
+  -webkit-transition:.4s ease;
+  -moz-transition:.4s ease;
+  -ms-transition:.4s ease;
+  -o-transition:.4s ease;
+  transition:.4 ease;
+}
+  
+.slide-icon:hover{
+  /*position:absolute;*/
+  margin-top:0;
+}
+
+@media only screen and (max-width: 1300px) {
+  #icon-wrapper{
+    width:100%;
+    float:left;
+    height:170px;
+  }
+  .icon-slide-container {
+    height: 200px;
+    overflow: hidden;
+    /*text-align: left;*/
+    position: absolute;
+    /*float: left;*/
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+  }
+  .slide-icon {
+    width: 200px;
+    height: auto;
+    /*position: absolute;*/
+    margin-top: -200px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #home-social-container{
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    padding: 0;
+    float: left;
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  #icon-wrapper{
+    width:100%;
+    float:left;
+    height:650px;
+  }
+  
+  .icon-slide-container {
+    height: 300px;
+    overflow: hidden;
+    text-align: left;
+    position: absolute;
+    float: left;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+  }
+  
+  .slide-icon {
+    width: 300px;
+    height: auto;
+    position: absolute;
+    margin-top: -300px;
+  } 
+  .icons {
+    width: 50%;
+    float: left;
+    position: relative;
+
+  }
+}
+                        
+@media only screen and (max-width: 650px) {
+  #icon-wrapper {
+    height: 400px;
+  }
+  #section{
+    width: 90%;
+    padding-left:5%;
+    padding-right:5%;
+  }
+  .slide-icon {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    margin-top: -200px;
+  }
+  .icon-slide-container {
+    height: 200px;
+    width: 200px;
+    left: 50%;
+    /*margin-left: -100px;*/
+    padding-top: 50px 
+  }
+  .icons3 {
+    width: 50%;
+    position: relative;
+    margin-left: 0%;
+    margin-top: 230px;
+  }
+}
+                                  
+@media only screen and (max-width: 570px) {
+  #icon-wrapper {
+    height: 300px;
+  }
+  .slide-icon {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    margin-top: -150px;
+  }
+  .icon-slide-container {
+    height: 150px;
+    width: 150px;
+    left: 50%;
+    margin-left: -75px;
+  }
+  .icons3 {
+    width: 50%;
+    float: left;
+    margin-left: 0%;
+    margin-top: 190px;
+  } 
+}
+
+
+
+/*sdljfblskjdbnksj*/
+
 
 
         

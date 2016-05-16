@@ -36,7 +36,12 @@
 							<td>Description:</td> <td>{{task.description}}</td>
 					 	</tr>
 					 	<tr>
-							<td>Task Status:</td> <td>{{form.taskState}}  *Once marked as COMPLETED you won't be able to make changes to this task</td> 
+							<td>Task Status:</td> <td>{{form.taskState}}  {% if ack %}
+							Change this to "In Progress" and start working!
+							{% else %}
+							*Once marked as COMPLETED you won't be able to make changes to this task
+							{% endif %}
+						</td> 
 					 	</tr>
 					 	{% if inprog %}
 					 	<tr>

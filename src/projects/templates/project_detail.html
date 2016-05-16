@@ -22,8 +22,9 @@
 		<a href="{% url 'schedule_new' %}" class="fancy-button bg-gradient3"><span><i class="glyphicon glyphicon-calendar"></i> Add Meeting</span></a>
 </div>
 <div class="row">
-	<div class="col-sm-11">
+	<div class="col-sm-11 col-xs-11 col-lg-11 col-xl-11">
 		<!-- <h4><i>*to grab tasks, click on "View Details"</i></h4> -->
+		<h3><i>Current Tasks</i></h3>
 		<table id = "taskTable" class="table table-hover tablesorter">
 	    <thead>
 	      <tr>
@@ -38,6 +39,7 @@
 	    </thead>
 	    <tbody>
 	    {% for task in tasks %}
+	    	{% if not task.taskState == 'CP' %}
 	    	<tr>
 	        	<td>{{task}}</td>
 	        	{% if task.assignee == None %}
@@ -70,12 +72,47 @@
 		    </td>
 
 	      	</tr>
+	      	{% endif %}
 	    {% endfor %}
 	    </tbody>
 	  	</table>
 
+	  	<br><br><br>
+	  	<h3><i>Completed Tasks</i></h3>
+	  	<div class="col-sm-7 col-xs-7 col-lg-7 col-xl-7">
+		<table id = "taskTable" class="table table-hover tablesorter">
+	    <thead>
+	      <tr>
+	        <th>Task</th>
+	        <th title="Member responsible for this task">Assignee<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	        <th title="Difficulty of tasks range from Easy, Medium, Hard">Difficulty<span style="cursor:pointer; color:#4c9ece" class="glyphicon glyphicon-info-sign"></span></th>
+	    
 
-		<div class="col-sm-11 col-xs-11" align="center">
+
+	      </tr>
+	    </thead>
+	    <tbody>
+
+		{% for task in tasks %}
+	    {% if task.taskState == 'CP' %}
+	    	<tr>
+	        	<td>{{task}}</td>
+	        	{% if task.assignee == None %}
+					<td> </td>	
+	        	{% else %}
+	        		<td>{{task.assignee}}</td>
+	        	{% endif %}
+	        	<td>{{task.get_difficultyLevel_display}}</td>
+	        	
+
+	      	</tr>
+	      	{% endif %}
+	    {% endfor %}
+	    </tbody>
+	  	</table>
+	  </div>
+
+		<div class="col-sm-11 col-xs-11 col-lg-11 col-xl-11" align="center">
 			{% if not tasks %}
 	  			<i><h4> There are currently no tasks in this project. Click on "Add Task" to create one!</h4></i>
 	  		{% endif %}

@@ -23,7 +23,7 @@ def myprojects(request):
 	navtab = True
 
 	profile = UserProfile.objects.get(username=request.user)
-	projects = Project.objects.filter(members__username=request.user.username)
+	projects = Project.objects.filter(members__username=request.user.username).order_by('dueDate')
 	today = datetime.datetime.today()
 
 
@@ -185,6 +185,7 @@ def project_detail(request,pk):
 		project.projectProgress = int(tasks_CP.count()/allTasks.count())
 		project.save()
 	size = users.count()
+	allTasks = allTasks.order_by('taskState')
 
 	# if request.method =="POST":
 	# 	task = get_object_or_404(Task, pk=taskpk)

@@ -69,8 +69,9 @@ def schedule_detail(request, pk):
     return render(request, "meeting_detail.html", context)
 
 def schedule_new(request):
+    form = MeetingForm(request.POST)
     if request.method == "POST":
-        form = MeetingForm(request.POST)
+        
         if form.is_valid():
             # if project.grabBy "None"
             # find user with lowest score and assign harder tasks first
@@ -78,8 +79,8 @@ def schedule_new(request):
             meeting = form.save(commit=False)
             meeting.save()
             return HttpResponseRedirect('http://127.0.0.1:8000/schedule/')
-    else:
-        form = MeetingForm()
+    # else:
+    #     form = MeetingForm()
 
     return render(request, "meeting_new.html", {"form": form})
 

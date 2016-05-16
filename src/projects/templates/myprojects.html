@@ -18,8 +18,24 @@
     
     <div class='row'>
         <div class="col-sm-11">
-            
+            <a href="{% url 'project_new'%}">
+            <div class="col-md-4 text-center">
+                <div class="boxproj">
+                    <div class="box-content">
+                        <br><br><br>
+                        <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" enable-background="new 0 0 48 48" width="100" height="100">
+                            <circle fill="#4CAF50" cx="24" cy="24" r="21"/>
+                             <g fill="#fff">
+                            <rect x="21" y="14" width="6" height="20"/>
+                            <rect x="14" y="21" width="20" height="6"/>
+                            </g>
+                        </svg>
+                        
+                    </div>
+                </div>
 
+                </div>
+            </a>
             {% for project in projects %}   
                 <!-- <div class="item  col-xs-4 col-sm-4">
                      <a href = "{% url 'project_detail' pk=project.pk %}" style= "color:white;"><button type="button" class="btn btn-circle"> <h4>{{project.projectName}}</h4><br><h6>{{project.projectProgress}}%<br>{{ project.dueDate|timeuntil:today}} left</h6></button></a>
@@ -29,9 +45,9 @@
                     <a href = "{% url 'project_detail' pk=project.pk %}" style= "color:gray; word-wrap: break-word;">
                     <div class="boxproj">
                         <div class="box-content">
-                            <h2 class="tag-title">{{project.projectName}}</h2>
+                            <h2 class="tag-title"><br>{{project.projectName}}</h2>
                             <hr />
-                            <p> {{project.projectProgress}} done%<br>{{ project.dueDate|timeuntil:today}} left until due date</p>
+                            <!-- <p> {{project.projectProgress}} done% -->{{ project.dueDate|timeuntil:today}} left until due date</p>
                             <br />
                         </div>
                     </div>
@@ -41,38 +57,13 @@
         
 	</div>
 	<div class="col-sm-1"></div>
-</div>
-	<div class='row'>
-	<div <div class="col-sm-11" align="center">
-            <a href="{% url 'project_new'%}">
-            <div class="icons" align="center">
-        		<div class="icon-slide-container" align="center">
-          			<img class="slide-icon"  alt="The Kite Map Logo" height="100" src="http://s32.postimg.org/ig5sc386t/addproj.jpg">
-          		</div>
-        	</div>
-        </a>
-                     
-                
-		</div>
-			
-	</div>
+    </div>
+
+
 	<div class='row'>
 				<br>
 	</div>
 
-		
-
-		<!-- <div class="col-sm-4 pull-right"> -->
-			<!-- <head>
-			 	<title>Calendar</title>
-			</head>
-			
-			<body>
-			    <br>
-			    <a href="{% url 'project_new'%}"><button type='button' class='button-slide'><span>New Project</span></button></a>
-
-			   
-			</body> -->
 		</div>	
 	</div>
 </div>

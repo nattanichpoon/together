@@ -7,7 +7,7 @@
 {% if task %}
 <div class='container'>
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<form method="POST" class="post-form">
 			    {% csrf_token %}
 			    <div class="row">
@@ -39,7 +39,7 @@
 							<td>Task Status:</td> <td>{{form.taskState}}  {% if ack %}
 							Change this to "In Progress" and start working!
 							{% else %}
-							*Once marked as COMPLETED you won't be able to make changes to this task
+							
 							{% endif %}
 						</td> 
 					 	</tr>
@@ -52,9 +52,11 @@
 				</table>
 			<!-- </div> -->
 		</div>
-			    
-			    <div class="row">
-		    	<button type="submit" class="button-slide">Submit Update</button>
+			    <div style="color:red; text-align:right;">
+			    	*Once marked as COMPLETED you won't be able to make changes to this task
+			    </div>
+			    <div class="row" style="text-align:right;">
+		    	<button type="submit" class="button-slide" >Submit Update</button>
 		    </div>
 
 			</form>
